@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>MCS8 JavaScript Client SDK开发指南</title>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/template-web.js"></script>
+  <script src="js/crypto-js.js"></script>
+  <link rel="stylesheet" href="js/bootstrap-3.4.1-dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="js/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="js/zTree/css/zTreeStyle/zTreeStyle.css" />
+  <script type="text/javascript" src="js/zTree/js/jquery.ztree.core.js"></script>
+  <script type="text/javascript" src="js/zTree/js/jquery.ztree.excheck.js"></script>
+  <script type="text/javascript" src="js/zTree/js/jquery.ztree.exedit.js"></script>
+  <style>
+    .panel {
+      height: calc(100vh - 100px);
+      overflow-y: scroll;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-md-12">
+        <h2>MCS8 JavaScript Client SDK快速上手：第一个例子</h2>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col-md-3">
+        <ul class="nav nav-pills nav-stacked" id="menu">
+          <li class="head">第一个例子</li>
+          <li><a id="lnkconnect" href="#connect" data-key="connect">第一步：连接网关</a></li>
+          <li><a id="lnkgetDevList" href="#getDevList" data-key="getDevList">第二步：获取设备列表（示例）</a></li>
+
+          <li class="division"></li>
+          <li><a href="index.html" data-key=""> 《 返回开发指南</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-6 tab-content">
+
+        <!-- 第一步：连接网关 -->
+        <div class="tab-pane active" id="connect">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">连接网关</h3>
+            </div>
+            <div class="panel-body">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">调度台地址</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="txtGatewayUrl" value="https://sys.mcs8.net:7715" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">调度台/企业账号</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="txtUsername" value="pc1" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">调度台/企业密码</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="txtPassword" placeholder="输入你的账号密码..." value="" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"></label>
+                  <div class="col-sm-10">
+                    <button type="button" class="btn btn-primary" id="btnConnect">连接网关</button>
+                  </div>
+                </div>
+              </form>
+              <div class="alert alert-danger" role="alert">
+                <p><b>特别提示：</b>MCS8 JavaScript Client SDK 仅在安全上下文中(HTTPS)使用，请确保你的域名证书是有效的！</p>
+                <p></p>
+                <p>如果你无有效的域名证书，或域名证书错误、过期、无效，请在浏览器打开你的调度台网址，<button type="button" class="btn btn-danger"
+                    id="btnCertificateInvalid">点这里打开你的调度台网址</button></p>
+                <p>在打开的隐私设置页面依次点击[ 高级 ][ 继续前往192.1680.114（不安全） ]（如图所示），设置完成后，请重新连接网关。</p>
+              </div>
+              <p>
+                <img src="./img/img_1.jpg" />
+                <img src="./img/img_2.jpg" />
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- 第一步 END -->
+
+        <!-- 第二步：获取设备列表 -->
+        <div class="tab-pane" id="getDevList">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">获取设备列表</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-5">
+                  <ul id="devTree" class="ztree"></ul>
+                </div>
+                <div class="col-md-7" id="tpl_getDevList_content">
+                  <h3>[ 点击 ]设备，进入操作面板！</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 第二步 END -->
+
+      </div>
+
+      <div class="col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">日志</h3>
+          </div>
+          <div id="log" class="panel-body code" style="overflow-y:scroll;overflow-x: auto;">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="display:none">
+    <video id="localVideo" autoplay controls></video>
+    <audio id="localAudio" autoplay controls></audio>
+  </div>
+
+</body>
+
+<!-- 操作面板 模块 -->
+<script id="tpl_getDevList_" type="text/html">
+  <div class="row">
+  {{each list item}}
+    <div class="col-sm-12">
+        <div class="thumbnail">
+
+            <span class="label label-warning">具有视音频功能设备支持</span>
+
+            <video id="remoteVideo{{item.deviceId}}" controls autoplay muted></video>
+            <audio id="remoteAudio{{item.deviceId}}" controls autoplay></audio>
+            <div class="caption">     
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width: 80px;">设备Id</span>
+                <input type="text" class="form-control" id="txtDeviceId" value="{{item.deviceId}}" readonly />                
+              </div>
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width: 80px;">设备名称</span>
+                <input type="text" class="form-control" id="txtDeviceName" value="{{item.deviceName}}" readonly />                
+              </div>
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width: 80px;">设备类型</span>
+                <input type="text" class="form-control" id="txtDeviceType" value="{{item.deviceTypeDesc}}" readonly />                
+              </div>
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width: 80px;">在线状态</span>
+                <input type="text" class="form-control" id="txtStatus" value="{{item.statusDesc}}" readonly />
+              </div>
+              {{if item.channelId}}
+              <hr/>
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width: 80px;">通道号</span>
+                <input type="text" class="form-control" id="txtChannelId" value="{{item.channelId}}" readonly />                
+              </div>
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width: 80px;">通道名称</span>
+                <input type="text" class="form-control" id="txtChannelName" value="{{item.channelName}}" readonly />                
+              </div>
+              {{/if}}
+              
+              {{if item.status==0}}
+              <hr />
+              <div class="alert alert-danger" role="alert">该设备已离线！</div>
+              {{/if}}
+              
+            </div>
+        </div>
+    </div>
+  {{/each}}
+</div>
+</script>
+
+<script id="tpl_getDevList_1" type="text/html">
+  <div class="row">
+  {{each list item}}
+    <div class="col-sm-12">
+        <div class="thumbnail">
+
+            <span class="label label-warning">具有视音频功能设备支持</span>
+
+            <video id="remoteVideo{{item.deviceId}}" controls autoplay muted></video>
+            <audio id="remoteAudio{{item.deviceId}}" controls autoplay></audio>
+            <div class="caption">     
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width: 80px;">设备Id</span>
+                <input type="text" class="form-control" id="txtDeviceId" value="{{item.deviceId}}" readonly />                
+              </div>
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width: 80px;">设备名称</span>
+                <input type="text" class="form-control" id="txtDeviceName" value="{{item.deviceName}}" readonly />                
+              </div>
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width: 80px;">设备类型</span>
+                <input type="text" class="form-control" id="txtDeviceType" value="{{item.deviceTypeDesc}}" readonly />                
+              </div>
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width: 80px;">在线状态</span>
+                <input type="text" class="form-control" id="txtStatus" value="{{item.statusDesc}}" readonly />
+              </div>
+
+              <p class="division">实时监听</p>
+              <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-primary" onclick="FUNC_openVideo('{{item.deviceId}}','{{item.channelId}}')">实时视频</button>
+                <button type="button" class="btn btn-default" onclick="FUNC_closeVideo('{{item.deviceId}}','{{item.channelId}}')">关闭视频</button>
+              </div>
+
+              <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-primary" onclick="FUNC_openAudio('{{item.deviceId}}','{{item.channelId}}')">声音监听</button>
+                <button type="button" class="btn btn-default" onclick="FUNC_closeAudio('{{item.deviceId}}','{{item.channelId}}')">关闭监听</button>
+              </div>
+
+              <p class="division">通话对讲</p>
+              <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-primary" onclick="FUNC_CreateP2pMediaGroup('{{item.deviceId}}')">视频通话</button>
+                <button type="button" class="btn btn-default" onclick="FUNC_closeGroup('{{item.deviceId}}')">关闭通话</button>
+              </div>
+
+              <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-primary" onclick="FUNC_CreateP2pMediaGroup6('{{item.deviceId}}')">语音通话</button>
+                <button type="button" class="btn btn-default" onclick="FUNC_closeGroup('{{item.deviceId}}')">关闭通话</button>
+              </div>
+
+              <p class="division"></p>
+
+              <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-primary" onclick="FUNC_startTalk('{{item.deviceId}}')">开始喊话</button>
+                <button type="button" class="btn btn-default" onclick="FUNC_stopTalk('{{item.deviceId}}')">停止喊话</button>
+              </div>        
+
+              <p class="division">通话对讲(请在设备端发起呼叫)</p>
+
+              <div class="btn-group btn-group-sm" id="tpl_add2MediaGroup_content">
+                请在设备端发起视频呼叫！
+              </div> 
+              
+              <p class="division"></p>
+              <p class="division">指令消息</p>
+
+              <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-primary" onclick="FUNC_startRecord('{{item.deviceId}}')">开始录像</button>
+                <button type="button" class="btn btn-default" onclick="FUNC_stopRecord('{{item.deviceId}}')">停止录像</button>
+              </div>
+
+              <p class="division"></p>
+
+              <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-primary" onclick="FUNC_sendIM('{{item.deviceId}}','这是测试消息',false)">下发文本消息</button>
+                <button type="button" class="btn btn-primary" onclick="FUNC_sendWorkNo('{{item.deviceId}}','WNO123456')">下发工单消息</button>
+              </div>
+
+              <p class="division"></p>
+
+              <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-primary" onclick="FUNC_getGps('{{item.deviceId}}')">获取设备位置消息</button>
+                <button type="button" class="btn btn-primary" onclick="FUNC_getDeviceInfo('{{item.deviceId}}')">获取设备参数消息</button>
+              </div>
+
+            </div>
+        </div>
+    </div>
+  {{/each}}
+</div>
+</script>
+
+<script id="tpl_getDevList_5" type="text/html">
+  <div class="row">
+  {{each list item}}
+    <div class="col-sm-12">
+        <div class="thumbnail">
+
+            <span class="label label-warning">具有视音频功能设备支持</span>
+
+            <video id="remoteVideo{{item.deviceId}}" controls autoplay muted></video>
+            <audio id="remoteAudio{{item.deviceId}}" controls autoplay></audio>
+            <div class="caption">     
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width: 80px;">设备Id</span>
+                <input type="text" class="form-control" id="txtDeviceId" value="{{item.deviceId}}" readonly />                
+              </div>
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width: 80px;">设备名称</span>
+                <input type="text" class="form-control" id="txtDeviceName" value="{{item.deviceName}}" readonly />                
+              </div>
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width: 80px;">设备类型</span>
+                <input type="text" class="form-control" id="txtDeviceType" value="{{item.deviceTypeDesc}}" readonly />                
+              </div>
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width: 80px;">在线状态</span>
+                <input type="text" class="form-control" id="txtStatus" value="{{item.statusDesc}}" readonly />
+              </div>
+              {{if item.channelId}}
+              <hr/>
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width: 80px;">通道号</span>
+                <input type="text" class="form-control" id="txtChannelId" value="{{item.channelId}}" readonly />                
+              </div>
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width: 80px;">通道名称</span>
+                <input type="text" class="form-control" id="txtChannelName" value="{{item.channelName}}" readonly />                
+              </div>
+              {{/if}}             
+
+              <p class="division">实时监听</p>
+
+              <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-primary" onclick="FUNC_openVideo('{{item.deviceId}}','{{item.channelId}}')">实时视频</button>
+                <button type="button" class="btn btn-default" onclick="FUNC_closeVideo('{{item.deviceId}}','{{item.channelId}}')">关闭视频</button>
+              </div>
+
+              <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-primary" onclick="FUNC_openAudio('{{item.deviceId}}','{{item.channelId}}')">声音监听</button>
+                <button type="button" class="btn btn-default" onclick="FUNC_closeAudio('{{item.deviceId}}','{{item.channelId}}')">关闭监听</button>
+              </div>
+
+              <p class="division">通话对讲</p>
+
+              <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-primary" onclick="FUNC_startTalk('{{item.deviceId}}')">开始喊话</button>
+                <button type="button" class="btn btn-default" onclick="FUNC_stopTalk('{{item.deviceId}}')">停止喊话</button>
+              </div>
+
+              <p class="division">指令消息</p>             
+
+              <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-primary" onclick="FUNC_getGps('{{item.deviceId}}')">获取设备位置消息</button>
+              </div>
+
+            </div>
+        </div>
+    </div>
+  {{/each}}
+</div>
+</script>
+
+<!-- 接听设备视频呼叫 模块 -->
+<script id="tpl_add2MediaGroup" type="text/html">
+    {{each list item}}  
+    <div class="thumbnail">
+      <div class="caption">
+          <p>来自 [ {{item.creatorId}} ] 的呼叫 </p>     
+          <button class="btn btn-primary" onclick="FUNC_add2MediaGroup('{{item.roomId}}','{{item.TalkGroupType}}')" >接听</button>                
+          <button class="btn btn-default" onclick="FUNC_closeGroup('{{item.creatorId}}','{{item.roomId}}');document.getElementById('tpl_add2MediaGroup_content').innerHTML = '';">挂断</button>
+      </div>
+  </div>     
+    {{/each}} 
+</script>
+
+<!-- MCS8 JavaScript Client SDK -->
+<script src="jssdk/mcs8Client.js"></script>
+<script src="jssdk/sdkDemo.js"></script>
+
+<script>
+  var __PAGE_KEY__ = "sdkdemo";
+  $(function () {
+
+    $("#btnCertificateInvalid").click(function (e) {
+      var txtGatewayUrl = $("#txtGatewayUrl").val();
+      try {
+        new URL(txtGatewayUrl);
+      } catch (error) {
+        alert("输入网关地址/地址格式错误！正确格式示例：https://106.54.78.47:7715/gateway");
+        return;
+      }
+      txtGatewayUrl = txtGatewayUrl.replace("gateway", "");
+      window.open(txtGatewayUrl);
+    });
+
+    $('#menu a').click(function (e) {
+      var key = $(this).data("key");
+      if (key) {
+        e.preventDefault();
+        if (key == 'getDevList') {
+          if (!sdkclient.mConnected) {
+            alert('请先连接网关！')
+            return;
+          }
+          FUNC_init_demo(key);
+          FUNC_init_add2MediaGroup('add2MediaGroup');
+        }
+        $(this).tab('show');
+      }
+    });
+
+    $('#btnConnect').click(async function () {
+      FUNC_connect();
+
+      var wait = 5;
+      while (!sdkclient.mConnected) {
+        await SLEEP(500);
+        if ((wait--) < 0) {
+          break;
+        }
+      }
+
+      if (sdkclient.mConnected) {
+        $('#lnkgetDevList').trigger('click');
+      }
+    })
+
+  });
+</script>
+
+</html>
