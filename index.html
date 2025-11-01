@@ -73,6 +73,9 @@
           <li><a href="#startRecord" data-key="startRecord">下发录像指令</a></li>
           <li><a href="#sendWorkNo" data-key="sendWorkNo">下发工单消息</a></li>
           <li><a href="#sendIM" data-key="sendIM">下发文本/TTS消息</a></li>
+
+          <li class="head">实时视频流处理</li>
+          <li><a href="#videoStream" data-key="videoStream">视频流实时处理</a></li>
         </ul>
       </div>
       <div class="col-md-6" id="content">
@@ -977,6 +980,28 @@ sdkclient.addObserver('AlarmUpload', msg => {
           </div>
           <!-- 下发文本消息 END -->
 
+          <!-- 实时视频流处理 -->
+          <div class="tab-pane" id="videoStream">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">实时视频流处理</h3>
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="deviceSelect">选择在线设备:</label>
+                  <select class="form-control" id="deviceSelect">
+                    <option value="">请选择设备</option>
+                  </select>
+                </div>
+                <button class="btn btn-primary" id="startStreamBtn">开始传输视频流</button>
+                <button class="btn btn-danger" id="stopStreamBtn" style="display:none;">停止传输</button>
+                <div id="streamStatus" class="alert alert-info" style="margin-top: 10px;"></div>
+                <div id="processingResults" class="well" style="margin-top: 10px; max-height: 300px; overflow-y: auto;"></div>
+              </div>
+            </div>
+          </div>
+          <!-- 实时视频流处理 END -->
+
         </div>
       </div>
       <div class="col-md-3">
@@ -1387,6 +1412,104 @@ sdkclient.addObserver('AlarmUpload', msg => {
         $(this).tab('show');
         eval(`FUNC_init_${key}('${key}')`);
       }
+    });
+
+    // 实时视频流处理功能
+    let mediaStream = null;
+    let isStreaming = false;
+
+    // 初始化设备选择下拉框
+    function initDeviceSelect() {
+      if (sdkclient.mConnected) {
+        sdkclient.mClient.requestMsg2GatewayServer("getDevOnlineList", {}).then(resp => {
+          const select = $('#deviceSelect');
+          select.empty();
+          select.append('<option value="">请选择设备</option>');
+          
+          if (resp.Content && Array.isArray(resp.Content)) {
+            resp.Content.forEach(device => {
+              if (device.Status === 1) { // 只显示在线设备
+                select.append(`<option value="${device.DevId}">${device.DevId}</option>`);
+              }
+            });
+          }
+        });
+      }
+    }
+
+    // 开始传输视频流
+    $('#startStreamBtn').click(function() {
+      const selectedDevice = $('#deviceSelect').val();
+      if (!selectedDevice) {
+        alert('请选择一个设备');
+        return;
+      }
+
+      $('#streamStatus').text('正在启动视频流传输...');
+      $('#startStreamBtn').hide();
+      $('#stopStreamBtn').show();
+      isStreaming = true;
+
+      // 这里应该调用SDK打开视频的方法
+      // 由于需要传输视频流到后端服务，我们需要获取媒体流
+      // 暂时使用一个模拟的实现
+      simulateVideoStream(selectedDevice);
+    });
+
+    // 停止传输视频流
+    $('#stopStreamBtn').click(function() {
+      $('#streamStatus').text('视频流传输已停止');
+      $('#startStreamBtn').show();
+      $('#stopStreamBtn').hide();
+      isStreaming = false;
+
+      // 停止视频流传输的逻辑
+      if (mediaStream) {
+        const tracks = mediaStream.getTracks();
+        tracks.forEach(track => track.stop());
+        mediaStream = null;
+      }
+    });
+
+    // 模拟视频流传输和后端处理结果
+    function simulateVideoStream(deviceId) {
+      $('#streamStatus').text(`正在传输设备 ${deviceId} 的视频流到后端服务...`);
+      
+      // 模拟后端处理结果的流式返回
+      let resultCount = 0;
+      const resultsInterval = setInterval(() => {
+        if (!isStreaming) {
+          clearInterval(resultsInterval);
+          return;
+        }
+        
+        resultCount++;
+        const timestamp = new Date().toLocaleTimeString();
+        const resultsDiv = $('#processingResults');
+        const resultText = `[${
+          timestamp}] 处理结果 #${
+          resultCount}: 来自设备 ${
+          deviceId} 的分析数据...`;
+        
+        resultsDiv.append(`<p>${resultText}</p>`);
+        resultsDiv.scrollTop(resultsDiv[0].scrollHeight);
+        
+        // 模拟不同的处理结果
+        if (resultCount % 5 === 0) {
+          resultsDiv.append(`<p class="text-warning">[${
+            timestamp}] 警告: 检测到异常行为 (置信度: 85%)</p>`);
+        } else if (resultCount % 10 === 0) {
+          resultsDiv.append(`<p class="text-danger">[${
+            timestamp}] 紧急: 检测到安全事件 (置信度: 92%)</p>`);
+        }
+        
+        resultsDiv.scrollTop(resultsDiv[0].scrollHeight);
+      }, 2000);
+    }
+
+    // 在视频流处理Tab显示时初始化设备列表
+    $('#menu a[data-key="videoStream"]').click(function() {
+      initDeviceSelect();
     });
   });
 </script>
