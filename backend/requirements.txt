@@ -1,5 +1,7 @@
-fastapi==0.68.0
-uvicorn==0.15.0
-websockets==10.0
-opencv-python==4.5.3.56
-numpy==1.21.2
+fastapi
+uvicorn
+websockets
+opencv-python
+numpy
+pyaudio
+dashscope
