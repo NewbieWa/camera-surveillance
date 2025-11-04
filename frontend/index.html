@@ -999,6 +999,17 @@ sdkclient.addObserver('AlarmUpload', msg => {
                 <div id="processingResults" class="well" style="margin-top: 10px; max-height: 300px; overflow-y: auto;"></div>
               </div>
             </div>
+            
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">处理结果展示</h3>
+              </div>
+              <div class="panel-body">
+                <div id="analysisResults" class="row">
+                  <!-- 处理结果将在这里展示 -->
+                </div>
+              </div>
+            </div>
           </div>
           <!-- 实时视频流处理 END -->
 
@@ -1388,6 +1399,7 @@ sdkclient.addObserver('AlarmUpload', msg => {
 <!-- MCS8 JavaScript Client SDK -->
 <script src="jssdk/mcs8Client.js"></script>
 <script src="jssdk/sdkDemo.js"></script>
+<script src="jssdk/videoStreamHandler.js"></script>
 
 <script>
   var __PAGE_KEY__ = "sdkdemo";
@@ -1417,6 +1429,7 @@ sdkclient.addObserver('AlarmUpload', msg => {
     // 实时视频流处理功能
     let mediaStream = null;
     let isStreaming = false;
+    let ws = null; // WebSocket连接
 
     // 初始化设备选择下拉框
     function initDeviceSelect() {
@@ -1437,6 +1450,131 @@ sdkclient.addObserver('AlarmUpload', msg => {
       }
     }
 
+    // 连接到后端WebSocket服务
+    function connectToBackend() {
+      const backendUrl = 'ws://localhost:8000/ws/results';
+      ws = new WebSocket(backendUrl);
+      
+      ws.onopen = function(event) {
+        console.log('已连接到后端WebSocket服务');
+        $('#streamStatus').append('<br>已连接到后端分析服务');
+      };
+      
+      ws.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        displayAnalysisResult(data);
+      };
+      
+      ws.onclose = function(event) {
+        console.log('与后端WebSocket服务的连接已关闭');
+      };
+      
+      ws.onerror = function(error) {
+        console.error('WebSocket连接错误:', error);
+        $('#streamStatus').append('<br>WebSocket连接错误: ' + error);
+      };
+    }
+
+    // 显示分析结果
+    function displayAnalysisResult(result) {
+      const resultsDiv = $('#processingResults');
+      const timestamp = new Date().toLocaleTimeString();
+      
+      let resultHtml = '';
+      if (result.type === 'vehicle_number') {
+        resultHtml = `
+          <div class="alert alert-info">
+            <strong>[${timestamp}] 车号识别结果:</strong> ${result.result}
+            ${result.vehicle_number ? `<br>识别到的车号: ${result.vehicle_number}` : ''}
+          </div>`;
+      } else if (result.type === 'anti_rolling') {
+        const alertClass = result.success ? 'alert-success' : 'alert-warning';
+        const statusText = result.success ? '成功' : '失败';
+        resultHtml = `
+          <div class="alert ${alertClass}">
+            <strong>[${timestamp}] 防遛确认:</strong> ${result.result} (${statusText})
+          </div>`;
+      } else if (result.type === 'remove_rolling') {
+        const alertClass = result.success ? 'alert-success' : 'alert-warning';
+        const statusText = result.success ? '成功' : '失败';
+        resultHtml = `
+          <div class="alert ${alertClass}">
+            <strong>[${timestamp}] 撤遛确认:</strong> ${result.result} (${statusText})
+          </div>`;
+      } else if (result.type === 'error') {
+        resultHtml = `
+          <div class="alert alert-danger">
+            <strong>[${timestamp}] 错误:</strong> ${result.message}
+          </div>`;
+      }
+      
+      if (resultHtml) {
+        resultsDiv.append(resultHtml);
+        resultsDiv.scrollTop(resultsDiv[0].scrollHeight);
+      }
+      
+      // 在结果展示区域显示详细信息
+      displayDetailedResult(result);
+    }
+
+    // 显示详细结果
+    function displayDetailedResult(result) {
+      const analysisDiv = $('#analysisResults');
+      const timestamp = new Date().toLocaleTimeString();
+      
+      let detailHtml = '';
+      if (result.type === 'vehicle_number') {
+        detailHtml = `
+          <div class="col-md-4">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">车号识别结果</h3>
+              </div>
+              <div class="panel-body">
+                <p><strong>设备ID:</strong> ${result.device_id}</p>
+                <p><strong>结果:</strong> ${result.result}</p>
+                ${result.vehicle_number ? `<p><strong>车号:</strong> ${result.vehicle_number}</p>` : ''}
+                <p><strong>时间:</strong> ${new Date(result.timestamp * 1000).toLocaleString()}</p>
+              </div>
+            </div>
+          </div>`;
+      } else if (result.type === 'anti_rolling') {
+        const panelClass = result.success ? 'panel-success' : 'panel-warning';
+        detailHtml = `
+          <div class="col-md-4">
+            <div class="panel ${panelClass}">
+              <div class="panel-heading">
+                <h3 class="panel-title">防遛确认结果</h3>
+              </div>
+              <div class="panel-body">
+                <p><strong>设备ID:</strong> ${result.device_id}</p>
+                <p><strong>结果:</strong> ${result.result}</p>
+                <p><strong>时间:</strong> ${new Date(result.timestamp * 1000).toLocaleString()}</p>
+              </div>
+            </div>
+          </div>`;
+      } else if (result.type === 'remove_rolling') {
+        const panelClass = result.success ? 'panel-success' : 'panel-warning';
+        detailHtml = `
+          <div class="col-md-4">
+            <div class="panel ${panelClass}">
+              <div class="panel-heading">
+                <h3 class="panel-title">撤遛确认结果</h3>
+              </div>
+              <div class="panel-body">
+                <p><strong>设备ID:</strong> ${result.device_id}</p>
+                <p><strong>结果:</strong> ${result.result}</p>
+                <p><strong>时间:</strong> ${new Date(result.timestamp * 1000).toLocaleString()}</p>
+              </div>
+            </div>
+          </div>`;
+      }
+      
+      if (detailHtml) {
+        analysisDiv.append(detailHtml);
+      }
+    }
+
     // 开始传输视频流
     $('#startStreamBtn').click(function() {
       const selectedDevice = $('#deviceSelect').val();
@@ -1450,11 +1588,88 @@ sdkclient.addObserver('AlarmUpload', msg => {
       $('#stopStreamBtn').show();
       isStreaming = true;
 
-      // 这里应该调用SDK打开视频的方法
-      // 由于需要传输视频流到后端服务，我们需要获取媒体流
-      // 暂时使用一个模拟的实现
-      simulateVideoStream(selectedDevice);
+      // 连接到后端WebSocket服务
+      connectToBackend();
+
+      // 发送开始处理请求到后端
+      // 注意：在实际应用中，这里需要通过MCS8 SDK获取视频流并传输到后端
+      sendStartProcessingRequest(selectedDevice);
     });
+
+    // 发送开始处理请求到后端
+    function sendStartProcessingRequest(deviceId) {
+      // 通过HTTP请求通知后端开始处理指定设备的视频流
+      fetch(`http://localhost:8000/video-stream/${deviceId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('后端响应 (video-stream):', data);
+        $('#streamStatus').text(`已创建设备 ${data.device_id} 的工作空间: ${data.workspace_path}`);
+        
+        // 使用后端返回的带时间戳的设备ID继续调用视频处理端点
+        startVideoProcessing(data.device_id_with_timestamp); // 使用data.device_id而不是原始的deviceId
+      })
+      .catch(error => {
+        console.error('请求后端服务时出错:', error);
+        $('#streamStatus').text(`错误: ${error.message}`);
+      });
+    }
+    
+    // 启动视频处理任务
+    function startVideoProcessing(deviceIdWithTimestamp) {
+      // 获取设备ID（去掉时间戳部分以获取原始设备ID）
+      const originalDeviceId = deviceIdWithTimestamp.split('_')[0];
+      
+      // 首先尝试打开视频流（这会通过MCS8 SDK连接设备）
+      const remoteVideo = document.getElementById(`remoteVideo${originalDeviceId}`);
+      if (!remoteVideo) {
+        // 如果不存在对应的video元素，创建一个
+        const videoElement = $('<video id="remoteVideo' + originalDeviceId + '" style="display:none;" autoplay muted></video>');
+        $('body').append(videoElement);
+      }
+      
+      // 调用MCS8 SDK打开视频流
+      sdkclient.mClient.openVideo(originalDeviceId, document.getElementById(`remoteVideo${originalDeviceId}`), null, null)
+        .then(resp => {
+          console.log('视频流打开响应:', resp);
+          
+          if (resp === 200) {
+            // 视频流成功打开，现在通知后端开始处理
+            fetch(`http://localhost:8000/process-video/${deviceIdWithTimestamp}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                device_id: originalDeviceId // 传递原始设备ID
+              })
+            })
+            .then(response => response.json())
+            .then(data => {
+              console.log('后端响应 (process-video):', data);
+              $('#streamStatus').append(`<br>视频处理任务已启动，设备ID: ${data.device_id}`);
+              
+              // 现在系统将开始处理视频流并分析内容
+              $('#streamStatus').append(`<br>开始实时分析视频流...`);
+            })
+            .catch(error => {
+              console.error('启动视频处理任务时出错:', error);
+              $('#streamStatus').append(`<br>错误: ${error.message}`);
+            });
+          } else {
+            console.error('打开视频流失败:', resp);
+            $('#streamStatus').append(`<br>错误: 打开视频流失败，错误代码 ${resp}`);
+          }
+        })
+        .catch(error => {
+          console.error('调用MCS8 SDK打开视频流时出错:', error);
+          $('#streamStatus').append(`<br>错误: ${error.message}`);
+        });
+    }
 
     // 停止传输视频流
     $('#stopStreamBtn').click(function() {
@@ -1469,43 +1684,13 @@ sdkclient.addObserver('AlarmUpload', msg => {
         tracks.forEach(track => track.stop());
         mediaStream = null;
       }
-    });
-
-    // 模拟视频流传输和后端处理结果
-    function simulateVideoStream(deviceId) {
-      $('#streamStatus').text(`正在传输设备 ${deviceId} 的视频流到后端服务...`);
       
-      // 模拟后端处理结果的流式返回
-      let resultCount = 0;
-      const resultsInterval = setInterval(() => {
-        if (!isStreaming) {
-          clearInterval(resultsInterval);
-          return;
-        }
-        
-        resultCount++;
-        const timestamp = new Date().toLocaleTimeString();
-        const resultsDiv = $('#processingResults');
-        const resultText = `[${
-          timestamp}] 处理结果 #${
-          resultCount}: 来自设备 ${
-          deviceId} 的分析数据...`;
-        
-        resultsDiv.append(`<p>${resultText}</p>`);
-        resultsDiv.scrollTop(resultsDiv[0].scrollHeight);
-        
-        // 模拟不同的处理结果
-        if (resultCount % 5 === 0) {
-          resultsDiv.append(`<p class="text-warning">[${
-            timestamp}] 警告: 检测到异常行为 (置信度: 85%)</p>`);
-        } else if (resultCount % 10 === 0) {
-          resultsDiv.append(`<p class="text-danger">[${
-            timestamp}] 紧急: 检测到安全事件 (置信度: 92%)</p>`);
-        }
-        
-        resultsDiv.scrollTop(resultsDiv[0].scrollHeight);
-      }, 2000);
-    }
+      // 关闭WebSocket连接
+      if (ws) {
+        ws.close();
+        ws = null;
+      }
+    });
 
     // 在视频流处理Tab显示时初始化设备列表
     $('#menu a[data-key="videoStream"]').click(function() {
