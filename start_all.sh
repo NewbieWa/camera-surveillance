@@ -58,13 +58,23 @@ BACKEND_PID=$!
 sleep 3
 
 # 检查后端服务是否启动成功
-if curl -s http://localhost:$BACKEND_PORT/ > /dev/null; then
-    echo -e "${GREEN}✓ 后端服务启动成功 (PID: $BACKEND_PID)${NC}"
-else
-    echo -e "${RED}✗ 后端服务启动失败${NC}"
-    cat backend.log
-    exit 1
-fi
+# 增加重试机制以应对启动延迟
+sleep 2  # 额外等待确保服务已完全启动
+for i in {1..10}; do
+    if curl -s http://localhost:$BACKEND_PORT/ > /dev/null; then
+        echo -e "${GREEN}✓ 后端服务启动成功 (PID: $BACKEND_PID)${NC}"
+        break
+    else
+        if [ $i -eq 10 ]; then
+            echo -e "${RED}✗ 后端服务启动失败${NC}"
+            if [ -f backend.log ]; then
+                cat backend.log
+            fi
+            exit 1
+        fi
+        sleep 1
+    fi
+done
 
 # 启动前端服务
 echo -e "${GREEN}启动前端服务...${NC}"

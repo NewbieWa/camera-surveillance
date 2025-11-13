@@ -76,6 +76,7 @@
 
           <li class="head">实时视频流处理</li>
           <li><a href="#videoStream" data-key="videoStream">视频流实时处理</a></li>
+          <li><a href="#videoFileTest" data-key="videoFileTest">视频文件测试</a></li>
         </ul>
       </div>
       <div class="col-md-6" id="content">
@@ -1013,6 +1014,39 @@ sdkclient.addObserver('AlarmUpload', msg => {
           </div>
           <!-- 实时视频流处理 END -->
 
+          <!-- 视频文件测试 -->
+          <div class="tab-pane" id="videoFileTest">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">视频文件测试</h3>
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="videoFileSelect">选择视频文件:</label>
+                  <select class="form-control" id="videoFileSelect">
+                    <option value="">请选择视频文件</option>
+                  </select>
+                </div>
+                <button class="btn btn-primary" id="loadVideoFilesBtn">加载视频文件列表</button>
+                <button class="btn btn-success" id="processVideoFileBtn">处理视频文件</button>
+                <div id="videoFileStatus" class="alert alert-info" style="margin-top: 10px;"></div>
+                <div id="videoFileResults" class="well" style="margin-top: 10px; max-height: 300px; overflow-y: auto;"></div>
+              </div>
+            </div>
+            
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">处理结果展示</h3>
+              </div>
+              <div class="panel-body">
+                <div id="videoFileAnalysisResults" class="row">
+                  <!-- 处理结果将在这里展示 -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 视频文件测试 END -->
+
         </div>
       </div>
       <div class="col-md-3">
@@ -1695,6 +1729,265 @@ sdkclient.addObserver('AlarmUpload', msg => {
     // 在视频流处理Tab显示时初始化设备列表
     $('#menu a[data-key="videoStream"]').click(function() {
       initDeviceSelect();
+    });
+    
+    // 视频文件测试功能
+    let videoFileWs = null; // WebSocket连接用于视频文件测试
+    
+    // 初始化视频文件列表
+    function initVideoFileList() {
+      // 从后端API获取视频文件列表
+      const select = $('#videoFileSelect');
+      select.empty();
+      select.append('<option value="">请选择视频文件</option>');
+      
+      // 从后端API获取视频文件列表
+      fetch('http://localhost:8000/list-video-files')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('网络响应不正常');
+          }
+          return response.json();
+        })
+        .then(data => {
+          const videoFiles = data.video_files || [];
+          
+          // 添加到下拉列表
+          videoFiles.forEach(file => {
+            select.append(`<option value="${file}">${file}</option>`);
+          });
+          
+          $('#videoFileStatus').text(`视频文件列表已加载，共找到 ${videoFiles.length} 个视频文件`);
+        })
+        .catch(error => {
+          console.error('获取视频文件列表时出错:', error);
+          $('#videoFileStatus').text('加载视频文件列表失败: ' + error.message);
+          
+          // 如果获取失败，使用默认列表
+          const defaultFiles = ['车号.mp4', '车号2.mp4', '车号3.mp4', '车号4.mp4', '车号5.mp4', '791ff8c6e3dfa3e931ecc72f7964b6e9.mp4'];
+          defaultFiles.forEach(file => {
+            select.append(`<option value="${file}">${file}</option>`);
+          });
+        });
+    }
+    
+    // 加载视频文件列表
+    $('#loadVideoFilesBtn').click(function() {
+      $('#videoFileStatus').text('正在加载视频文件列表...');
+      initVideoFileList();
+      $('#videoFileStatus').text('视频文件列表已加载');
+    });
+    
+    // 连接到后端WebSocket服务用于视频文件测试
+    function connectToVideoFileBackend() {
+      const backendUrl = 'ws://localhost:8000/ws/results';
+      videoFileWs = new WebSocket(backendUrl);
+      
+      videoFileWs.onopen = function(event) {
+        console.log('视频文件测试 - 已连接到后端WebSocket服务');
+        $('#videoFileStatus').append('<br>已连接到后端分析服务');
+      };
+      
+      videoFileWs.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        displayVideoFileAnalysisResult(data);
+      };
+      
+      videoFileWs.onclose = function(event) {
+        console.log('视频文件测试 - 与后端WebSocket服务的连接已关闭');
+      };
+      
+      videoFileWs.onerror = function(error) {
+        console.error('视频文件测试 - WebSocket连接错误:', error);
+        $('#videoFileStatus').append('<br>WebSocket连接错误: ' + error);
+      };
+    }
+    
+    // 显示视频文件测试分析结果
+    function displayVideoFileAnalysisResult(result) {
+      const resultsDiv = $('#videoFileResults');
+      const timestamp = new Date().toLocaleTimeString();
+      
+      let resultHtml = '';
+      if (result.type === 'vehicle_number') {
+        resultHtml = `
+          <div class="alert alert-info">
+            <strong>[${timestamp}] 车号识别结果:</strong> ${result.result}
+            ${result.vehicle_number ? `<br>识别到的车号: ${result.vehicle_number}` : ''}
+          </div>`;
+      } else if (result.type === 'anti_rolling') {
+        const alertClass = result.success ? 'alert-success' : 'alert-warning';
+        const statusText = result.success ? '成功' : '失败';
+        resultHtml = `
+          <div class="alert ${alertClass}">
+            <strong>[${timestamp}] 防遛确认:</strong> ${result.result} (${statusText})
+          </div>`;
+      } else if (result.type === 'remove_rolling') {
+        const alertClass = result.success ? 'alert-success' : 'alert-warning';
+        const statusText = result.success ? '成功' : '失败';
+        resultHtml = `
+          <div class="alert ${alertClass}">
+            <strong>[${timestamp}] 撤遛确认:</strong> ${result.result} (${statusText})
+          </div>`;
+      } else if (result.type === 'error') {
+        resultHtml = `
+          <div class="alert alert-danger">
+            <strong>[${timestamp}] 错误:</strong> ${result.message}
+          </div>`;
+      }
+      
+      if (resultHtml) {
+        resultsDiv.append(resultHtml);
+        resultsDiv.scrollTop(resultsDiv[0].scrollHeight);
+      }
+      
+      // 在结果展示区域显示详细信息
+      displayVideoFileDetailedResult(result);
+    }
+    
+    // 显示视频文件测试详细结果
+    function displayVideoFileDetailedResult(result) {
+      const analysisDiv = $('#videoFileAnalysisResults');
+      const timestamp = new Date().toLocaleTimeString();
+      
+      let detailHtml = '';
+      if (result.type === 'vehicle_number') {
+        detailHtml = `
+          <div class="col-md-4">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">车号识别结果</h3>
+              </div>
+              <div class="panel-body">
+                <p><strong>设备ID:</strong> ${result.device_id}</p>
+                <p><strong>结果:</strong> ${result.result}</p>
+                ${result.vehicle_number ? `<p><strong>车号:</strong> ${result.vehicle_number}</p>` : ''}
+                <p><strong>时间:</strong> ${new Date(result.timestamp * 1000).toLocaleString()}</p>
+              </div>
+            </div>
+          </div>`;
+      } else if (result.type === 'anti_rolling') {
+        const panelClass = result.success ? 'panel-success' : 'panel-warning';
+        detailHtml = `
+          <div class="col-md-4">
+            <div class="panel ${panelClass}">
+              <div class="panel-heading">
+                <h3 class="panel-title">防遛确认结果</h3>
+              </div>
+              <div class="panel-body">
+                <p><strong>设备ID:</strong> ${result.device_id}</p>
+                <p><strong>结果:</strong> ${result.result}</p>
+                <p><strong>时间:</strong> ${new Date(result.timestamp * 1000).toLocaleString()}</p>
+              </div>
+            </div>
+          </div>`;
+      } else if (result.type === 'remove_rolling') {
+        const panelClass = result.success ? 'panel-success' : 'panel-warning';
+        detailHtml = `
+          <div class="col-md-4">
+            <div class="panel ${panelClass}">
+              <div class="panel-heading">
+                <h3 class="panel-title">撤遛确认结果</h3>
+              </div>
+              <div class="panel-body">
+                <p><strong>设备ID:</strong> ${result.device_id}</p>
+                <p><strong>结果:</strong> ${result.result}</p>
+                <p><strong>时间:</strong> ${new Date(result.timestamp * 1000).toLocaleString()}</p>
+              </div>
+            </div>
+          </div>`;
+      }
+      
+      if (detailHtml) {
+        analysisDiv.append(detailHtml);
+      }
+    }
+    
+    // 处理视频文件
+    $('#processVideoFileBtn').click(function() {
+      const selectedFile = $('#videoFileSelect').val();
+      if (!selectedFile) {
+        alert('请选择一个视频文件');
+        return;
+      }
+
+      $('#videoFileStatus').text(`正在处理视频文件: ${selectedFile}`);
+      
+      // 连接到后端WebSocket服务
+      connectToVideoFileBackend();
+      
+      // 从文件名提取设备ID（去掉扩展名）
+      const deviceId = selectedFile.replace(/\.[^/.]+$/, ""); // 移除扩展名
+      $('#videoFileStatus').append(`<br>使用设备ID: ${deviceId}`);
+      
+      // 调用后端接口开始处理
+      sendVideoFileToBackend(selectedFile, deviceId);
+    });
+    
+    // 发送视频文件到后端
+    async function sendVideoFileToBackend(filename, deviceId) {
+      try {
+        // 从video/train_number文件夹加载视频文件
+        const videoUrl = `video/train_number/${filename}`;
+        
+        // 使用fetch加载视频文件
+        const response = await fetch(videoUrl);
+        if (!response.ok) {
+          throw new Error(`无法加载视频文件: ${response.status} ${response.statusText}`);
+        }
+        
+        const videoBlob = await response.blob();
+        
+        // 首先调用 /video-stream/{device_id} 接口创建工作空间
+        $('#videoFileStatus').append(`<br>正在创建工作空间...`);
+        
+        const streamResponse = await fetch(`http://localhost:8000/video-stream/${deviceId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (!streamResponse.ok) {
+          throw new Error(`创建工作空间失败: ${streamResponse.status} ${streamResponse.statusText}`);
+        }
+        
+        const streamData = await streamResponse.json();
+        $('#videoFileStatus').append(`<br>工作空间创建成功: ${streamData.workspace_path}`);
+        
+        // 等待一小段时间确保工作空间创建完成
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        // 然后调用 /process-video/{device_id} 接口处理视频
+        $('#videoFileStatus').append(`<br>正在发送视频数据到后端进行处理...`);
+        
+        const processResponse = await fetch(`http://localhost:8000/process-video/${streamData.device_id_with_timestamp}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/octet-stream'  // 发送视频数据作为二进制流
+          },
+          body: videoBlob  // 直接发送视频文件的二进制数据
+        });
+        
+        if (!processResponse.ok) {
+          throw new Error(`处理视频失败: ${processResponse.status} ${processResponse.statusText}`);
+        }
+        
+        const processData = await processResponse.json();
+        $('#videoFileStatus').append(`<br>视频处理任务已启动: ${processData.message}`);
+        
+        // 视频处理将在后端异步进行，结果将通过WebSocket返回
+        $('#videoFileStatus').append(`<br>开始接收处理结果...`);
+        
+      } catch (error) {
+        console.error('发送视频文件到后端时出错:', error);
+        $('#videoFileStatus').append(`<br>错误: ${error.message}`);
+      }
+    }
+    
+    // 在视频文件测试Tab显示时初始化文件列表
+    $('#menu a[data-key="videoFileTest"]').click(function() {
+      initVideoFileList();
     });
   });
 </script>

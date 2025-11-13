@@ -1,5 +1,110 @@
-INFO:     Started server process [98637]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     127.0.0.1:58757 - "GET / HTTP/1.1" 200 OK
+2025-11-09 23:00:22 INFO:     Started server process [13975]
+2025-11-09 23:00:22 INFO: Started server process [13975]
+2025-11-09 23:00:22 INFO:     Waiting for application startup.
+2025-11-09 23:00:22 INFO: Waiting for application startup.
+2025-11-09 23:00:22 INFO:     Application startup complete.
+2025-11-09 23:00:22 INFO: Application startup complete.
+2025-11-09 23:00:22 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2025-11-09 23:00:22 INFO: Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2025-11-09 23:00:25 INFO:     127.0.0.1:53139 - "GET / HTTP/1.1" 200 OK
+2025-11-09 23:00:33 INFO: [2025-11-09 23:00:33] 正在查找视频目录: /Users/wanglei/workStore/code/workSource/camera-surveillance/frontend/video/train_number
+2025-11-09 23:00:33 INFO: [2025-11-09 23:00:33] 找到 6 个视频文件: ['791ff8c6e3dfa3e931ecc72f7964b6e9.mp4', '车号.mp4', '车号2.mp4', '车号3.mp4', '车号4.mp4', '车号5.mp4']
+[2025-11-09 23:00:33] 正在查找视频目录: /Users/wanglei/workStore/code/workSource/camera-surveillance/frontend/video/train_number
+[2025-11-09 23:00:33] 找到 6 个视频文件: ['791ff8c6e3dfa3e931ecc72f7964b6e9.mp4', '车号.mp4', '车号2.mp4', '车号3.mp4', '车号4.mp4', '车号5.mp4']
+2025-11-09 23:00:33 INFO:     127.0.0.1:53144 - "GET /list-video-files HTTP/1.1" 200 OK
+2025-11-09 23:00:36 INFO:     127.0.0.1:53146 - "WebSocket /ws/results" [accepted]
+2025-11-09 23:00:36 INFO: 127.0.0.1:53146 - "WebSocket /ws/results" [accepted]
+2025-11-09 23:00:36 INFO:     connection open
+2025-11-09 23:00:36 INFO: connection open
+2025-11-09 23:00:36 INFO:     127.0.0.1:53144 - "POST /video-stream/791ff8c6e3dfa3e931ecc72f7964b6e9 HTTP/1.1" 200 OK
+2025-11-09 23:00:36 INFO:     127.0.0.1:53144 - "OPTIONS /process-video/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436 HTTP/1.1" 200 OK
+2025-11-09 23:00:36 INFO:     127.0.0.1:53144 - "POST /process-video/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436 HTTP/1.1" 200 OK
+2025-11-09 23:00:36 INFO: [2025-11-09 23:00:36] 工作空间不存在，为设备 791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436 创建: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436
+2025-11-09 23:00:36 INFO: [2025-11-09 23:00:36] 成功导入dashscope库
+2025-11-09 23:00:36 INFO: [2025-11-09 23:00:36] AudioTranscriber初始化完成，采样率: 16000Hz
+2025-11-09 23:00:36 INFO: [2025-11-09 23:00:36] 开始录制视频到: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/video_1762700436.mp4
+2025-11-09 23:00:37 INFO: [2025-11-09 23:00:37] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+2025-11-09 23:00:37 INFO: [2025-11-09 23:00:37] 开始转录音频文件: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/extracted_audio.wav
+2025-11-09 23:00:37 ERROR: {"status_code": 401, "request_id": null, "code": 401, "message": "Unauthorized, your api-key is invalid!", "output": null, "usage": null}
+2025-11-09 23:00:37 INFO: [2025-11-09 23:00:37] 识别失败: Unauthorized, your api-key is invalid!
+2025-11-09 23:00:38 INFO: [2025-11-09 23:00:38] 处理车号确认操作: 车号确认
+2025-11-09 23:00:40 INFO: [2025-11-09 23:00:40] 处理防遛确认操作: 铁鞋设置
+2025-11-09 23:00:41 INFO: [2025-11-09 23:00:41] 处理防遛确认操作: 手闸拧紧
+2025-11-09 23:00:43 INFO: [2025-11-09 23:00:43] 处理撤遛确认操作: 铁鞋撤除
+2025-11-09 23:00:46 INFO: [2025-11-09 23:00:46] 处理撤遛确认操作: 手闸松开
+[2025-11-09 23:00:36] 工作空间不存在，为设备 791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436 创建: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436
+[2025-11-09 23:00:36] 成功导入dashscope库
+[2025-11-09 23:00:36] AudioTranscriber初始化完成，采样率: 16000Hz
+[2025-11-09 23:00:36] 开始录制视频到: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/video_1762700436.mp4
+[2025-11-09 23:00:37] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+[2025-11-09 23:00:37] 开始转录音频文件: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/extracted_audio.wav
+[2025-11-09 23:00:37] 识别失败: Unauthorized, your api-key is invalid!
+[2025-11-09 23:00:38] 处理车号确认操作: 车号确认
+[2025-11-09 23:00:38] 识别车辆编号时出错: Get upload certificate failed, code: InvalidApiKey, message: Invalid API-key provided.
+[2025-11-09 23:00:38] 识别车辆编号时出错: Get upload certificate failed, code: InvalidApiKey, message: Invalid API-key provided.
+[2025-11-09 23:00:38] 识别车辆编号时出错: Get upload certificate failed, code: InvalidApiKey, message: Invalid API-key provided.
+[2025-11-09 23:00:38] 识别车辆编号时出错: Get upload certificate failed, code: InvalidApiKey, message: Invalid API-key provided.
+[2025-11-09 23:00:39] 识别车辆编号时出错: Get upload certificate failed, code: InvalidApiKey, message: Invalid API-key provided.
+[2025-11-09 23:00:39] 识别车辆编号时出错: Get upload certificate failed, code: InvalidApiKey, message: Invalid API-key provided.
+[2025-11-09 23:00:39] 识别车辆编号时出错: Get upload certificate failed, code: InvalidApiKey, message: Invalid API-key provided.
+[2025-11-09 23:00:40] 处理防遛确认操作: 铁鞋设置
+[2025-11-09 23:00:40] 调用防遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_23.20.jpg
+[2025-11-09 23:00:40] 调用防遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_24.20.jpg
+[2025-11-09 23:00:40] 调用防遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_25.20.jpg
+[2025-11-09 23:00:40] 调用防遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_26.20.jpg
+[2025-11-09 23:00:40] 调用防遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_27.20.jpg
+[2025-11-09 23:00:40] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_23.20.jpg 耗时: 0.51秒
+[2025-11-09 23:00:40] 调用防遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_28.20.jpg
+[2025-11-09 23:00:40] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_27.20.jpg 耗时: 0.50秒
+[2025-11-09 23:00:40] 调用防遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_29.20.jpg
+[2025-11-09 23:00:40] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_26.20.jpg 耗时: 0.50秒
+[2025-11-09 23:00:40] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_24.20.jpg 耗时: 0.51秒
+[2025-11-09 23:00:40] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_25.20.jpg 耗时: 0.51秒
+[2025-11-09 23:00:41] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_28.20.jpg 耗时: 0.50秒
+[2025-11-09 23:00:41] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_29.20.jpg 耗时: 0.50秒
+[2025-11-09 23:00:41] 处理防遛确认操作: 手闸拧紧
+[2025-11-09 23:00:41] 调用防遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_23.20.jpg
+[2025-11-09 23:00:41] 调用防遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_24.20.jpg
+[2025-11-09 23:00:41] 调用防遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_25.20.jpg
+[2025-11-09 23:00:41] 调用防遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_26.20.jpg
+[2025-11-09 23:00:41] 调用防遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_27.20.jpg
+[2025-11-09 23:00:42] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_23.20.jpg 耗时: 0.51秒
+[2025-11-09 23:00:42] 调用防遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_28.20.jpg
+[2025-11-09 23:00:42] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_24.20.jpg 耗时: 0.51秒
+[2025-11-09 23:00:42] 调用防遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_29.20.jpg
+[2025-11-09 23:00:42] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_27.20.jpg 耗时: 0.51秒
+[2025-11-09 23:00:42] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_25.20.jpg 耗时: 0.51秒
+[2025-11-09 23:00:42] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_26.20.jpg 耗时: 0.51秒
+[2025-11-09 23:00:42] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_28.20.jpg 耗时: 0.50秒
+[2025-11-09 23:00:42] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_29.20.jpg 耗时: 0.50秒
+[2025-11-09 23:00:43] 处理撤遛确认操作: 铁鞋撤除
+[2025-11-09 23:00:43] 调用撤遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_40.80.jpg
+[2025-11-09 23:00:43] 调用撤遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_41.80.jpg
+[2025-11-09 23:00:43] 调用撤遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_42.80.jpg
+[2025-11-09 23:00:43] 调用撤遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_43.80.jpg
+[2025-11-09 23:00:43] 调用撤遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_44.80.jpg
+[2025-11-09 23:00:44] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_40.80.jpg 耗时: 0.70秒
+[2025-11-09 23:00:44] 调用撤遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_45.80.jpg
+[2025-11-09 23:00:44] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_43.80.jpg 耗时: 0.70秒
+[2025-11-09 23:00:44] 调用撤遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_46.80.jpg
+[2025-11-09 23:00:44] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_42.80.jpg 耗时: 0.70秒
+[2025-11-09 23:00:44] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_44.80.jpg 耗时: 0.70秒
+[2025-11-09 23:00:44] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_41.80.jpg 耗时: 0.70秒
+[2025-11-09 23:00:44] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_45.80.jpg 耗时: 0.70秒
+[2025-11-09 23:00:44] 处理图像 workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_46.80.jpg 耗时: 0.70秒
+[2025-11-09 23:00:46] 处理撤遛确认操作: 手闸松开
+[2025-11-09 23:00:46] 调用撤遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_40.80.jpg
+[2025-11-09 23:00:46] 调用撤遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_41.80.jpg
+[2025-11-09 23:00:46] 调用撤遛确认模型处理图像: workspace/791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436_1762700436/frame_42.80.jpg
+2025-11-09 23:00:47 INFO: [2025-11-09 23:00:47] 设备 791ff8c6e3dfa3e931ecc72f7964b6e9_1762700436 的视频处理完成
+2025-11-09 23:04:24 INFO: [2025-11-09 23:04:24] WebSocket连接错误: (<CloseCode.ABNORMAL_CLOSURE: 1006>, '')
+2025-11-09 23:04:24 INFO:     connection closed
+2025-11-09 23:04:24 INFO: connection closed
+2025-11-11 23:32:12 INFO:     Shutting down
+2025-11-11 23:32:12 INFO: Shutting down
+2025-11-11 23:32:12 INFO:     Waiting for application shutdown.
+2025-11-11 23:32:12 INFO: Waiting for application shutdown.
+2025-11-11 23:32:12 INFO:     Application shutdown complete.
+2025-11-11 23:32:12 INFO: Application shutdown complete.
+2025-11-11 23:32:12 INFO:     Finished server process [13975]
+2025-11-11 23:32:12 INFO: Finished server process [13975]
