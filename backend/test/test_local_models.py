@@ -12,9 +12,11 @@ import asyncio
 
 # 添加项目根目录到Python路径
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 
-# 尝试导入模型，处理可能的依赖问题
-from backend.src.backend.processor.local_models import AntiRollingModel, RemoveRollingModel
+# 尝试导入模型和anchor，处理可能的依赖问题
+from camera_surveillance.processor.local_models import AntiRollingModel, RemoveRollingModel
 MODELS_AVAILABLE = True
 
 def test_anti_rolling_model():
@@ -31,7 +33,7 @@ def test_anti_rolling_model():
         print("防遛确认模型创建成功")
         
         # 检查当前目录下是否有测试图像
-        test_image_path = "../images/example.jpg"  # 假设存在一个测试图像
+        test_image_path = 'images/example.jpg'
         # 如果不存在测试图像，可以尝试使用工作空间中的图像
         if not os.path.exists(test_image_path):
             # 查找工作空间中的图像
@@ -92,7 +94,7 @@ def test_remove_rolling_model():
         print("撤遛确认模型创建成功")
         
         # 检查当前目录下是否有测试图像
-        test_image_path = "test_image.jpg"  # 假设存在一个测试图像
+        test_image_path = "images/example.png"
         # 如果不存在测试图像，可以尝试使用工作空间中的图像
         if not os.path.exists(test_image_path):
             # 查找工作空间中的图像

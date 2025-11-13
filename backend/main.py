@@ -17,7 +17,7 @@ logging.basicConfig(
     format='%(asctime)s %(levelname)s: %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S',
     handlers=[
-        logging.FileHandler('backend.log'),
+        logging.FileHandler('backend/backend.log'),
         logging.StreamHandler()
     ]
 )
@@ -31,18 +31,19 @@ def log_with_timestamp(message: str):
     # 同时记录到日志文件
     logger.info(f"[{timestamp}] {message}")
 
-# 添加项目根目录到Python路径
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# 添加src目录到Python路径
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src'))
 
-from backend.src.backend.core import WorkspaceManager
-from backend.src.backend.core import VideoStreamProcessor
-from backend.src.backend.processor.audio_transcriber import AudioTranscriber
-from backend.src.backend.processor.speech_processor import SpeechProcessor
-from backend.src.backend.core import KeywordDetector, OperationType
-from backend.src.backend.core import FrameExtractor
-from backend.src.backend.processor.vehicle_recognizer import VehicleNumberRecognizer
-from backend.src.backend.processor.local_models import AntiRollingModel, RemoveRollingModel
-from backend.src.backend.core import ResultReporter
+
+from camera_surveillance.workspace import WorkspaceManager
+from camera_surveillance.video_processor import VideoStreamProcessor
+from camera_surveillance.processor import AudioTranscriber
+from camera_surveillance.processor import SpeechProcessor
+from camera_surveillance.keyword_detector import KeywordDetector, OperationType
+from camera_surveillance.frame_extractor import FrameExtractor
+from camera_surveillance.processor.vehicle_recognizer import VehicleNumberRecognizer
+from camera_surveillance.processor.local_models import AntiRollingModel, RemoveRollingModel
+from camera_surveillance.result_reporter import ResultReporter
 
 app = FastAPI(title="外勤作业智能分析系统", description="实时视频流处理和分析服务")
 

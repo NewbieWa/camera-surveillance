@@ -1,14 +1,9 @@
 import asyncio
 import cv2
-import numpy as np
-import threading
 import queue
 import time
-from typing import Generator, Tuple, Optional
-import wave
-import tempfile
+from typing import Generator
 import os
-import io
 from pathlib import Path
 from datetime import datetime
 

@@ -1,0 +1,11 @@
+dashscope>=1.25.1
+eva-decord==0.6.1
+fastapi>=0.121.1
+numpy==1.26.4
+pandas==2.3.2
+pyaudio>=0.2.14
+torch==2.2.2
+tqdm==4.67.1
+ultralytics==8.3.203
+uvicorn>=0.38.0
+websockets>=15.0.1

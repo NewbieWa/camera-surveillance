@@ -35,14 +35,14 @@ backend/
 ## 安装依赖
 
 ```bash
-cd backend
+cd camera_surveillance
 pip install -r requirements.txt
 ```
 
 ## 运行服务
 
 ```bash
-cd backend
+cd camera_surveillance
 python main.py
 ```
 

@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: camera-surveillance
+Version: 0.1.0
+Summary: Backend for camera surveillance system
+Author-email: Your Name <your.email@example.com>
+Requires-Dist: dashscope>=1.25.1
+Requires-Dist: eva-decord==0.6.1
+Requires-Dist: fastapi>=0.121.1
+Requires-Dist: numpy==1.26.4
+Requires-Dist: pandas==2.3.2
+Requires-Dist: pyaudio>=0.2.14
+Requires-Dist: torch==2.2.2
+Requires-Dist: tqdm==4.67.1
+Requires-Dist: ultralytics==8.3.203
+Requires-Dist: uvicorn>=0.38.0
+Requires-Dist: websockets>=15.0.1

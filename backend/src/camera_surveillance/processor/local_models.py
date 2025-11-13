@@ -5,6 +5,11 @@ from typing import Optional, List, Tuple
 from pathlib import Path
 import time
 from datetime import datetime
+import os
+import sys
+
+# 添加项目根目录到Python路径
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 
 # 尝试导入必要的库，处理可能的依赖问题
 try:
@@ -116,7 +121,7 @@ class BaseModelInterface(ABC):
 class AntiRollingModel(BaseModelInterface):
     """防遛确认模型A"""
     
-    def __init__(self, model_path: str = 'core/models/det_20250924.pt', conf_threshold: float = 0.8, max_concurrent: int = 5):
+    def __init__(self, model_path: str = None, conf_threshold: float = 0.8, max_concurrent: int = 5):
         """
         初始化防遛确认模型
         
@@ -126,7 +131,13 @@ class AntiRollingModel(BaseModelInterface):
             max_concurrent: 最大并发调用数量
         """
         super().__init__(max_concurrent)
-        self.model_path = model_path
+        
+        print(f"Current working directory: {os.getcwd()}")
+        if model_path is None:
+            self.model_path = 'src/camera_surveillance/models/det_20250924.pt'
+        else:
+            self.model_path = model_path
+        
         self.conf_threshold = conf_threshold
         self.model = None
         self.device = None
@@ -137,6 +148,8 @@ class AntiRollingModel(BaseModelInterface):
             log_with_timestamp("依赖库不可用，防遛确认模型无法加载")
     
     def _load_model(self):
+        print(f"Current working directory: {os.getcwd()}")
+
         """加载模型"""
         try:
             # 根据系统自动判断用mps还是gpu还是cpu
@@ -232,7 +245,7 @@ class AntiRollingModel(BaseModelInterface):
 class RemoveRollingModel(BaseModelInterface):
     """撤遛确认模型B"""
     
-    def __init__(self, model_path: str = 'core/models/det_20250924.pt', conf_threshold: float = 0.8, max_concurrent: int = 5):
+    def __init__(self, model_path: str = None, conf_threshold: float = 0.8, max_concurrent: int = 5):
         """
         初始化撤遛确认模型
         
@@ -242,7 +255,13 @@ class RemoveRollingModel(BaseModelInterface):
             max_concurrent: 最大并发调用数量
         """
         super().__init__(max_concurrent)
-        self.model_path = model_path
+        
+        print(f"Current working directory: {os.getcwd()}")
+        if model_path is None:
+            self.model_path = "src/camera_surveillance/models/det_20250924.pt"
+        else:
+            self.model_path = model_path
+        
         self.conf_threshold = conf_threshold
         self.model = None
         self.device = None
