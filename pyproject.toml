@@ -1,5 +1,5 @@
 [project]
-name = "camera-surveillance-backend"
+name = "camera-surveillance"
 version = "0.1.0"
 description = "Backend for camera surveillance system"
 authors = [
@@ -24,8 +24,8 @@ requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-where = ["src"]
-include = ["camera_surveillance_backend*"]
+where = ["backend/src"]
+include = ["camera_surveillance*"]
 
 [project.scripts]
 start-backend = "main:main"
