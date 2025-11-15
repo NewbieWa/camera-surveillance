@@ -15,7 +15,7 @@ from pathlib import Path
 # 添加项目根目录到Python路径
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from core.processor.audio_transcriber import AudioTranscriber
+from camera_surveillance.processor.audio_transcriber import AudioTranscriber
 
 def create_test_wav_file():
     """创建测试WAV文件"""

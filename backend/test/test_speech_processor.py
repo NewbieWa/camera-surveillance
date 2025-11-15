@@ -25,7 +25,7 @@ def test_speech_processor():
     """测试语音处理器功能"""
     try:
         # 导入模块
-        from core.processor.speech_processor import SpeechProcessor
+        from camera_surveillance.processor.speech_processor import SpeechProcessor
         
         # 创建语音处理器实例
         processor = SpeechProcessor()

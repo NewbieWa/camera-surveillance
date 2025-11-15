@@ -6,7 +6,8 @@ from typing import List, Tuple
 from pathlib import Path
 from datetime import datetime
 from http import HTTPStatus
-from dashscope.audio.asr import Recognition
+from dashscope.audio.asr import Recognition, Transcription
+import json
 
 def log_with_timestamp(message: str):
     """带时间戳的日志输出函数"""
@@ -30,7 +31,7 @@ class SpeechProcessor:
         # 导入百炼SDK
         try:
             import dashscope
-            dashscope.api_key = 'OS-e2utk2vb87ku3v5'
+            dashscope.api_key = 'sk-75d99280f5db4b65b5eaa46525a35177'
         except ImportError:
             log_with_timestamp("警告: 未安装dashscope库，请先安装: pip install dashscope")
             raise
@@ -60,6 +61,18 @@ class SpeechProcessor:
             return []
         
         try:
+            task_response = Transcription.async_call(
+                model='paraformer-v2',
+                file_urls=[
+                    'https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D'],
+                language_hints=['zh', 'en']  # “language_hints”只支持paraformer-v2模型
+            )
+
+            transcribe_response = Transcription.wait(task=task_response.output.task_id)
+            if transcribe_response.status_code == HTTPStatus.OK:
+                log_with_timestamp(json.dumps(transcribe_response.output, indent=4, ensure_ascii=False))
+                log_with_timestamp('transcription done!')
+
             # 创建识别器实例
             recognition = Recognition(
                 model=self.model,
@@ -75,6 +88,8 @@ class SpeechProcessor:
                 log_with_timestamp('识别成功')
                 # 获取完整的句子结果
                 full_result = result.get_sentence()
+                log_with_timestamp(f'speech_result: {result}')
+                log_with_timestamp(f'full_result: {full_result}')
                 if full_result and 'text' in full_result:
                     # 模拟时间戳，实际应用中可以从result中获取更精确的时间戳
                     timestamp = 0.0
@@ -147,6 +162,15 @@ class SpeechProcessor:
 if __name__ == "__main__":
     # 创建语音处理器实例
     processor = SpeechProcessor()
+
+    r = requests.get(
+        'https://dashscope.oss-cn-beijing.aliyuncs.com/samples/audio/paraformer/hello_world_female2.wav'
+    )
+    with open('asr_example.wav', 'wb') as f:
+        f.write(r.content)
+
+    processor.transcribe_file(
+        'asr_example.wav' )
     
     # 示例1: 转录本地文件
     # result = processor.transcribe_file('path/to/your/audio.wav')

@@ -17,7 +17,7 @@ logging.basicConfig(
     format='%(asctime)s %(levelname)s: %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S',
     handlers=[
-        logging.FileHandler('backend/backend.log'),
+        logging.FileHandler('backend.log'),
         logging.StreamHandler()
     ]
 )

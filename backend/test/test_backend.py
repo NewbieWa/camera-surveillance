@@ -15,9 +15,9 @@ from pathlib import Path
 # 添加项目根目录到Python路径
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from core.workspace import WorkspaceManager
-from core.keyword_detector import KeywordDetector, OperationType
-from core.result_reporter import ResultReporter
+from camera_surveillance.workspace import WorkspaceManager
+from camera_surveillance.keyword_detector import KeywordDetector, OperationType
+from camera_surveillance.result_reporter import ResultReporter
 
 def test_workspace_manager():
     """测试工作空间管理器"""

@@ -2,7 +2,6 @@ import asyncio
 import concurrent.futures
 from abc import ABC, abstractmethod
 from typing import Optional, List, Tuple
-from pathlib import Path
 import time
 from datetime import datetime
 import os
@@ -13,9 +12,9 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 
 # 尝试导入必要的库，处理可能的依赖问题
 try:
+    from ultralytics import YOLO
     import cv2
     import torch
-    from ultralytics import YOLO
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
     print(f"警告: 无法导入必要的依赖库: {e}")

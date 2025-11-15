@@ -15,8 +15,8 @@ from pathlib import Path
 # 添加项目根目录到Python路径
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from core.processor.local_models import AntiRollingModel, RemoveRollingModel
-from core.frame_extractor import FrameExtractor
+from camera_surveillance.processor.local_models import AntiRollingModel, RemoveRollingModel
+from camera_surveillance.frame_extractor import FrameExtractor
 
 def test_parallel_model_processing():
     """测试并行模型处理功能"""

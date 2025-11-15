@@ -54,6 +54,8 @@ class VehicleNumberRecognizer:
                 model='qwen3-vl-8b-instruct',  # 使用适当的视觉模型
                 messages=messages
             )
+
+            log_with_timestamp(f"vehicle response: {response}")
             
             # 解析响应
             if response and "output" in response and "choices" in response["output"]:
