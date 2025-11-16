@@ -1,0 +1,10 @@
+2025-11-15 21:31:31 INFO: Started server process [45151]
+2025-11-15 21:31:31 INFO: Waiting for application startup.
+2025-11-15 21:31:31 INFO: Application startup complete.
+2025-11-15 21:31:31 ERROR: [Errno 48] error while attempting to bind on address ('0.0.0.0', 8000): address already in use
+2025-11-15 21:31:31 INFO: Waiting for application shutdown.
+2025-11-15 21:31:31 INFO: Application shutdown complete.
+2025-11-15 21:31:39 INFO: Started server process [45225]
+2025-11-15 21:31:39 INFO: Waiting for application startup.
+2025-11-15 21:31:39 INFO: Application startup complete.
+2025-11-15 21:31:39 INFO: Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)

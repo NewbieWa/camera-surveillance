@@ -77,6 +77,7 @@
           <li class="head">实时视频流处理</li>
           <li><a href="#videoStream" data-key="videoStream">视频流实时处理</a></li>
           <li><a href="#videoFileTest" data-key="videoFileTest">视频文件测试</a></li>
+          <li><a href="#liveVideoDetection" data-key="liveVideoDetection">实时视频检测</a></li>
         </ul>
       </div>
       <div class="col-md-6" id="content">
@@ -1047,6 +1048,44 @@ sdkclient.addObserver('AlarmUpload', msg => {
           </div>
           <!-- 视频文件测试 END -->
 
+          <!-- 实时视频检测 -->
+          <div class="tab-pane" id="liveVideoDetection">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">实时视频检测</h3>
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="detectionDeviceSelect">选择在线设备:</label>
+                  <select class="form-control" id="detectionDeviceSelect">
+                    <option value="">请选择设备</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <video id="detectionVideo" controls autoplay muted style="width: 100%; max-width: 640px; height: auto;"></video>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary" id="startDetectionBtn">开始视频检测</button>
+                  <button class="btn btn-danger" id="stopDetectionBtn" style="display:none;">停止检测</button>
+                </div>
+                <div id="detectionStatus" class="alert alert-info" style="margin-top: 10px;"></div>
+                <div id="detectionResults" class="well" style="margin-top: 10px; max-height: 300px; overflow-y: auto;"></div>
+              </div>
+            </div>
+            
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">检测结果展示</h3>
+              </div>
+              <div class="panel-body">
+                <div id="detectionAnalysisResults" class="row">
+                  <!-- 检测结果将在这里展示 -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 实时视频检测 END -->
+
         </div>
       </div>
       <div class="col-md-3">
@@ -1989,6 +2028,307 @@ sdkclient.addObserver('AlarmUpload', msg => {
     $('#menu a[data-key="videoFileTest"]').click(function() {
       initVideoFileList();
     });
+    
+    // 实时视频检测功能
+    let detectionWs = null; // WebSocket连接用于实时视频检测
+    let isDetectionStreaming = false; // 实时视频检测状态
+    let detectionMediaStream = null; // 检测媒体流对象
+    let detectionDeviceId = null; // 检测设备ID
+    let mediaRecorder = null; // 用于录制视频流
+    
+    // 初始化检测设备选择下拉框
+    function initDetectionDeviceSelect() {
+      if (sdkclient.mConnected) {
+        sdkclient.mClient.requestMsg2GatewayServer("getDevOnlineList", {}).then(resp => {
+          const select = $('#detectionDeviceSelect');
+          select.empty();
+          select.append('<option value="">请选择设备</option>');
+          
+          if (resp.Content && Array.isArray(resp.Content)) {
+            resp.Content.forEach(device => {
+              if (device.Status === 1) { // 只显示在线设备
+                select.append(`<option value="${device.DevId}">${device.DevId}</option>`);
+              }
+            });
+          }
+        });
+      }
+    }
+    
+    // 连接到后端WebSocket服务用于实时视频检测
+    function connectToDetectionBackend(deviceId) {
+      const timestamp = Date.now();
+      detectionDeviceId = `${deviceId}_${timestamp}`;
+      
+      // 连接到实时视频检测WebSocket端点
+      const backendUrl = `ws://localhost:8000/ws/live-video/${detectionDeviceId}`;
+      detectionWs = new WebSocket(backendUrl);
+      
+      detectionWs.onopen = function(event) {
+        console.log('实时视频检测 - 已连接到后端WebSocket服务');
+        $('#detectionStatus').append(`<br>已连接到后端分析服务，设备ID: ${detectionDeviceId}`);
+      };
+      
+      detectionWs.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        if (data.status === 'frame_processed') {
+          // 帧处理确认，不需要特别处理
+          return;
+        }
+        displayDetectionAnalysisResult(data);
+      };
+      
+      detectionWs.onclose = function(event) {
+        console.log('实时视频检测 - 与后端WebSocket服务的连接已关闭');
+      };
+      
+      detectionWs.onerror = function(error) {
+        console.error('实时视频检测 - WebSocket连接错误:', error);
+        $('#detectionStatus').append('<br>WebSocket连接错误: ' + error);
+      };
+    }
+    
+    // 显示实时视频检测分析结果
+    function displayDetectionAnalysisResult(result) {
+      const resultsDiv = $('#detectionResults');
+      const timestamp = new Date().toLocaleTimeString();
+      
+      let resultHtml = '';
+      if (result.type === 'vehicle_number') {
+        resultHtml = `
+          <div class="alert alert-info">
+            <strong>[${timestamp}] 车号识别结果:</strong> ${result.result}
+            ${result.vehicle_number ? `<br>识别到的车号: ${result.vehicle_number}` : ''}
+          </div>`;
+      } else if (result.type === 'anti_rolling') {
+        const alertClass = result.success ? 'alert-success' : 'alert-warning';
+        const statusText = result.success ? '成功' : '失败';
+        resultHtml = `
+          <div class="alert ${alertClass}">
+            <strong>[${timestamp}] 防遛确认:</strong> ${result.result} (${statusText})
+          </div>`;
+      } else if (result.type === 'remove_rolling') {
+        const alertClass = result.success ? 'alert-success' : 'alert-warning';
+        const statusText = result.success ? '成功' : '失败';
+        resultHtml = `
+          <div class="alert ${alertClass}">
+            <strong>[${timestamp}] 撤遛确认:</strong> ${result.result} (${statusText})
+          </div>`;
+      } else if (result.type === 'error') {
+        resultHtml = `
+          <div class="alert alert-danger">
+            <strong>[${timestamp}] 错误:</strong> ${result.message}
+          </div>`;
+      }
+      
+      if (resultHtml) {
+        resultsDiv.append(resultHtml);
+        resultsDiv.scrollTop(resultsDiv[0].scrollHeight);
+      }
+      
+      // 在结果展示区域显示详细信息
+      displayDetectionDetailedResult(result);
+    }
+    
+    // 显示实时视频检测详细结果
+    function displayDetectionDetailedResult(result) {
+      const analysisDiv = $('#detectionAnalysisResults');
+      const timestamp = new Date().toLocaleTimeString();
+      
+      let detailHtml = '';
+      if (result.type === 'vehicle_number') {
+        // Use detectionDeviceId if result.device_id is not available
+        const deviceId = result.device_id || detectionDeviceId;
+        detailHtml = `
+          <div class="col-md-4">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">车号识别结果</h3>
+              </div>
+              <div class="panel-body">
+                <p><strong>设备ID:</strong> ${deviceId}</p>
+                <p><strong>结果:</strong> ${result.result}</p>
+                ${result.vehicle_number ? `<p><strong>车号:</strong> ${result.vehicle_number}</p>` : ''}
+                <p><strong>时间:</strong> ${new Date(result.timestamp * 1000).toLocaleString()}</p>
+              </div>
+            </div>
+          </div>`;
+      } else if (result.type === 'anti_rolling') {
+        // Use detectionDeviceId if result.device_id is not available
+        const deviceId = result.device_id || detectionDeviceId;
+        const panelClass = result.success ? 'panel-success' : 'panel-warning';
+        detailHtml = `
+          <div class="col-md-4">
+            <div class="panel ${panelClass}">
+              <div class="panel-heading">
+                <h3 class="panel-title">防遛确认结果</h3>
+              </div>
+              <div class="panel-body">
+                <p><strong>设备ID:</strong> ${deviceId}</p>
+                <p><strong>结果:</strong> ${result.result}</p>
+                <p><strong>时间:</strong> ${new Date(result.timestamp * 1000).toLocaleString()}</p>
+              </div>
+            </div>
+          </div>`;
+      } else if (result.type === 'remove_rolling') {
+        // Use detectionDeviceId if result.device_id is not available
+        const deviceId = result.device_id || detectionDeviceId;
+        const panelClass = result.success ? 'panel-success' : 'panel-warning';
+        detailHtml = `
+          <div class="col-md-4">
+            <div class="panel ${panelClass}">
+              <div class="panel-heading">
+                <h3 class="panel-title">撤遛确认结果</h3>
+              </div>
+              <div class="panel-body">
+                <p><strong>设备ID:</strong> ${deviceId}</p>
+                <p><strong>结果:</strong> ${result.result}</p>
+                <p><strong>时间:</strong> ${new Date(result.timestamp * 1000).toLocaleString()}</p>
+              </div>
+            </div>
+          </div>`;
+      }
+      
+      if (detailHtml) {
+        analysisDiv.append(detailHtml);
+      }
+    }
+    
+    // 开始实时视频检测
+    $('#startDetectionBtn').click(function() {
+      const selectedDevice = $('#detectionDeviceSelect').val();
+      if (!selectedDevice) {
+        alert('请选择一个设备');
+        return;
+      }
+
+      $('#detectionStatus').text('正在启动实时视频检测...');
+      $('#startDetectionBtn').hide();
+      $('#stopDetectionBtn').show();
+      isDetectionStreaming = true;
+      
+      // 连接到后端WebSocket服务
+      connectToDetectionBackend(selectedDevice);
+      
+      // 调用MCS8 SDK的openAudio方法将信息输出到视频元素
+      startDetectionWithAudio(selectedDevice);
+    });
+    
+    // 使用openAudio方法开始检测
+    async function startDetectionWithAudio(deviceId) {
+      try {
+        // 获取视频显示元素
+        const videoElement = document.getElementById('detectionVideo');
+        
+        // 调用openAudio方法（注意：这里根据您的要求使用openAudio）
+        // 这会将音频流输出到video元素
+        const resp = await sdkclient.mClient.openAudio(deviceId, videoElement, null);
+        
+        console.log('openAudio response:', resp);
+        
+        if (resp === 200) {
+          $('#detectionStatus').append('<br>音频流已连接到视频元素');
+          
+          // 等待视频元素加载
+          videoElement.onloadedmetadata = function() {
+            // 使用captureStream API获取视频元素的流
+            if (videoElement.captureStream) {
+              const stream = videoElement.captureStream();
+              
+              // 创建MediaRecorder来录制流并发送到后端
+              try {
+                mediaRecorder = new MediaRecorder(stream, { 
+                  mimeType: 'video/webm;codecs=vp9' 
+                });
+                
+                mediaRecorder.ondataavailable = function(event) {
+                  if (event.data.size > 0) {
+                    // 发送视频数据块到后端
+                    sendDetectionVideoChunkToBackend(event.data);
+                  }
+                };
+                
+                // 开始录制
+                mediaRecorder.start(500); // 每500毫秒生成一个数据块
+                $('#detectionStatus').append('<br>开始捕获视频流并发送到后端');
+              } catch (error) {
+                console.error('创建MediaRecorder失败:', error);
+                $('#detectionStatus').append('<br>创建录制器失败: ' + error.message);
+              }
+            } else {
+              console.error('浏览器不支持captureStream API');
+              $('#detectionStatus').append('<br>浏览器不支持captureStream API');
+            }
+          };
+        } else {
+          console.error('openAudio调用失败:', resp);
+          $('#detectionStatus').append('<br>openAudio调用失败: ' + resp);
+        }
+      } catch (error) {
+        console.error('调用openAudio时出错:', error);
+        $('#detectionStatus').append('<br>调用openAudio时出错: ' + error.message);
+      }
+    }
+    
+    // 发送视频数据块到后端
+    function sendDetectionVideoChunkToBackend(videoChunk) {
+      if (detectionWs && detectionWs.readyState === WebSocket.OPEN) {
+        // 将视频数据块转换为DataURL并发送
+        const reader = new FileReader();
+        reader.onload = function() {
+          const videoData = {
+            type: 'detection_video_chunk',
+            data: reader.result,
+            timestamp: Date.now(),
+            deviceId: detectionDeviceId
+          };
+          detectionWs.send(JSON.stringify(videoData));
+        };
+        reader.readAsDataURL(videoChunk);
+      }
+    }
+    
+    // 停止实时视频检测
+    $('#stopDetectionBtn').click(function() {
+      $('#detectionStatus').text('实时视频检测已停止');
+      $('#startDetectionBtn').show();
+      $('#stopDetectionBtn').hide();
+      isDetectionStreaming = false;
+      
+      // 停止录制
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+      }
+      
+      // 停止媒体流
+      if (detectionMediaStream) {
+        const tracks = detectionMediaStream.getTracks();
+        tracks.forEach(track => track.stop());
+        detectionMediaStream = null;
+      }
+      
+      // 关闭WebSocket连接
+      if (detectionWs) {
+        detectionWs.close();
+        detectionWs = null;
+      }
+      
+      // 停止视频显示
+      const videoElement = document.getElementById('detectionVideo');
+      if (videoElement) {
+        videoElement.srcObject = null;
+      }
+    });
+    
+    // 在实时视频检测Tab显示时初始化设备列表
+    $('#menu a[data-key="liveVideoDetection"]').click(function() {
+      initDetectionDeviceSelect();
+    });
+    
+    // 实时视频检测Tab初始化函数
+    function FUNC_init_liveVideoDetection(key) {
+      initDetectionDeviceSelect();
+    }
   });
 </script>
 

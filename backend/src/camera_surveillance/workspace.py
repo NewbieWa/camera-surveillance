@@ -26,8 +26,13 @@ class WorkspaceManager:
         Returns:
             工作空间路径
         """
-        timestamp = int(time.time())
-        workspace_name = f"{device_id}_{timestamp}"
+        # 如果设备ID已经包含时间戳格式（如camera_1234567890），则不重复添加时间戳
+        if device_id.startswith("camera_") and "_" in device_id and device_id.split("_")[-1].isdigit():
+            workspace_name = device_id
+        else:
+            timestamp = int(time.time())
+            workspace_name = f"{device_id}_{timestamp}"
+            
         workspace_path = self.base_path / workspace_name
         workspace_path.mkdir(exist_ok=True)
         return str(workspace_path)

@@ -6,6 +6,8 @@ from typing import Generator
 import os
 from pathlib import Path
 from datetime import datetime
+import base64
+import tempfile
 
 def log_with_timestamp(message: str):
     """带时间戳的日志输出函数"""
@@ -26,8 +28,11 @@ class VideoStreamProcessor:
         self.video_writer = None
         self.audio_queue = queue.Queue()
         self.is_processing = False
-        self.fps = 0
+        self.fps = 30  # 默认帧率
         self.frame_count = 0
+        self.width = 640  # 默认宽度
+        self.height = 480  # 默认高度
+        self.output_video_path = None
         
     def start_video_recording(self, output_path: str = None) -> str:
         """
@@ -44,7 +49,45 @@ class VideoStreamProcessor:
             output_path = str(self.workspace_path / f"video_{timestamp}.mp4")
         
         self.output_video_path = output_path
+        
+        # 初始化视频写入器
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        self.video_writer = cv2.VideoWriter(
+            self.output_video_path, 
+            fourcc, 
+            self.fps, 
+            (self.width, self.height)
+        )
+        
         return output_path
+    
+    def add_frame_to_video(self, image_path: str, video_path: str = None):
+        """
+        将单个图像帧添加到视频中
+        
+        Args:
+            image_path: 图像文件路径
+            video_path: 视频文件路径（可选）
+        """
+        # 如果指定了视频路径，则更新输出路径
+        if video_path:
+            self.output_video_path = video_path
+            
+        # 确保视频写入器已初始化
+        if self.video_writer is None:
+            self.start_video_recording(self.output_video_path)
+            
+        # 读取图像
+        frame = cv2.imread(image_path)
+        if frame is not None:
+            # 调整图像大小以匹配视频尺寸
+            frame = cv2.resize(frame, (self.width, self.height))
+            
+            # 写入视频帧
+            self.video_writer.write(frame)
+            self.frame_count += 1
+        else:
+            log_with_timestamp(f"无法读取图像文件: {image_path}")
     
     def process_video_stream(self, video_stream):
         """
@@ -61,18 +104,20 @@ class VideoStreamProcessor:
             cap = video_stream
         
         # 获取视频参数
-        self.fps = int(cap.get(cv2.CAP_PROP_FPS))
-        width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-        height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        self.fps = int(cap.get(cv2.CAP_PROP_FPS)) or self.fps
+        self.width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)) or self.width
+        self.height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)) or self.height
         
-        # 初始化视频写入器
-        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        self.video_writer = cv2.VideoWriter(
-            self.output_video_path, 
-            fourcc, 
-            self.fps, 
-            (width, height)
-        )
+        # 重新初始化视频写入器（如果已有输出路径）
+        if self.output_video_path and self.video_writer:
+            self.video_writer.release()
+            fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+            self.video_writer = cv2.VideoWriter(
+                self.output_video_path, 
+                fourcc, 
+                self.fps, 
+                (self.width, self.height)
+            )
         
         self.is_processing = True
         
@@ -152,16 +197,18 @@ class VideoStreamProcessor:
         
         # 获取视频参数
         self.fps = int(cap.get(cv2.CAP_PROP_FPS)) or 30  # 默认30fps
-        width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)) or 640  # 默认640
-        height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)) or 480  # 默认480
+        self.width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)) or 640  # 默认640
+        self.height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)) or 480  # 默认480
         
-        # 初始化视频写入器
+        # 重新初始化视频写入器
+        if self.video_writer:
+            self.video_writer.release()
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         self.video_writer = cv2.VideoWriter(
             output_path, 
             fourcc, 
             self.fps, 
-            (width, height)
+            (self.width, self.height)
         )
         
         self.is_processing = True
@@ -247,7 +294,8 @@ class VideoStreamProcessor:
             return
     
     def stop_processing(self):
-        """停止处理"""
+        """停止处理并释放资源"""
         self.is_processing = False
         if self.video_writer:
             self.video_writer.release()
+            self.video_writer = None
