@@ -7,9 +7,12 @@ import logging
 from typing import List
 from pathlib import Path
 from datetime import datetime
+import cv2
 from fastapi import FastAPI, WebSocket, Request
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+
+from camera_surveillance.tools.workspace import log_with_timestamp
 
 # 配置日志
 logging.basicConfig(
@@ -24,26 +27,21 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-def log_with_timestamp(message: str):
-    """带时间戳的日志输出函数"""
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    print(f"[{timestamp}] {message}")
-    # 同时记录到日志文件
-    logger.info(f"[{timestamp}] {message}")
-
 # 添加src目录到Python路径
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src'))
 
 
-from camera_surveillance.workspace import WorkspaceManager
-from camera_surveillance.video_processor import VideoStreamProcessor
+from camera_surveillance.tools.workspace import WorkspaceManager
+from camera_surveillance.tools.video_processor import VideoStreamProcessor
 from camera_surveillance.processor import AudioTranscriber
 from camera_surveillance.processor import SpeechProcessor
-from camera_surveillance.keyword_detector import KeywordDetector, OperationType
-from camera_surveillance.frame_extractor import FrameExtractor
-from camera_surveillance.processor.vehicle_recognizer import VehicleNumberRecognizer
-from camera_surveillance.processor.local_models import AntiRollingModel, RemoveRollingModel
-from camera_surveillance.result_reporter import ResultReporter
+from camera_surveillance.tools.keyword_detector import KeywordDetector, OperationType
+from camera_surveillance.tools.frame_extractor import FrameExtractor
+from camera_surveillance.processor import VehicleNumberRecognizer
+from camera_surveillance.processor import AntiRollingModel, RemoveRollingModel
+from camera_surveillance.processor import process_detection, process_vehicle_number, process_anti_rolling, process_remove_rolling
+from camera_surveillance.tools.result_reporter import ResultReporter
+from camera_surveillance.coordinator import process_video_common, process_stored_video_chunk, process_video_task
 
 app = FastAPI(title="外勤作业智能分析系统", description="实时视频流处理和分析服务")
 
@@ -63,6 +61,9 @@ MAX_CONCURRENT_MODELS = int(os.getenv("MAX_CONCURRENT_MODELS", "5"))  # 最大�
 workspace_manager = WorkspaceManager("workspace")
 result_reporter = ResultReporter()
 active_connections: List[WebSocket] = []
+
+# 用于限制同时执行的视频处理任务数量
+video_processing_semaphore = asyncio.Semaphore(3)
 
 @app.get("/list-video-files")
 async def list_video_files():
@@ -113,43 +114,38 @@ async def websocket_results(websocket: WebSocket):
         active_connections.remove(websocket)
         result_reporter.remove_websocket_connection(websocket)
 
-@app.post("/video-stream/{device_id}")
-async def receive_video_stream(device_id: str):
-    """接收视频流的端点"""
-    # 在device_id后添加时间戳
-    import time
-    timestamp = int(time.time())
-    device_id_with_timestamp = f"{device_id}_{timestamp}"
-    
-    # 创建工作空间
-    workspace_path = workspace_manager.create_workspace(device_id_with_timestamp)
-    
-    # 返回工作空间信息
-    return {
-        "message": "视频流接收端点已准备就绪",
-        "device_id_with_timestamp": device_id_with_timestamp,
-        "original_device_id": device_id,
-        "timestamp": timestamp,
-        "workspace_path": workspace_path
-    }
-
-@app.post("/process-video/{device_id}")
-async def process_video_stream(device_id: str, request: Request):
-    """处理视频流的端点 - 接收实时视频数据流"""
-    # 从设备ID中提取原始ID（因为可能包含时间戳）
-    original_device_id = device_id.split('_')[0] if '_' in device_id else device_id
-    
-    # 从请求体中读取视频流数据
-    video_stream_data = await request.body()
-    
-    # 启动异步处理任务
-    asyncio.create_task(process_video_task(device_id, video_stream_data))
-    
-    return {
-        "message": "视频处理任务已启动",
-        "device_id": device_id,
-        "original_device_id": original_device_id
-    }
+@app.post("/process-full-video/{device_id}")
+async def process_full_video(device_id: str, request: Request):
+    """处理完整视频流的端点 - 接收实时视频数据流并在内部创建workspace"""
+    try:
+        # 在device_id后添加时间戳
+        timestamp = int(time.time())
+        device_id_with_timestamp = f"{device_id}_{timestamp}"
+        
+        # 创建工作空间
+        workspace_path = workspace_manager.create_workspace(device_id)
+        log_with_timestamp(f"为设备 {device_id} 创建工作空间: {workspace_path}")
+        
+        # 从请求体中读取视频流数据
+        video_stream_data = await request.body()
+        
+        # 启动异步处理任务
+        asyncio.create_task(process_video_task(device_id, workspace_path, video_stream_data))
+        
+        return {
+            "message": "视频处理任务已启动",
+            "device_id": device_id,
+            "original_device_id": device_id,
+            "timestamp": timestamp,
+            "workspace_path": workspace_path
+        }
+    except Exception as e:
+        log_with_timestamp(f"处理设备 {device_id} 的完整视频时出错: {e}")
+        return {
+            "message": f"处理视频时出错: {str(e)}",
+            "device_id": device_id,
+            "timestamp": int(time.time())
+        }
 
 @app.websocket("/ws/live-video/{device_id}")
 async def websocket_live_video(websocket: WebSocket, device_id: str):
@@ -173,13 +169,21 @@ async def websocket_live_video(websocket: WebSocket, device_id: str):
     video_path = video_processor.start_video_recording()
     log_with_timestamp(f"开始录制视频到: {video_path}")
     
+    # 用于存储detection_video_chunk的计数器和缓冲区
+    chunk_counter = 0
+    chunk_buffer = []
+    
     try:
         while True:
             # 接收来自前端的数据
             data = await websocket.receive_text()
             frame_data = json.loads(data)
             
-            if frame_data["type"] == "video_frame":
+            if frame_data["type"] == "stop_detection":
+                # 收到停止检测信号，退出循环
+                log_with_timestamp(f"收到停止检测信号，设备ID: {device_id}")
+                break
+            elif frame_data["type"] == "video_frame":
                 # 处理实时视频帧
                 image_data = frame_data["data"]
                 
@@ -316,90 +320,235 @@ async def websocket_live_video(websocket: WebSocket, device_id: str):
                 # 解析base64数据
                 import base64
                 import tempfile
+
+                # log_with_timestamp(f"video_data_url: {video_data_url}")
                 
                 # 移除data URL前缀
                 if "," in video_data_url:
                     header, encoded = video_data_url.split(",", 1)
                     video_bytes = base64.b64decode(encoded)
                     
-                    # 创建临时视频文件
-                    with tempfile.NamedTemporaryFile(suffix='.webm', delete=False) as temp_file:
+                    # 确保工作空间中的tmp目录存在
+                    tmp_dir = os.path.join(workspace_path, "tmp")
+                    if not os.path.exists(tmp_dir):
+                        os.makedirs(tmp_dir)
+                    
+                    # 创建临时视频文件在工作空间目录中
+                    import time
+                    temp_video_path = os.path.join(tmp_dir, f"video_chunk_{int(time.time()*1000000)}_{chunk_counter:06d}.webm")
+                    with open(temp_video_path, 'wb') as temp_file:
                         temp_file.write(video_bytes)
-                        temp_video_path = temp_file.name
                     
                     try:
-                        # 将数据块添加到视频中
-                        output_video_path = os.path.join(workspace_path, f"detection_video_{int(time.time())}.webm")
+                        log_with_timestamp(f"接收视频块，临时文件: {temp_video_path}")
                         
-                        # 如果系统有ffmpeg，尝试转换格式以确保兼容性
-                        try:
-                            import subprocess
-                            # 尝试将webm转换为mp4
-                            output_video_path = os.path.join(workspace_path, f"detection_video_{int(time.time())}.mp4")
-                            cmd = [
-                                'ffmpeg',
-                                '-i', temp_video_path,
-                                '-c:v', 'libx264',
-                                '-c:a', 'aac',
-                                output_video_path,
-                                '-y'
-                            ]
-                            result = subprocess.run(cmd, capture_output=True, text=True)
-                            
-                            if result.returncode != 0:
-                                # 如果ffmpeg失败，回退到直接复制文件
-                                import shutil
-                                output_video_path = os.path.join(workspace_path, f"detection_video_{int(time.time())}.webm")
-                                shutil.copy2(temp_video_path, output_video_path)
-                        except:
-                            # 如果ffmpeg不可用，直接复制webm文件
-                            import shutil
-                            output_video_path = os.path.join(workspace_path, f"detection_video_{int(time.time())}.webm")
-                            shutil.copy2(temp_video_path, output_video_path)
+                        # 直接将数据块添加到缓冲区用于定期保存，不再尝试处理单个片段
+                        chunk_buffer.append(temp_video_path)
+                        chunk_counter += 1
                         
-                        log_with_timestamp(f"检测视频块已保存到: {output_video_path}")
+                        # 检查文件大小
+                        if os.path.exists(temp_video_path):
+                            file_size = os.path.getsize(temp_video_path)
+                            log_with_timestamp(f"视频块大小: {file_size} 字节")
                         
-                        # 对视频进行处理和分析
-                        try:
-                            # 提取音频用于转录
-                            audio_path = os.path.join(workspace_path, "detection_extracted_audio.wav")
-                            video_processor.extract_audio_from_video(output_video_path, audio_path)
+                        log_with_timestamp("视频块已添加到缓冲区，等待合并处理")
+                        
+                        # 每10个数据块存储一次
+                        if chunk_counter % 10 == 0:
+                            # 生成带序号的文件名
+                            chunk_file_path = os.path.join(workspace_path, f"detection_video_chunk_{chunk_counter//60:04d}.webm")
                             
-                            # 转录音频
-                            speech_processor = SpeechProcessor()
-                            transcriptions = speech_processor.transcribe_file(audio_path)
-                            
-                            # 如果没有转录结果，使用模拟数据
-                            if not transcriptions:
-                                transcriptions = [
-                                    (time.time() % 100, "现在进行车号确认操作"),
-                                    (time.time() % 100 + 15, "铁鞋设置手闸拧紧"),
-                                    (time.time() % 100 + 30, "铁鞋撤除手闸松开")
-                                ]
-                            
-                            # 检测关键词
-                            detections = keyword_detector.detect_keywords_with_context(transcriptions)
-                            
-                            # 处理每个检测到的操作
-                            for detection in detections:
-                                await process_detection(
+                            # 合并所有缓冲区中的视频块
+                            try:
+                                
+                                # 创建一个临时文本文件列出所有要合并的文件
+                                import time
+                                list_file_path = os.path.join(workspace_path, f"chunk_list_{int(time.time())}.txt")
+                                
+                                # 添加日志输出
+                                log_with_timestamp(f"准备创建列表文件: {list_file_path}")
+                                log_with_timestamp(f"workspace_path: {workspace_path}")
+                                log_with_timestamp(f"有效视频块数量: {len(chunk_buffer)}")
+                                
+                                # 过滤掉不存在的文件
+                                valid_chunks = [chunk for chunk in chunk_buffer if os.path.exists(chunk)]
+                                log_with_timestamp(f"有效存在的视频块数量: {len(valid_chunks)}")
+                                
+                                if not valid_chunks:
+                                    log_with_timestamp("没有有效的视频块可以合并")
+                                    # 继续处理下一个循环
+                                    continue
+                                
+                                try:
+                                    with open(list_file_path, 'w') as list_file:
+                                        for chunk_path in valid_chunks:
+                                            # 确保使用绝对路径，防止ffmpeg路径解析问题
+                                            absolute_chunk_path = os.path.abspath(chunk_path)
+                                            list_file.write(f"file '{absolute_chunk_path}'\n")
+                                    log_with_timestamp(f"列表文件已成功创建: {list_file_path}")
+                                    
+                                    # 读取并输出文件内容以确认文件存在
+                                    if os.path.exists(list_file_path):
+                                        with open(list_file_path, 'r') as f:
+                                            content = f.read()
+                                            log_with_timestamp(f"列表文件内容:\n{content}")
+                                    else:
+                                        log_with_timestamp("错误：列表文件未找到")
+                                except Exception as e:
+                                    log_with_timestamp(f"创建列表文件失败: {e}")
+                                    import traceback
+                                    log_with_timestamp(f"详细错误信息: {traceback.format_exc()}")
+                                    # 回退到复制第一个有效文件
+                                    shutil.copy2(valid_chunks[0], chunk_file_path)
+                                    raise
+                                
+                                # 确保列表文件存在
+                                if not os.path.exists(list_file_path):
+                                    log_with_timestamp(f"列表文件不存在: {list_file_path}")
+                                    # 回退到复制第一个有效文件
+                                    shutil.copy2(valid_chunks[0], chunk_file_path)
+                                else:
+                                    # 检查所有视频块的格式，如果格式不一致则使用重新编码方式
+                                    # 使用ffmpeg合并视频
+                                    cmd = [
+                                        'ffmpeg',
+                                        '-f', 'concat',
+                                        '-safe', '0',
+                                        '-i', list_file_path,
+                                        '-c', 'copy',  # 尝试直接复制，不重新编码
+                                        chunk_file_path,
+                                        '-y'
+                                    ]
+                                    import subprocess
+                                    result = subprocess.run(cmd, capture_output=True, text=True)
+                                    
+                                    if result.returncode != 0:
+                                        log_with_timestamp(f"视频合并失败 (直接复制): {result.stderr}")
+                                        log_with_timestamp(f"尝试重新编码，valid_chunks数量: {len(valid_chunks)}")
+                                        # 尝试重新编码 - 这可以处理不同格式的视频块
+                                        cmd_reencode = [
+                                            'ffmpeg',
+                                            '-f', 'concat',
+                                            '-safe', '0',
+                                            '-i', list_file_path,
+                                            '-c:v', 'libx264',
+                                            '-c:a', 'aac',
+                                            '-preset', 'ultrafast',
+                                            chunk_file_path,
+                                            '-y'
+                                        ]
+                                        result_reencode = subprocess.run(cmd_reencode, capture_output=True, text=True)
+                                        
+                                        if result_reencode.returncode != 0:
+                                            log_with_timestamp(f"视频重新编码失败: {result_reencode.stderr}")
+                                            # 如果合并失败，尝试逐步合并
+                                            log_with_timestamp("尝试逐步合并视频块...")
+                                            try:
+                                                # 从第一个文件开始，逐步合并
+                                                temp_output = chunk_file_path + ".temp"
+                                                current_file = valid_chunks[0]
+                                                
+                                                # 先复制第一个文件
+                                                shutil.copy2(current_file, temp_output)
+                                                
+                                                # 依次合并其他文件
+                                                for i in range(1, len(valid_chunks)):
+                                                    next_file = valid_chunks[i]
+                                                    temp_list = os.path.join(workspace_path, f"temp_merge_list_{i}.txt")
+                                                    with open(temp_list, 'w') as f:
+                                                        f.write(f"file '{os.path.abspath(current_file)}'\n")
+                                                        f.write(f"file '{os.path.abspath(next_file)}'\n")
+                                                    
+                                                    temp_output2 = chunk_file_path + f".temp{i}"
+                                                    cmd_merge = [
+                                                        'ffmpeg',
+                                                        '-f', 'concat',
+                                                        '-safe', '0',
+                                                        '-i', temp_list,
+                                                        '-c', 'copy',
+                                                        temp_output2,
+                                                        '-y'
+                                                    ]
+                                                    result_merge = subprocess.run(cmd_merge, capture_output=True, text=True)
+                                                    
+                                                    if result_merge.returncode != 0:
+                                                        log_with_timestamp(f"逐步合并第{i}个文件失败，尝试重新编码: {result_merge.stderr}")
+                                                        # 如果直接复制失败，尝试重新编码
+                                                        cmd_reencode_step = [
+                                                            'ffmpeg',
+                                                            '-f', 'concat',
+                                                            '-safe', '0',
+                                                            '-i', temp_list,
+                                                            '-c:v', 'libx264',
+                                                            '-c:a', 'aac',
+                                                            '-preset', 'ultrafast',
+                                                            temp_output2,
+                                                            '-y'
+                                                        ]
+                                                        result_reencode_step = subprocess.run(cmd_reencode_step, capture_output=True, text=True)
+                                                        if result_reencode_step.returncode != 0:
+                                                            log_with_timestamp(f"逐步合并重新编码也失败: {result_reencode_step.stderr}")
+                                                            # 回退到复制第一个文件
+                                                            shutil.copy2(valid_chunks[0], chunk_file_path)
+                                                            break
+                                                    
+                                                    # 更新current_file为合并后的文件
+                                                    current_file = temp_output2
+                                                    shutil.move(temp_output2, temp_output)
+                                                    # 清理临时列表文件
+                                                    os.unlink(temp_list)
+                                                
+                                                # 最终结果移动到目标文件
+                                                if os.path.exists(temp_output):
+                                                    shutil.move(temp_output, chunk_file_path)
+                                                    log_with_timestamp(f"逐步合并完成，最终文件大小: {os.path.getsize(chunk_file_path)} 字节")
+                                            except Exception as e:
+                                                log_with_timestamp(f"逐步合并过程中出现异常: {e}")
+                                                # 最后的回退：复制第一个文件
+                                                shutil.copy2(valid_chunks[0], chunk_file_path)
+                                        else:
+                                            log_with_timestamp(f"视频重新编码成功")
+                                    else:
+                                        log_with_timestamp(f"视频合并成功")
+                                    
+                                    # 检查生成的文件大小
+                                    if os.path.exists(chunk_file_path):
+                                        file_size = os.path.getsize(chunk_file_path)
+                                        log_with_timestamp(f"检测视频块已合并并保存到: {chunk_file_path}，大小: {file_size} 字节")
+                                    else:
+                                        log_with_timestamp(f"错误：合并后的文件不存在: {chunk_file_path}")
+                                
+                                # 启动子协程处理存储的视频文件
+                                asyncio.create_task(process_stored_video_chunk(
+                                    chunk_file_path, 
                                     device_id, 
-                                    detection, 
-                                    output_video_path, 
+                                    workspace_path, 
+                                    keyword_detector, 
                                     vehicle_recognizer, 
                                     anti_rolling_model, 
                                     remove_rolling_model
-                                )
-                        
-                        except Exception as e:
-                            log_with_timestamp(f"处理检测视频时出错: {e}")
+                                ))
+                                
+                            except Exception as e:
+                                log_with_timestamp(f"合并视频块时出错: {e}")
+                                import traceback
+                                log_with_timestamp(f"错误详情: {traceback.format_exc()}")
+                            finally:
+                                # 清理列表文件
+                                # try:
+                                #     if 'list_file_path' in locals() and os.path.exists(list_file_path):
+                                #         os.unlink(list_file_path)
+                                # except Exception as e:
+                                #     log_with_timestamp(f"清理列表文件失败: {e}")
+                                i = 1
+                            
+                            # 清空缓冲区
+                            chunk_buffer.clear()
                         
                     finally:
-                        # 清理临时文件
-                        try:
-                            os.unlink(temp_video_path)
-                        except:
-                            pass
+                        # 注意：这里不立即清理temp_video_path，因为它们被存储在chunk_buffer中
+                        # 它们将在处理完成后被清理
+                        pass
             
             # 发送确认消息
             await websocket.send_text(json.dumps({
@@ -418,189 +567,41 @@ async def websocket_live_video(websocket: WebSocket, device_id: str):
         }
         await result_reporter.report_result(error_result)
     finally:
+        # 清理缓冲区中剩余的临时文件
+        for temp_path in chunk_buffer:
+            try:
+                os.unlink(temp_path)
+            except:
+                pass
+        
+        # 清理tmp目录
+        # tmp_dir = os.path.join(workspace_path, "tmp")
+        # if os.path.exists(tmp_dir):
+        #     import shutil
+        #     try:
+        #         shutil.rmtree(tmp_dir)
+        #         log_with_timestamp(f"已清理tmp目录: {tmp_dir}")
+        #     except Exception as e:
+        #         log_with_timestamp(f"清理tmp目录失败: {e}")
+                
+        # 确保所有帧都已写入视频文件
+        log_with_timestamp(f"等待视频帧写入完成，当前帧数: {video_processor.frame_count}")
+        
         # 停止视频处理并释放资源
+        # 确保视频写入器被正确关闭
         video_processor.stop_processing()
         log_with_timestamp(f"实时视频WebSocket连接已关闭，设备ID: {device_id}")
+        
+        # 添加短暂延迟以确保文件写入完成
+        await asyncio.sleep(1)  # 等待1秒确保文件写入完成
 
-async def process_video_task(device_id: str, video_stream_data: bytes):
-    """异步处理视频流任务 - 接收实时视频数据流"""
-    try:
-        # 使用已存在的工作空间路径，而不是重新创建
-        # 首先尝试找到与设备ID对应的工作空间
-        workspace_path = str(workspace_manager.base_path / device_id)
-        
-        # 检查工作空间是否存在，如果不存在则创建
-        if not os.path.exists(workspace_path):
-            log_with_timestamp(f"工作空间不存在，为设备 {device_id} 创建: {workspace_path}")
-            workspace_path = workspace_manager.create_workspace(device_id)
-        else:
-            log_with_timestamp(f"使用现有工作空间: {workspace_path}")
-        
-        # 2. 初始化各个处理模块（带并发配置）
-        video_processor = VideoStreamProcessor(workspace_path)
-        audio_transcriber = AudioTranscriber()
-        keyword_detector = KeywordDetector()
-        vehicle_recognizer = VehicleNumberRecognizer()
-        anti_rolling_model = AntiRollingModel(max_concurrent=MAX_CONCURRENT_MODELS)
-        remove_rolling_model = RemoveRollingModel(max_concurrent=MAX_CONCURRENT_MODELS)
-        
-        # 3. 开始视频录制
-        video_path = video_processor.start_video_recording()
-        log_with_timestamp(f"开始录制视频到: {video_path}")
-        
-        # 4. 处理视频流数据 - 将字节数据传递给视频处理器
-        video_processor.process_video_stream_from_bytes(video_stream_data, video_path)
-        
-        # 5. 提取音频
-        audio_path = os.path.join(workspace_path, "extracted_audio.wav")
-        video_processor.extract_audio_from_video(video_path, audio_path)
-        
-        # 6. 转录音频 - 使用SpeechProcessor
-        speech_processor = SpeechProcessor()
-        transcriptions = speech_processor.transcribe_file(audio_path)
-        # 如果没有转录结果，使用模拟数据
-        if not transcriptions:
-            transcriptions = [
-                (10.5, "现在进行车号确认操作"),
-                (25.2, "铁鞋设置手闸拧紧"),
-                (42.8, "铁鞋撤除手闸松开")
-            ]
-        
-        # 7. 检测关键词
-        detections = keyword_detector.detect_keywords_with_context(transcriptions)
-        
-        # 8. 处理每个检测到的操作
-        for detection in detections:
-            await process_detection(
-                device_id, 
-                detection, 
-                video_path, 
-                vehicle_recognizer, 
-                anti_rolling_model, 
-                remove_rolling_model
-            )
-        
-        log_with_timestamp(f"设备 {device_id} 的视频处理完成")
-        
-    except Exception as e:
-        log_with_timestamp(f"处理设备 {device_id} 的视频时出错: {e}")
-        # 报告错误结果
-        error_result = {
-            "type": "error",
-            "device_id": device_id,
-            "message": f"处理视频时出错: {str(e)}",
-            "timestamp": time.time()
-        }
-        await result_reporter.report_result(error_result)
 
-async def process_detection(device_id: str, detection, video_path: str,
-                          vehicle_recognizer: VehicleNumberRecognizer,
-                          anti_rolling_model: AntiRollingModel,
-                          remove_rolling_model: RemoveRollingModel):
-    """处理单个检测结果"""
-    try:
-        # 1. 提取相关帧（根据操作类型使用不同的时间点逻辑）
-        frame_extractor = FrameExtractor(video_path)
-        
-        # TODO: 这里需要根据实际的音频片段时间来提取帧
-        # 目前我们假设detection.timestamp就是音频片段的结束时间
-        frame_paths = frame_extractor.extract_frames_around_timestamp(
-            detection.timestamp,
-            before_seconds=2.0,
-            after_seconds=4.0,
-            interval_seconds=1.0
-        )
-        frame_extractor.release()
-        
-        # 2. 根据操作类型处理
-        if detection.operation_type == OperationType.VEHICLE_NUMBER:
-            await process_vehicle_number(
-                device_id, detection, frame_paths, vehicle_recognizer
-            )
-        elif detection.operation_type == OperationType.ANTI_ROLLING:
-            await process_anti_rolling(
-                device_id, detection, frame_paths, anti_rolling_model
-            )
-        elif detection.operation_type == OperationType.REMOVE_ROLLING:
-            await process_remove_rolling(
-                device_id, detection, frame_paths, remove_rolling_model
-            )
-            
-    except Exception as e:
-        log_with_timestamp(f"处理检测结果时出错: {e}")
 
-async def process_vehicle_number(device_id: str, detection, frame_paths, 
-                               vehicle_recognizer: VehicleNumberRecognizer):
-    """处理车号确认操作"""
-    log_with_timestamp(f"处理车号确认操作: {detection.text}")
-    
-    # 尝试识别车辆编号
-    vehicle_number = None
-    for timestamp, frame_path in frame_paths:
-        vehicle_number = vehicle_recognizer.recognize_vehicle_number(frame_path)
-        if vehicle_number:
-            break
-    
-    # 创建结果报告
-    if vehicle_number:
-        result = result_reporter.create_vehicle_number_result(
-            device_id, vehicle_number, [fp for _, fp in frame_paths], detection.timestamp
-        )
-    else:
-        result = result_reporter.create_vehicle_number_failure(
-            device_id, [fp for _, fp in frame_paths], detection.timestamp
-        )
-    
-    # 发送结果
-    await result_reporter.report_result(result)
 
-async def process_anti_rolling(device_id: str, detection, frame_paths,
-                             anti_rolling_model: AntiRollingModel):
-    """处理防遛确认操作"""
-    log_with_timestamp(f"处理防遛确认操作: {detection.text}")
-    
-    # 使用模型并行处理所有帧
-    frame_file_paths = [frame_path for _, frame_path in frame_paths]
-    results = await anti_rolling_model.process_images_parallel(frame_file_paths)
-    
-    # 检查是否有任何帧处理成功
-    is_success = False
-    for _, result in results:
-        if result is True:
-            is_success = True
-            break
-    
-    # 创建结果报告
-    result = result_reporter.create_anti_rolling_result(
-        device_id, is_success, [fp for _, fp in frame_paths], detection.timestamp
-    )
-    
-    # 发送结果
-    await result_reporter.report_result(result)
 
-async def process_remove_rolling(device_id: str, detection, frame_paths,
-                               remove_rolling_model: RemoveRollingModel):
-    """处理撤遛确认操作"""
-    log_with_timestamp(f"处理撤遛确认操作: {detection.text}")
-    
-    # 使用模型并行处理所有帧
-    frame_file_paths = [frame_path for _, frame_path in frame_paths]
-    results = await remove_rolling_model.process_images_parallel(frame_file_paths)
-    
-    # 检查是否有任何帧处理成功
-    is_success = False
-    for _, result in results:
-        if result is True:
-            is_success = True
-            break
-    
-    # 创建结果报告
-    result = result_reporter.create_remove_rolling_result(
-        device_id, is_success, [fp for _, fp in frame_paths], detection.timestamp
-    )
-    
-    # 发送结果
-    await result_reporter.report_result(result)
+
+
+
 
 @app.get("/")
 async def root():
