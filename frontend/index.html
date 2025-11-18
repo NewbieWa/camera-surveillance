@@ -2169,15 +2169,62 @@ sdkclient.addObserver('AlarmUpload', msg => {
           
           // 等待视频元素加载
           videoElement.onloadedmetadata = function() {
-            // 使用captureStream API获取视频元素的流（包含音频和视频）
-            if (videoElement.captureStream) {
-              const stream = videoElement.captureStream();
+            // 检查浏览器是否支持MediaStream API和captureStream
+            if (audioElement.captureStream && videoElement.captureStream) {
+              // 合并音频和视频流
+              const audioStream = audioElement.captureStream();
+              const videoStream = videoElement.captureStream();
+              
+              // 创建一个新的媒体流并添加视频和音频轨道
+              const combinedStream = new MediaStream();
+              
+              // 添加视频轨道
+              videoStream.getVideoTracks().forEach(track => {
+                combinedStream.addTrack(track);
+              });
+              
+              // 添加音频轨道
+              audioStream.getAudioTracks().forEach(track => {
+                combinedStream.addTrack(track);
+              });
+              
+              // 使用合并后的流进行录制
+              const stream = combinedStream;
               
               // 创建MediaRecorder来录制流并发送到后端
               try {
+                // 优化MediaRecorder配置，检查浏览器支持的格式
+                const mimeTypes = [
+                  'video/webm;codecs=vp9',
+                  'video/webm;codecs=vp8',
+                  'video/webm',
+                  'video/mp4'
+                ];
+                
+                let selectedMimeType = null;
+                for (const mimeType of mimeTypes) {
+                  if (MediaRecorder.isTypeSupported(mimeType)) {
+                    selectedMimeType = mimeType;
+                    break;
+                  }
+                }
+                
+                if (!selectedMimeType) {
+                  console.error('浏览器不支持任何指定的录制格式');
+                  $('#detectionStatus').append('<br>错误：浏览器不支持任何录制格式');
+                  return;
+                }
+                
                 mediaRecorder = new MediaRecorder(stream, { 
-                  mimeType: 'video/webm;codecs=vp9' 
+                  mimeType: selectedMimeType,
+                  videoBitsPerSecond: 5000000 // 限制比特率为5Mbps
                 });
+                
+                // 添加错误处理
+                mediaRecorder.onerror = function(event) {
+                  console.error('MediaRecorder错误:', event.error);
+                  $('#detectionStatus').append('<br>MediaRecorder错误: ' + event.error);
+                };
                 
                 mediaRecorder.ondataavailable = function(event) {
                   if (event.data.size > 0) {
@@ -2186,9 +2233,62 @@ sdkclient.addObserver('AlarmUpload', msg => {
                   }
                 };
                 
-                // 开始录制
-                mediaRecorder.start(3000); // 每3秒生成一个数据块
+                // 开始录制 - 增加数据块大小以减少碎片
+                mediaRecorder.start(10000); // 每15秒生成一个数据块，减少传输频率
                 $('#detectionStatus').append('<br>开始捕获音视频流并发送到后端');
+              } catch (error) {
+                console.error('创建MediaRecorder失败:', error);
+                $('#detectionStatus').append('<br>创建录制器失败: ' + error.message);
+              }
+            } else if (videoElement.captureStream) {
+              // 如果不支持合并流，只录制视频流
+              const stream = videoElement.captureStream();
+              
+              // 创建MediaRecorder来录制流并发送到后端
+              try {
+                // 优化MediaRecorder配置，检查浏览器支持的格式
+                const mimeTypes = [
+                  'video/webm;codecs=vp9',
+                  'video/webm;codecs=vp8',
+                  'video/webm',
+                  'video/mp4'
+                ];
+                
+                let selectedMimeType = null;
+                for (const mimeType of mimeTypes) {
+                  if (MediaRecorder.isTypeSupported(mimeType)) {
+                    selectedMimeType = mimeType;
+                    break;
+                  }
+                }
+                
+                if (!selectedMimeType) {
+                  console.error('浏览器不支持任何指定的录制格式');
+                  $('#detectionStatus').append('<br>错误：浏览器不支持任何录制格式');
+                  return;
+                }
+                
+                mediaRecorder = new MediaRecorder(stream, { 
+                  mimeType: selectedMimeType,
+                  videoBitsPerSecond: 5000000 // 限制比特率为5Mbps
+                });
+                
+                // 添加错误处理
+                mediaRecorder.onerror = function(event) {
+                  console.error('MediaRecorder错误:', event.error);
+                  $('#detectionStatus').append('<br>MediaRecorder错误: ' + event.error);
+                };
+                
+                mediaRecorder.ondataavailable = function(event) {
+                  if (event.data.size > 0) {
+                    // 发送视频数据块到后端
+                    sendDetectionVideoChunkToBackend(event.data);
+                  }
+                };
+                
+                // 开始录制 - 增加数据块大小以减少碎片
+                mediaRecorder.start(15000); // 每15秒生成一个数据块，减少传输频率
+                $('#detectionStatus').append('<br>开始捕获视频流并发送到后端（可能缺少音频）');
               } catch (error) {
                 console.error('创建MediaRecorder失败:', error);
                 $('#detectionStatus').append('<br>创建录制器失败: ' + error.message);
@@ -2208,21 +2308,22 @@ sdkclient.addObserver('AlarmUpload', msg => {
       }
     }
     
-    // 发送视频数据块到后端
-    function sendDetectionVideoChunkToBackend(videoChunk) {
+    // 发送视频数据块到后端 - 优化版本：直接发送二进制数据并验证
+    async function sendDetectionVideoChunkToBackend(videoChunk) {
       if (detectionWs && detectionWs.readyState === WebSocket.OPEN) {
-        // 将视频数据块转换为DataURL并发送
-        const reader = new FileReader();
-        reader.onload = function() {
-          const videoData = {
-            type: 'detection_video_chunk',
-            data: reader.result,
-            timestamp: Date.now(),
-            deviceId: detectionDeviceId
-          };
-          detectionWs.send(JSON.stringify(videoData));
+        // 不再检查WebM头部，直接发送所有数据
+        // 发送元数据
+        const metadata = {
+          type: 'detection_video_chunk_metadata',
+          timestamp: Date.now(),
+          deviceId: detectionDeviceId,
+          size: videoChunk.size
         };
-        reader.readAsDataURL(videoChunk);
+        
+        detectionWs.send(JSON.stringify(metadata));
+        
+        // 直接发送二进制数据，避免DataURL转换
+        detectionWs.send(videoChunk);
       }
     }
     

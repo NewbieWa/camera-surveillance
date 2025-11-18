@@ -1,213 +1,158 @@
-2025-11-16 18:20:18 INFO:     Started server process [50132]
-2025-11-16 18:20:18 INFO: Started server process [50132]
-2025-11-16 18:20:18 INFO:     Waiting for application startup.
-2025-11-16 18:20:18 INFO: Waiting for application startup.
-2025-11-16 18:20:18 INFO:     Application startup complete.
-2025-11-16 18:20:18 INFO: Application startup complete.
-2025-11-16 18:20:18 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-2025-11-16 18:20:18 INFO: Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-2025-11-16 18:20:19 INFO:     127.0.0.1:63456 - "GET / HTTP/1.1" 200 OK
-2025-11-16 18:21:05 INFO:     127.0.0.1:63483 - "WebSocket /ws/live-video/860924031381890" [accepted]
-2025-11-16 18:21:05 INFO: 127.0.0.1:63483 - "WebSocket /ws/live-video/860924031381890" [accepted]
-2025-11-16 18:21:05 INFO: [2025-11-16 18:21:05] 实时视频WebSocket连接已建立，设备ID: 860924031381890
-2025-11-16 18:21:05 INFO: [2025-11-16 18:21:05] 为设备 860924031381890 创建工作空间: workspace/860924031381890_1763288465
-2025-11-16 18:21:05 INFO: [2025-11-16 18:21:05] 成功导入dashscope库
-2025-11-16 18:21:05 INFO: [2025-11-16 18:21:05] AudioTranscriber初始化完成，采样率: 16000Hz
-2025-11-16 18:21:05 INFO: [2025-11-16 18:21:05] 开始录制视频到: workspace/860924031381890_1763288465/video_1763288465.mp4
-2025-11-16 18:21:05 INFO:     connection open
-2025-11-16 18:21:05 INFO: connection open
-2025-11-16 18:21:10 INFO: [2025-11-16 18:21:10] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288470023469_000000.webm
-2025-11-16 18:21:10 INFO: [2025-11-16 18:21:10] 视频块大小: 179066 字节
-2025-11-16 18:21:10 INFO: [2025-11-16 18:21:10] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:21:13 INFO: [2025-11-16 18:21:13] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288473035340_000001.webm
-2025-11-16 18:21:13 INFO: [2025-11-16 18:21:13] 视频块大小: 272345 字节
-2025-11-16 18:21:13 INFO: [2025-11-16 18:21:13] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:21:16 INFO: [2025-11-16 18:21:16] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288476146180_000002.webm
-2025-11-16 18:21:16 INFO: [2025-11-16 18:21:16] 视频块大小: 278585 字节
-2025-11-16 18:21:16 INFO: [2025-11-16 18:21:16] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:21:19 INFO: [2025-11-16 18:21:19] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288479169436_000003.webm
-2025-11-16 18:21:19 INFO: [2025-11-16 18:21:19] 视频块大小: 315808 字节
-2025-11-16 18:21:19 INFO: [2025-11-16 18:21:19] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:21:22 INFO: [2025-11-16 18:21:22] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288482191105_000004.webm
-2025-11-16 18:21:22 INFO: [2025-11-16 18:21:22] 视频块大小: 282117 字节
-2025-11-16 18:21:22 INFO: [2025-11-16 18:21:22] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:21:25 INFO: [2025-11-16 18:21:25] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288485366112_000005.webm
-2025-11-16 18:21:25 INFO: [2025-11-16 18:21:25] 视频块大小: 288809 字节
-2025-11-16 18:21:25 INFO: [2025-11-16 18:21:25] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:21:28 INFO: [2025-11-16 18:21:28] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288488445394_000006.webm
-2025-11-16 18:21:28 INFO: [2025-11-16 18:21:28] 视频块大小: 249528 字节
-2025-11-16 18:21:28 INFO: [2025-11-16 18:21:28] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:21:31 INFO: [2025-11-16 18:21:31] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288491476599_000007.webm
-2025-11-16 18:21:31 INFO: [2025-11-16 18:21:31] 视频块大小: 309775 字节
-2025-11-16 18:21:31 INFO: [2025-11-16 18:21:31] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:21:34 INFO: [2025-11-16 18:21:34] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288494493616_000008.webm
-2025-11-16 18:21:34 INFO: [2025-11-16 18:21:34] 视频块大小: 290514 字节
-2025-11-16 18:21:34 INFO: [2025-11-16 18:21:34] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:21:37 INFO: [2025-11-16 18:21:37] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288497507423_000009.webm
-2025-11-16 18:21:37 INFO: [2025-11-16 18:21:37] 视频块大小: 285030 字节
-2025-11-16 18:21:37 INFO: [2025-11-16 18:21:37] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:21:37 INFO: [2025-11-16 18:21:37] 准备创建列表文件: workspace/860924031381890_1763288465/chunk_list_1763288497.txt
-2025-11-16 18:21:37 INFO: [2025-11-16 18:21:37] workspace_path: workspace/860924031381890_1763288465
-2025-11-16 18:21:37 INFO: [2025-11-16 18:21:37] 有效视频块数量: 10
-2025-11-16 18:21:37 INFO: [2025-11-16 18:21:37] 有效存在的视频块数量: 10
-2025-11-16 18:21:37 INFO: [2025-11-16 18:21:37] 列表文件已成功创建: workspace/860924031381890_1763288465/chunk_list_1763288497.txt
-2025-11-16 18:21:37 INFO: [2025-11-16 18:21:37] 列表文件内容:
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288470023469_000000.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288473035340_000001.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288476146180_000002.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288479169436_000003.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288482191105_000004.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288485366112_000005.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288488445394_000006.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288491476599_000007.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288494493616_000008.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288497507423_000009.webm'
-
-2025-11-16 18:21:37 INFO: [2025-11-16 18:21:37] 视频合并成功
-2025-11-16 18:21:37 INFO: [2025-11-16 18:21:37] 检测视频块已合并并保存到: workspace/860924031381890_1763288465/detection_video_chunk_0000.webm，大小: 179409 字节
-2025-11-16 18:21:37 INFO: [2025-11-16 18:21:37] 开始处理存储的视频块: workspace/860924031381890_1763288465/detection_video_chunk_0000.webm
-2025-11-16 18:21:37 INFO: [2025-11-16 18:21:37] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
-2025-11-16 18:21:37 INFO: [2025-11-16 18:21:37] 开始转录音频文件: workspace/860924031381890_1763288465/extracted_audio_detection_video_chunk_0000.webm.wav
-2025-11-16 18:21:37 INFO: [2025-11-16 18:21:37] 错误: 音频文件不存在: workspace/860924031381890_1763288465/extracted_audio_detection_video_chunk_0000.webm.wav
-2025-11-16 18:21:38 INFO: [2025-11-16 18:21:38] 处理车号确认操作: 车号确认
-2025-11-16 18:21:38 INFO: [2025-11-16 18:21:38] 处理防遛确认操作: 铁鞋设置
-2025-11-16 18:21:38 INFO: [2025-11-16 18:21:38] 处理防遛确认操作: 手闸拧紧
-2025-11-16 18:21:39 INFO: [2025-11-16 18:21:39] 处理撤遛确认操作: 铁鞋撤除
-2025-11-16 18:21:39 INFO: [2025-11-16 18:21:39] 处理撤遛确认操作: 手闸松开
-2025-11-16 18:21:39 INFO: [2025-11-16 18:21:39] 视频处理完成: workspace/860924031381890_1763288465/detection_video_chunk_0000.webm
-2025-11-16 18:21:40 INFO: [2025-11-16 18:21:40] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288500590530_000010.webm
-2025-11-16 18:21:40 INFO: [2025-11-16 18:21:40] 视频块大小: 328921 字节
-2025-11-16 18:21:40 INFO: [2025-11-16 18:21:40] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:21:43 INFO: [2025-11-16 18:21:43] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288503628986_000011.webm
-2025-11-16 18:21:43 INFO: [2025-11-16 18:21:43] 视频块大小: 278367 字节
-2025-11-16 18:21:43 INFO: [2025-11-16 18:21:43] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:21:46 INFO: [2025-11-16 18:21:46] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288506733177_000012.webm
-2025-11-16 18:21:46 INFO: [2025-11-16 18:21:46] 视频块大小: 251491 字节
-2025-11-16 18:21:46 INFO: [2025-11-16 18:21:46] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:21:49 INFO: [2025-11-16 18:21:49] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288509820895_000013.webm
-2025-11-16 18:21:49 INFO: [2025-11-16 18:21:49] 视频块大小: 300861 字节
-2025-11-16 18:21:49 INFO: [2025-11-16 18:21:49] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:21:52 INFO: [2025-11-16 18:21:52] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288512868316_000014.webm
-2025-11-16 18:21:52 INFO: [2025-11-16 18:21:52] 视频块大小: 303510 字节
-[2025-11-16 18:21:05] 实时视频WebSocket连接已建立，设备ID: 860924031381890
-[2025-11-16 18:21:05] 为设备 860924031381890 创建工作空间: workspace/860924031381890_1763288465
-[2025-11-16 18:21:05] 成功导入dashscope库
-[2025-11-16 18:21:05] AudioTranscriber初始化完成，采样率: 16000Hz
+2025-11-18 22:03:52 INFO:     Started server process [72094]
+2025-11-18 22:03:52 INFO: Started server process [72094]
+2025-11-18 22:03:52 INFO:     Waiting for application startup.
+2025-11-18 22:03:52 INFO: Waiting for application startup.
+2025-11-18 22:03:52 INFO:     Application startup complete.
+2025-11-18 22:03:52 INFO: Application startup complete.
+2025-11-18 22:03:52 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2025-11-18 22:03:52 INFO: Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2025-11-18 22:03:53 INFO:     127.0.0.1:59791 - "GET / HTTP/1.1" 200 OK
+2025-11-18 22:11:25 INFO:     127.0.0.1:60068 - "WebSocket /ws/live-video/860924031381890" [accepted]
+2025-11-18 22:11:25 INFO: 127.0.0.1:60068 - "WebSocket /ws/live-video/860924031381890" [accepted]
+2025-11-18 22:11:25 INFO: [2025-11-18 22:11:25] 实时视频WebSocket连接已建立，设备ID: 860924031381890
+2025-11-18 22:11:25 INFO: [2025-11-18 22:11:25] 为设备 860924031381890 创建工作空间: workspace/860924031381890_1763475085
+2025-11-18 22:11:25 INFO: [2025-11-18 22:11:25] 成功导入dashscope库
+2025-11-18 22:11:25 INFO: [2025-11-18 22:11:25] AudioTranscriber初始化完成，采样率: 16000Hz
+2025-11-18 22:11:25 INFO: [2025-11-18 22:11:25] 开始录制视频到: workspace/860924031381890_1763475085/video_1763475085.mp4
+2025-11-18 22:11:25 INFO:     connection open
+2025-11-18 22:11:25 INFO: connection open
+2025-11-18 22:11:37 INFO: [2025-11-18 22:11:37] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475097753963_000000.webm
+2025-11-18 22:11:37 INFO: [2025-11-18 22:11:37] 视频块大小: 2142974 字节
+2025-11-18 22:11:37 INFO: [2025-11-18 22:11:37] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:11:47 INFO: [2025-11-18 22:11:47] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475107791641_000001.webm
+2025-11-18 22:11:47 INFO: [2025-11-18 22:11:47] 视频块大小: 2543660 字节
+2025-11-18 22:11:47 INFO: [2025-11-18 22:11:47] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:11:57 INFO: [2025-11-18 22:11:57] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475117860186_000002.webm
+2025-11-18 22:11:57 INFO: [2025-11-18 22:11:57] 视频块大小: 2363070 字节
+2025-11-18 22:11:57 INFO: [2025-11-18 22:11:57] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:11:57 INFO: [2025-11-18 22:11:57] 二进制合并完成: 7049704 -> 7049704 bytes
+2025-11-18 22:11:57 INFO: [2025-11-18 22:11:57] 开始转换webm到最终mp4格式...
+2025-11-18 22:12:03 INFO: [2025-11-18 22:12:03] 转换完成! 最终MP4文件大小: 6049440 字节
+2025-11-18 22:12:03 INFO: [2025-11-18 22:12:03] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+2025-11-18 22:12:03 INFO: [2025-11-18 22:12:03] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:12:03 INFO: [2025-11-18 22:12:03] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+2025-11-18 22:12:03 INFO: [2025-11-18 22:12:03] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+2025-11-18 22:12:04 INFO: The task 2aad5187-90aa-414a-a930-a8afcc8b56d4 is  RUNNING
+2025-11-18 22:12:05 INFO: [2025-11-18 22:12:05] {
+    "task_id": "2aad5187-90aa-414a-a930-a8afcc8b56d4",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:12:03.959",
+    "scheduled_time": "2025-11-18 22:12:03.979",
+    "end_time": "2025-11-18 22:12:04.656",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+2025-11-18 22:12:05 INFO: [2025-11-18 22:12:05] transcription done!
+2025-11-18 22:12:07 INFO: [2025-11-18 22:12:07] 识别成功
+2025-11-18 22:12:07 INFO: [2025-11-18 22:12:07] speech_result: {"status_code": 200, "request_id": "4139a4582f2c43dcbbfeeca3d42e5ac5", "code": "", "message": "", "output": null, "usage": null}
+2025-11-18 22:12:07 INFO: [2025-11-18 22:12:07] full_result: None
+2025-11-18 22:12:07 INFO: [2025-11-18 22:12:07] 未找到识别结果
+2025-11-18 22:12:10 INFO: [2025-11-18 22:12:10] 处理车号确认操作: 车号确认
+2025-11-18 22:12:19 INFO: [2025-11-18 22:12:19] 处理防遛确认操作: 铁鞋设置
+2025-11-18 22:12:22 INFO: [2025-11-18 22:12:22] 处理防遛确认操作: 手闸拧紧
+2025-11-18 22:12:25 INFO: [2025-11-18 22:12:25] 处理撤遛确认操作: 铁鞋撤除
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 处理撤遛确认操作: 手闸松开
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475148629678_000003.webm
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 视频块大小: 2274417 字节
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475148697251_000004.webm
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 视频块大小: 2242698 字节
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475148772847_000005.webm
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 视频块大小: 2554767 字节
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 二进制合并完成: 7071882 -> 7071882 bytes
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 开始转换webm到最终mp4格式...
+[2025-11-18 22:11:25] 实时视频WebSocket连接已建立，设备ID: 860924031381890
+[2025-11-18 22:11:25] 为设备 860924031381890 创建工作空间: workspace/860924031381890_1763475085
+[2025-11-18 22:11:25] 成功导入dashscope库
+[2025-11-18 22:11:25] AudioTranscriber初始化完成，采样率: 16000Hz
 Current working directory: /Users/wanglei/workStore/code/workSource/camera-surveillance/backend
 Current working directory: /Users/wanglei/workStore/code/workSource/camera-surveillance/backend
-[2025-11-16 18:21:05] 防遛确认模型加载成功，设备: mps
+[2025-11-18 22:11:25] 防遛确认模型加载成功，设备: mps
 Current working directory: /Users/wanglei/workStore/code/workSource/camera-surveillance/backend
-[2025-11-16 18:21:05] 撤遛确认模型加载成功，设备: mps
-[2025-11-16 18:21:05] 开始视频录制，输出路径: workspace/860924031381890_1763288465/video_1763288465.mp4, 尺寸: 640x480, FPS: 30
-[2025-11-16 18:21:05] 使用编码器 mp4v 创建视频写入器成功: workspace/860924031381890_1763288465/video_1763288465.mp4
-[2025-11-16 18:21:05] 开始录制视频到: workspace/860924031381890_1763288465/video_1763288465.mp4
-[2025-11-16 18:21:10] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288470023469_000000.webm
-[2025-11-16 18:21:10] 视频块大小: 179066 字节
-[2025-11-16 18:21:10] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:21:13] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288473035340_000001.webm
-[2025-11-16 18:21:13] 视频块大小: 272345 字节
-[2025-11-16 18:21:13] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:21:16] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288476146180_000002.webm
-[2025-11-16 18:21:16] 视频块大小: 278585 字节
-[2025-11-16 18:21:16] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:21:19] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288479169436_000003.webm
-[2025-11-16 18:21:19] 视频块大小: 315808 字节
-[2025-11-16 18:21:19] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:21:22] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288482191105_000004.webm
-[2025-11-16 18:21:22] 视频块大小: 282117 字节
-[2025-11-16 18:21:22] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:21:25] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288485366112_000005.webm
-[2025-11-16 18:21:25] 视频块大小: 288809 字节
-[2025-11-16 18:21:25] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:21:28] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288488445394_000006.webm
-[2025-11-16 18:21:28] 视频块大小: 249528 字节
-[2025-11-16 18:21:28] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:21:31] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288491476599_000007.webm
-[2025-11-16 18:21:31] 视频块大小: 309775 字节
-[2025-11-16 18:21:31] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:21:34] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288494493616_000008.webm
-[2025-11-16 18:21:34] 视频块大小: 290514 字节
-[2025-11-16 18:21:34] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:21:37] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288497507423_000009.webm
-[2025-11-16 18:21:37] 视频块大小: 285030 字节
-[2025-11-16 18:21:37] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:21:37] 准备创建列表文件: workspace/860924031381890_1763288465/chunk_list_1763288497.txt
-[2025-11-16 18:21:37] workspace_path: workspace/860924031381890_1763288465
-[2025-11-16 18:21:37] 有效视频块数量: 10
-[2025-11-16 18:21:37] 有效存在的视频块数量: 10
-[2025-11-16 18:21:37] 列表文件已成功创建: workspace/860924031381890_1763288465/chunk_list_1763288497.txt
-[2025-11-16 18:21:37] 列表文件内容:
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288470023469_000000.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288473035340_000001.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288476146180_000002.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288479169436_000003.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288482191105_000004.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288485366112_000005.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288488445394_000006.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288491476599_000007.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288494493616_000008.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288497507423_000009.webm'
-
-[2025-11-16 18:21:37] 视频合并成功
-[2025-11-16 18:21:37] 检测视频块已合并并保存到: workspace/860924031381890_1763288465/detection_video_chunk_0000.webm，大小: 179409 字节
-[2025-11-16 18:21:37] 开始处理存储的视频块: workspace/860924031381890_1763288465/detection_video_chunk_0000.webm
-[2025-11-16 18:21:37] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
-[2025-11-16 18:21:37] 开始转录音频文件: workspace/860924031381890_1763288465/extracted_audio_detection_video_chunk_0000.webm.wav
-[2025-11-16 18:21:37] 错误: 音频文件不存在: workspace/860924031381890_1763288465/extracted_audio_detection_video_chunk_0000.webm.wav
-[2025-11-16 18:21:38] 处理车号确认操作: 车号确认
-[2025-11-16 18:21:38] 处理防遛确认操作: 铁鞋设置
-[2025-11-16 18:21:38] 处理防遛确认操作: 手闸拧紧
-[2025-11-16 18:21:39] 处理撤遛确认操作: 铁鞋撤除
-[2025-11-16 18:21:39] 处理撤遛确认操作: 手闸松开
-[2025-11-16 18:21:39] 视频处理完成: workspace/860924031381890_1763288465/detection_video_chunk_0000.webm
-[2025-11-16 18:21:40] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288500590530_000010.webm
-[2025-11-16 18:21:40] 视频块大小: 328921 字节
-[2025-11-16 18:21:40] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:21:43] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288503628986_000011.webm
-[2025-11-16 18:21:43] 视频块大小: 278367 字节
-[2025-11-16 18:21:43] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:21:46] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288506733177_000012.webm
-[2025-11-16 18:21:46] 视频块大小: 251491 字节
-[2025-11-16 18:21:46] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:21:49] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288509820895_000013.webm
-[2025-11-16 18:21:49] 视频块大小: 300861 字节
-[2025-11-16 18:21:49] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:21:52] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288512868316_000014.webm
-[2025-11-16 18:21:52] 视频块大小: 303510 字节
-2025-11-16 18:21:52 INFO: [2025-11-16 18:21:52] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:21:55 INFO: [2025-11-16 18:21:55] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288515883571_000015.webm
-2025-11-16 18:21:55 INFO: [2025-11-16 18:21:55] 视频块大小: 217842 字节
-2025-11-16 18:21:55 INFO: [2025-11-16 18:21:55] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:21:58 INFO: [2025-11-16 18:21:58] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288518915134_000016.webm
-2025-11-16 18:21:58 INFO: [2025-11-16 18:21:58] 视频块大小: 263305 字节
-2025-11-16 18:21:58 INFO: [2025-11-16 18:21:58] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:22:02 INFO: [2025-11-16 18:22:02] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288522089797_000017.webm
-2025-11-16 18:22:02 INFO: [2025-11-16 18:22:02] 视频块大小: 283676 字节
-2025-11-16 18:22:02 INFO: [2025-11-16 18:22:02] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:22:05 INFO: [2025-11-16 18:22:05] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288525171243_000018.webm
-2025-11-16 18:22:05 INFO: [2025-11-16 18:22:05] 视频块大小: 352846 字节
-2025-11-16 18:22:05 INFO: [2025-11-16 18:22:05] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:22:08 INFO: [2025-11-16 18:22:08] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288528240352_000019.webm
-2025-11-16 18:22:08 INFO: [2025-11-16 18:22:08] 视频块大小: 278217 字节
-2025-11-16 18:22:08 INFO: [2025-11-16 18:22:08] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:22:08 INFO: [2025-11-16 18:22:08] 准备创建列表文件: workspace/860924031381890_1763288465/chunk_list_1763288528.txt
-2025-11-16 18:22:08 INFO: [2025-11-16 18:22:08] workspace_path: workspace/860924031381890_1763288465
-2025-11-16 18:22:08 INFO: [2025-11-16 18:22:08] 有效视频块数量: 10
-2025-11-16 18:22:08 INFO: [2025-11-16 18:22:08] 有效存在的视频块数量: 10
-2025-11-16 18:22:08 INFO: [2025-11-16 18:22:08] 列表文件已成功创建: workspace/860924031381890_1763288465/chunk_list_1763288528.txt
-2025-11-16 18:22:08 INFO: [2025-11-16 18:22:08] 列表文件内容:
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288500590530_000010.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288503628986_000011.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288506733177_000012.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288509820895_000013.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288512868316_000014.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288515883571_000015.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288518915134_000016.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288522089797_000017.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288525171243_000018.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288528240352_000019.webm'
-
-2025-11-16 18:22:08 INFO: [2025-11-16 18:22:08] 视频合并失败 (直接复制): ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
+[2025-11-18 22:11:25] 撤遛确认模型加载成功，设备: mps
+[2025-11-18 22:11:25] 开始视频录制，输出路径: workspace/860924031381890_1763475085/video_1763475085.mp4, 尺寸: 640x480, FPS: 30
+[2025-11-18 22:11:25] 使用编码器 mp4v 创建视频写入器成功: workspace/860924031381890_1763475085/video_1763475085.mp4
+[2025-11-18 22:11:25] 开始录制视频到: workspace/860924031381890_1763475085/video_1763475085.mp4
+[2025-11-18 22:11:37] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475097753963_000000.webm
+[2025-11-18 22:11:37] 视频块大小: 2142974 字节
+[2025-11-18 22:11:37] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:11:47] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475107791641_000001.webm
+[2025-11-18 22:11:47] 视频块大小: 2543660 字节
+[2025-11-18 22:11:47] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:11:57] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475117860186_000002.webm
+[2025-11-18 22:11:57] 视频块大小: 2363070 字节
+[2025-11-18 22:11:57] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:11:57] 二进制合并完成: 7049704 -> 7049704 bytes
+[2025-11-18 22:11:57] 开始转换webm到最终mp4格式...
+[2025-11-18 22:12:03] 转换完成! 最终MP4文件大小: 6049440 字节
+[2025-11-18 22:12:03] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+[2025-11-18 22:12:03] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:12:03] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+[2025-11-18 22:12:03] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+[2025-11-18 22:12:05] {
+    "task_id": "2aad5187-90aa-414a-a930-a8afcc8b56d4",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:12:03.959",
+    "scheduled_time": "2025-11-18 22:12:03.979",
+    "end_time": "2025-11-18 22:12:04.656",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+[2025-11-18 22:12:05] transcription done!
+[2025-11-18 22:12:07] 识别成功
+[2025-11-18 22:12:07] speech_result: {"status_code": 200, "request_id": "4139a4582f2c43dcbbfeeca3d42e5ac5", "code": "", "message": "", "output": null, "usage": null}
+[2025-11-18 22:12:07] full_result: None
+[2025-11-18 22:12:07] 未找到识别结果
+[2025-11-18 22:12:10] 处理车号确认操作: 车号确认
+[2025-11-18 22:12:12] vehicle response: {"status_code": 200, "request_id": "fff6897a-4799-4dd6-8feb-c35310ddbfc8", "code": "", "message": "", "output": {"text": null, "finish_reason": null, "choices": [{"finish_reason": "stop", "message": {"role": "assistant", "content": [{"text": "未识别"}]}}], "audio": null}, "usage": {"input_tokens": 2079, "output_tokens": 3, "characters": 0, "image_tokens": 2042, "input_tokens_details": {"image_tokens": 2042, "text_tokens": 37}, "output_tokens_details": {"text_tokens": 3}, "total_tokens": 2082}}
+[2025-11-18 22:12:14] vehicle response: {"status_code": 200, "request_id": "3a469748-334e-4db4-965f-b525fa2e77d0", "code": "", "message": "", "output": {"text": null, "finish_reason": null, "choices": [{"finish_reason": "stop", "message": {"role": "assistant", "content": [{"text": "未识别"}]}}], "audio": null}, "usage": {"input_tokens": 2079, "output_tokens": 3, "characters": 0, "image_tokens": 2042, "input_tokens_details": {"image_tokens": 2042, "text_tokens": 37}, "output_tokens_details": {"text_tokens": 3}, "total_tokens": 2082}}
+[2025-11-18 22:12:16] vehicle response: {"status_code": 200, "request_id": "1755c151-260c-44fc-800c-9759a7757150", "code": "", "message": "", "output": {"text": null, "finish_reason": null, "choices": [{"finish_reason": "stop", "message": {"role": "assistant", "content": [{"text": "000000 860924031381890"}]}}], "audio": null}, "usage": {"input_tokens": 2079, "output_tokens": 23, "characters": 0, "image_tokens": 2042, "input_tokens_details": {"image_tokens": 2042, "text_tokens": 37}, "output_tokens_details": {"text_tokens": 23}, "total_tokens": 2102}}
+[2025-11-18 22:12:19] 处理防遛确认操作: 铁鞋设置
+[2025-11-18 22:12:22] 处理防遛确认操作: 手闸拧紧
+[2025-11-18 22:12:25] 处理撤遛确认操作: 铁鞋撤除
+[2025-11-18 22:12:28] 处理撤遛确认操作: 手闸松开
+[2025-11-18 22:12:28] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:12:28] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475148629678_000003.webm
+[2025-11-18 22:12:28] 视频块大小: 2274417 字节
+[2025-11-18 22:12:28] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:12:28] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475148697251_000004.webm
+[2025-11-18 22:12:28] 视频块大小: 2242698 字节
+[2025-11-18 22:12:28] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:12:28] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475148772847_000005.webm
+[2025-11-18 22:12:28] 视频块大小: 2554767 字节
+[2025-11-18 22:12:28] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:12:28] 二进制合并完成: 7071882 -> 7071882 bytes
+[2025-11-18 22:12:28] 开始转换webm到最终mp4格式...
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 转换失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
   built with Apple clang version 16.0.0 (clang-1600.0.26.6)
   configuration: --prefix=/usr/local/Cellar/ffmpeg/8.0_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox
   libavutil      60.  8.100 / 60.  8.100
@@ -217,15 +162,63 @@ file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/works
   libavfilter    11.  4.100 / 11.  4.100
   libswscale      9.  1.100 /  9.  1.100
   libswresample   6.  1.100 /  6.  1.100
-[matroska,webm @ 0x7f9b2ea04080] Format matroska,webm detected only with low score of 1, misdetection possible!
-[matroska,webm @ 0x7f9b2ea04080] EBML header parsing failed
-[concat @ 0x7f9b2e904540] Impossible to open '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288500590530_000010.webm'
-[in#0 @ 0x7f9b2e904340] Error opening input: Invalid data found when processing input
-Error opening input file workspace/860924031381890_1763288465/chunk_list_1763288528.txt.
+[matroska,webm @ 0x7f7c99706900] Format matroska,webm detected only with low score of 1, misdetection possible!
+[matroska,webm @ 0x7f7c99706900] EBML header parsing failed
+[in#0 @ 0x7f7c99706700] Error opening input: Invalid data found when processing input
+Error opening input file workspace/860924031381890_1763475085/detection_video_chunk_0000_temp.webm.
 Error opening input files: Invalid data found when processing input
 
-2025-11-16 18:22:08 INFO: [2025-11-16 18:22:08] 尝试重新编码，valid_chunks数量: 10
-2025-11-16 18:22:08 INFO: [2025-11-16 18:22:08] 视频重新编码失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 使用临时webm文件作为输出: workspace/860924031381890_1763475085/detection_video_chunk_0000.webm
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+2025-11-18 22:12:28 INFO: [2025-11-18 22:12:28] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:12:29 INFO: [2025-11-18 22:12:29] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+2025-11-18 22:12:29 INFO: [2025-11-18 22:12:29] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+2025-11-18 22:12:29 INFO: The task a145a12e-b8ea-466b-bf08-763a8e935e0b is  RUNNING
+2025-11-18 22:12:30 INFO: [2025-11-18 22:12:30] {
+    "task_id": "a145a12e-b8ea-466b-bf08-763a8e935e0b",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:12:29.469",
+    "scheduled_time": "2025-11-18 22:12:29.502",
+    "end_time": "2025-11-18 22:12:30.198",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+2025-11-18 22:12:30 INFO: [2025-11-18 22:12:30] transcription done!
+2025-11-18 22:12:32 INFO: [2025-11-18 22:12:32] 识别成功
+2025-11-18 22:12:32 INFO: [2025-11-18 22:12:32] speech_result: {"status_code": 200, "request_id": "c1086c91bfda40f28a3f8f1a8b485819", "code": "", "message": "", "output": null, "usage": null}
+2025-11-18 22:12:32 INFO: [2025-11-18 22:12:32] full_result: None
+2025-11-18 22:12:32 INFO: [2025-11-18 22:12:32] 未找到识别结果
+2025-11-18 22:12:35 INFO: [2025-11-18 22:12:35] 处理车号确认操作: 车号确认
+2025-11-18 22:12:38 INFO: [2025-11-18 22:12:38] 处理防遛确认操作: 铁鞋设置
+2025-11-18 22:12:40 INFO: [2025-11-18 22:12:40] 处理防遛确认操作: 手闸拧紧
+2025-11-18 22:12:43 INFO: [2025-11-18 22:12:43] 处理撤遛确认操作: 铁鞋撤除
+2025-11-18 22:12:46 INFO: [2025-11-18 22:12:46] 处理撤遛确认操作: 手闸松开
+2025-11-18 22:12:46 INFO: [2025-11-18 22:12:46] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:12:46 INFO: [2025-11-18 22:12:46] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475166616289_000006.webm
+2025-11-18 22:12:46 INFO: [2025-11-18 22:12:46] 视频块大小: 2298708 字节
+2025-11-18 22:12:46 INFO: [2025-11-18 22:12:46] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:12:48 INFO: [2025-11-18 22:12:48] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475168037040_000007.webm
+2025-11-18 22:12:48 INFO: [2025-11-18 22:12:48] 视频块大小: 2270035 字节
+2025-11-18 22:12:48 INFO: [2025-11-18 22:12:48] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:12:58 INFO: [2025-11-18 22:12:58] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475178152256_000008.webm
+2025-11-18 22:12:58 INFO: [2025-11-18 22:12:58] 视频块大小: 2292884 字节
+2025-11-18 22:12:58 INFO: [2025-11-18 22:12:58] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:12:58 INFO: [2025-11-18 22:12:58] 二进制合并完成: 6861627 -> 6861627 bytes
+2025-11-18 22:12:58 INFO: [2025-11-18 22:12:58] 开始转换webm到最终mp4格式...
+2025-11-18 22:12:58 INFO: [2025-11-18 22:12:58] 转换失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
   built with Apple clang version 16.0.0 (clang-1600.0.26.6)
   configuration: --prefix=/usr/local/Cellar/ffmpeg/8.0_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox
   libavutil      60.  8.100 / 60.  8.100
@@ -235,50 +228,19 @@ Error opening input files: Invalid data found when processing input
   libavfilter    11.  4.100 / 11.  4.100
   libswscale      9.  1.100 /  9.  1.100
   libswresample   6.  1.100 /  6.  1.100
-[matroska,webm @ 0x7fd3c3905c80] Format matroska,webm detected only with low score of 1, misdetection possible!
-[matroska,webm @ 0x7fd3c3905c80] EBML header parsing failed
-[concat @ 0x7fd3c3904a40] Impossible to open '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288500590530_000010.webm'
-[in#0 @ 0x7fd3c3904840] Error opening input: Invalid data found when processing input
-Error opening input file workspace/860924031381890_1763288465/chunk_list_1763288528.txt.
+[matroska,webm @ 0x7fed1af05540] Format matroska,webm detected only with low score of 1, misdetection possible!
+[matroska,webm @ 0x7fed1af05540] EBML header parsing failed
+[in#0 @ 0x7fed1af05340] Error opening input: Invalid data found when processing input
+Error opening input file workspace/860924031381890_1763475085/detection_video_chunk_0000_temp.webm.
 Error opening input files: Invalid data found when processing input
 
-2025-11-16 18:22:08 INFO: [2025-11-16 18:22:08] 尝试逐步合并视频块...
-2025-11-16 18:22:08 INFO: [2025-11-16 18:22:08] 逐步合并过程中出现异常: cannot access local variable 'shutil' where it is not associated with a value
-2025-11-16 18:22:08 INFO: [2025-11-16 18:22:08] 合并视频块时出错: cannot access local variable 'shutil' where it is not associated with a value
-[2025-11-16 18:21:52] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:21:55] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288515883571_000015.webm
-[2025-11-16 18:21:55] 视频块大小: 217842 字节
-[2025-11-16 18:21:55] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:21:58] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288518915134_000016.webm
-[2025-11-16 18:21:58] 视频块大小: 263305 字节
-[2025-11-16 18:21:58] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:22:02] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288522089797_000017.webm
-[2025-11-16 18:22:02] 视频块大小: 283676 字节
-[2025-11-16 18:22:02] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:22:05] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288525171243_000018.webm
-[2025-11-16 18:22:05] 视频块大小: 352846 字节
-[2025-11-16 18:22:05] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:22:08] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288528240352_000019.webm
-[2025-11-16 18:22:08] 视频块大小: 278217 字节
-[2025-11-16 18:22:08] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:22:08] 准备创建列表文件: workspace/860924031381890_1763288465/chunk_list_1763288528.txt
-[2025-11-16 18:22:08] workspace_path: workspace/860924031381890_1763288465
-[2025-11-16 18:22:08] 有效视频块数量: 10
-[2025-11-16 18:22:08] 有效存在的视频块数量: 10
-[2025-11-16 18:22:08] 列表文件已成功创建: workspace/860924031381890_1763288465/chunk_list_1763288528.txt
-[2025-11-16 18:22:08] 列表文件内容:
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288500590530_000010.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288503628986_000011.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288506733177_000012.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288509820895_000013.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288512868316_000014.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288515883571_000015.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288518915134_000016.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288522089797_000017.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288525171243_000018.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288528240352_000019.webm'
-
-[2025-11-16 18:22:08] 视频合并失败 (直接复制): ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
+2025-11-18 22:12:58 INFO: [2025-11-18 22:12:58] 使用临时webm文件作为输出: workspace/860924031381890_1763475085/detection_video_chunk_0000.webm
+2025-11-18 22:12:58 INFO: [2025-11-18 22:12:58] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+2025-11-18 22:12:58 INFO: [2025-11-18 22:12:58] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:12:58 INFO: [2025-11-18 22:12:58] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+2025-11-18 22:12:58 INFO: [2025-11-18 22:12:58] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+2025-11-18 22:12:59 INFO: The task 8ffb3038-c9fb-46f8-9556-6375319f796d is  RUNNING
+[2025-11-18 22:12:28] 转换失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
   built with Apple clang version 16.0.0 (clang-1600.0.26.6)
   configuration: --prefix=/usr/local/Cellar/ffmpeg/8.0_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox
   libavutil      60.  8.100 / 60.  8.100
@@ -288,15 +250,62 @@ file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/works
   libavfilter    11.  4.100 / 11.  4.100
   libswscale      9.  1.100 /  9.  1.100
   libswresample   6.  1.100 /  6.  1.100
-[matroska,webm @ 0x7f9b2ea04080] Format matroska,webm detected only with low score of 1, misdetection possible!
-[matroska,webm @ 0x7f9b2ea04080] EBML header parsing failed
-[concat @ 0x7f9b2e904540] Impossible to open '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288500590530_000010.webm'
-[in#0 @ 0x7f9b2e904340] Error opening input: Invalid data found when processing input
-Error opening input file workspace/860924031381890_1763288465/chunk_list_1763288528.txt.
+[matroska,webm @ 0x7f7c99706900] Format matroska,webm detected only with low score of 1, misdetection possible!
+[matroska,webm @ 0x7f7c99706900] EBML header parsing failed
+[in#0 @ 0x7f7c99706700] Error opening input: Invalid data found when processing input
+Error opening input file workspace/860924031381890_1763475085/detection_video_chunk_0000_temp.webm.
 Error opening input files: Invalid data found when processing input
 
-[2025-11-16 18:22:08] 尝试重新编码，valid_chunks数量: 10
-[2025-11-16 18:22:08] 视频重新编码失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
+[2025-11-18 22:12:28] 使用临时webm文件作为输出: workspace/860924031381890_1763475085/detection_video_chunk_0000.webm
+[2025-11-18 22:12:28] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+[2025-11-18 22:12:28] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:12:29] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+[2025-11-18 22:12:29] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+[2025-11-18 22:12:30] {
+    "task_id": "a145a12e-b8ea-466b-bf08-763a8e935e0b",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:12:29.469",
+    "scheduled_time": "2025-11-18 22:12:29.502",
+    "end_time": "2025-11-18 22:12:30.198",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+[2025-11-18 22:12:30] transcription done!
+[2025-11-18 22:12:32] 识别成功
+[2025-11-18 22:12:32] speech_result: {"status_code": 200, "request_id": "c1086c91bfda40f28a3f8f1a8b485819", "code": "", "message": "", "output": null, "usage": null}
+[2025-11-18 22:12:32] full_result: None
+[2025-11-18 22:12:32] 未找到识别结果
+[2025-11-18 22:12:35] 处理车号确认操作: 车号确认
+[2025-11-18 22:12:38] 处理防遛确认操作: 铁鞋设置
+[2025-11-18 22:12:40] 处理防遛确认操作: 手闸拧紧
+[2025-11-18 22:12:43] 处理撤遛确认操作: 铁鞋撤除
+[2025-11-18 22:12:46] 处理撤遛确认操作: 手闸松开
+[2025-11-18 22:12:46] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:12:46] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475166616289_000006.webm
+[2025-11-18 22:12:46] 视频块大小: 2298708 字节
+[2025-11-18 22:12:46] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:12:48] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475168037040_000007.webm
+[2025-11-18 22:12:48] 视频块大小: 2270035 字节
+[2025-11-18 22:12:48] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:12:58] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475178152256_000008.webm
+[2025-11-18 22:12:58] 视频块大小: 2292884 字节
+[2025-11-18 22:12:58] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:12:58] 二进制合并完成: 6861627 -> 6861627 bytes
+[2025-11-18 22:12:58] 开始转换webm到最终mp4格式...
+[2025-11-18 22:12:58] 转换失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
   built with Apple clang version 16.0.0 (clang-1600.0.26.6)
   configuration: --prefix=/usr/local/Cellar/ffmpeg/8.0_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox
   libavutil      60.  8.100 / 60.  8.100
@@ -306,78 +315,62 @@ Error opening input files: Invalid data found when processing input
   libavfilter    11.  4.100 / 11.  4.100
   libswscale      9.  1.100 /  9.  1.100
   libswresample   6.  1.100 /  6.  1.100
-[matroska,webm @ 0x7fd3c3905c80] Format matroska,webm detected only with low score of 1, misdetection possible!
-[matroska,webm @ 0x7fd3c3905c80] EBML header parsing failed
-[concat @ 0x7fd3c3904a40] Impossible to open '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288500590530_000010.webm'
-[in#0 @ 0x7fd3c3904840] Error opening input: Invalid data found when processing input
-Error opening input file workspace/860924031381890_1763288465/chunk_list_1763288528.txt.
+[matroska,webm @ 0x7fed1af05540] Format matroska,webm detected only with low score of 1, misdetection possible!
+[matroska,webm @ 0x7fed1af05540] EBML header parsing failed
+[in#0 @ 0x7fed1af05340] Error opening input: Invalid data found when processing input
+Error opening input file workspace/860924031381890_1763475085/detection_video_chunk_0000_temp.webm.
 Error opening input files: Invalid data found when processing input
 
-[2025-11-16 18:22:08] 尝试逐步合并视频块...
-[2025-11-16 18:22:08] 逐步合并过程中出现异常: cannot access local variable 'shutil' where it is not associated with a value
-[2025-11-16 18:22:08] 合并视频块时出错: cannot access local variable 'shutil' where it is not associated with a value
-2025-11-16 18:22:08 INFO: [2025-11-16 18:22:08] 错误详情: Traceback (most recent call last):
-  File "/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/main.py", line 449, in websocket_live_video
-    current_file = valid_chunks[0]
-    ^^^^^^^^^^^^
-UnboundLocalError: cannot access local variable 'shutil' where it is not associated with a value
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/main.py", line 508, in websocket_live_video
-    shutil.copy2(valid_chunks[0], chunk_file_path)
-    ^^^^^^
-UnboundLocalError: cannot access local variable 'shutil' where it is not associated with a value
-
-2025-11-16 18:22:11 INFO: [2025-11-16 18:22:11] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288531399390_000020.webm
-2025-11-16 18:22:11 INFO: [2025-11-16 18:22:11] 视频块大小: 247151 字节
-2025-11-16 18:22:11 INFO: [2025-11-16 18:22:11] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:22:14 INFO: [2025-11-16 18:22:14] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288534434902_000021.webm
-2025-11-16 18:22:14 INFO: [2025-11-16 18:22:14] 视频块大小: 334223 字节
-2025-11-16 18:22:14 INFO: [2025-11-16 18:22:14] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:22:17 INFO: [2025-11-16 18:22:17] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288537525644_000022.webm
-2025-11-16 18:22:17 INFO: [2025-11-16 18:22:17] 视频块大小: 295016 字节
-2025-11-16 18:22:17 INFO: [2025-11-16 18:22:17] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:22:20 INFO: [2025-11-16 18:22:20] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288540623926_000023.webm
-2025-11-16 18:22:20 INFO: [2025-11-16 18:22:20] 视频块大小: 278881 字节
-2025-11-16 18:22:20 INFO: [2025-11-16 18:22:20] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:22:23 INFO: [2025-11-16 18:22:23] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288543780485_000024.webm
-2025-11-16 18:22:23 INFO: [2025-11-16 18:22:23] 视频块大小: 283655 字节
-2025-11-16 18:22:23 INFO: [2025-11-16 18:22:23] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:22:26 INFO: [2025-11-16 18:22:26] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288546839001_000025.webm
-2025-11-16 18:22:26 INFO: [2025-11-16 18:22:26] 视频块大小: 345812 字节
-2025-11-16 18:22:26 INFO: [2025-11-16 18:22:26] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:22:29 INFO: [2025-11-16 18:22:29] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288549885556_000026.webm
-2025-11-16 18:22:29 INFO: [2025-11-16 18:22:29] 视频块大小: 253135 字节
-2025-11-16 18:22:29 INFO: [2025-11-16 18:22:29] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:22:32 INFO: [2025-11-16 18:22:32] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288552987753_000027.webm
-2025-11-16 18:22:32 INFO: [2025-11-16 18:22:32] 视频块大小: 275069 字节
-2025-11-16 18:22:32 INFO: [2025-11-16 18:22:32] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:22:36 INFO: [2025-11-16 18:22:36] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288556105126_000028.webm
-2025-11-16 18:22:36 INFO: [2025-11-16 18:22:36] 视频块大小: 355184 字节
-2025-11-16 18:22:36 INFO: [2025-11-16 18:22:36] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:22:39 INFO: [2025-11-16 18:22:39] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288559166843_000029.webm
-2025-11-16 18:22:39 INFO: [2025-11-16 18:22:39] 视频块大小: 223951 字节
-2025-11-16 18:22:39 INFO: [2025-11-16 18:22:39] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:22:39 INFO: [2025-11-16 18:22:39] 准备创建列表文件: workspace/860924031381890_1763288465/chunk_list_1763288559.txt
-2025-11-16 18:22:39 INFO: [2025-11-16 18:22:39] workspace_path: workspace/860924031381890_1763288465
-2025-11-16 18:22:39 INFO: [2025-11-16 18:22:39] 有效视频块数量: 10
-2025-11-16 18:22:39 INFO: [2025-11-16 18:22:39] 有效存在的视频块数量: 10
-2025-11-16 18:22:39 INFO: [2025-11-16 18:22:39] 列表文件已成功创建: workspace/860924031381890_1763288465/chunk_list_1763288559.txt
-2025-11-16 18:22:39 INFO: [2025-11-16 18:22:39] 列表文件内容:
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288531399390_000020.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288534434902_000021.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288537525644_000022.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288540623926_000023.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288543780485_000024.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288546839001_000025.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288549885556_000026.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288552987753_000027.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288556105126_000028.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288559166843_000029.webm'
-
-2025-11-16 18:22:39 INFO: [2025-11-16 18:22:39] 视频合并失败 (直接复制): ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
+[2025-11-18 22:12:58] 使用临时webm文件作为输出: workspace/860924031381890_1763475085/detection_video_chunk_0000.webm
+[2025-11-18 22:12:58] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+[2025-11-18 22:12:58] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:12:58] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+[2025-11-18 22:12:58] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+2025-11-18 22:13:00 INFO: [2025-11-18 22:13:00] {
+    "task_id": "8ffb3038-c9fb-46f8-9556-6375319f796d",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:12:58.918",
+    "scheduled_time": "2025-11-18 22:12:58.961",
+    "end_time": "2025-11-18 22:12:59.667",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+2025-11-18 22:13:00 INFO: [2025-11-18 22:13:00] transcription done!
+2025-11-18 22:13:02 INFO: [2025-11-18 22:13:02] 识别成功
+2025-11-18 22:13:02 INFO: [2025-11-18 22:13:02] speech_result: {"status_code": 200, "request_id": "b9412f06adeb42cfa31193b6a074d846", "code": "", "message": "", "output": null, "usage": null}
+2025-11-18 22:13:02 INFO: [2025-11-18 22:13:02] full_result: None
+2025-11-18 22:13:02 INFO: [2025-11-18 22:13:02] 未找到识别结果
+2025-11-18 22:13:06 INFO: [2025-11-18 22:13:06] 处理车号确认操作: 车号确认
+2025-11-18 22:13:08 INFO: [2025-11-18 22:13:08] 处理防遛确认操作: 铁鞋设置
+2025-11-18 22:13:11 INFO: [2025-11-18 22:13:11] 处理防遛确认操作: 手闸拧紧
+2025-11-18 22:13:13 INFO: [2025-11-18 22:13:13] 处理撤遛确认操作: 铁鞋撤除
+2025-11-18 22:13:16 INFO: [2025-11-18 22:13:16] 处理撤遛确认操作: 手闸松开
+2025-11-18 22:13:16 INFO: [2025-11-18 22:13:16] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:13:16 INFO: [2025-11-18 22:13:16] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475196824233_000009.webm
+2025-11-18 22:13:16 INFO: [2025-11-18 22:13:16] 视频块大小: 2449194 字节
+2025-11-18 22:13:16 INFO: [2025-11-18 22:13:16] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:13:18 INFO: [2025-11-18 22:13:18] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475198370474_000010.webm
+2025-11-18 22:13:18 INFO: [2025-11-18 22:13:18] 视频块大小: 2541966 字节
+2025-11-18 22:13:18 INFO: [2025-11-18 22:13:18] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:13:28 INFO: [2025-11-18 22:13:28] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475208457551_000011.webm
+2025-11-18 22:13:28 INFO: [2025-11-18 22:13:28] 视频块大小: 2420697 字节
+2025-11-18 22:13:28 INFO: [2025-11-18 22:13:28] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:13:28 INFO: [2025-11-18 22:13:28] 二进制合并完成: 7411857 -> 7411857 bytes
+2025-11-18 22:13:28 INFO: [2025-11-18 22:13:28] 开始转换webm到最终mp4格式...
+2025-11-18 22:13:28 INFO: [2025-11-18 22:13:28] 转换失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
   built with Apple clang version 16.0.0 (clang-1600.0.26.6)
   configuration: --prefix=/usr/local/Cellar/ffmpeg/8.0_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox
   libavutil      60.  8.100 / 60.  8.100
@@ -387,76 +380,92 @@ file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/works
   libavfilter    11.  4.100 / 11.  4.100
   libswscale      9.  1.100 /  9.  1.100
   libswresample   6.  1.100 /  6.  1.100
-[matroska,webm @ 0x7febab0064c0] Format matroska,webm detected only with low score of 1, misdetection possible!
-[matroska,webm @ 0x7febab0064c0] EBML header parsing failed
-[concat @ 0x7febab005280] Impossible to open '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288531399390_000020.webm'
-[in#0 @ 0x7febab005080] Error opening input: Invalid data found when processing input
-Error opening input file workspace/860924031381890_1763288465/chunk_list_1763288559.txt.
+[matroska,webm @ 0x7fc5b4f06900] Format matroska,webm detected only with low score of 1, misdetection possible!
+[matroska,webm @ 0x7fc5b4f06900] EBML header parsing failed
+[in#0 @ 0x7fc5b4f06700] Error opening input: Invalid data found when processing input
+Error opening input file workspace/860924031381890_1763475085/detection_video_chunk_0000_temp.webm.
 Error opening input files: Invalid data found when processing input
 
-2025-11-16 18:22:39 INFO: [2025-11-16 18:22:39] 尝试重新编码，valid_chunks数量: 10
-[2025-11-16 18:22:08] 错误详情: Traceback (most recent call last):
-  File "/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/main.py", line 449, in websocket_live_video
-    current_file = valid_chunks[0]
-    ^^^^^^^^^^^^
-UnboundLocalError: cannot access local variable 'shutil' where it is not associated with a value
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/main.py", line 508, in websocket_live_video
-    shutil.copy2(valid_chunks[0], chunk_file_path)
-    ^^^^^^
-UnboundLocalError: cannot access local variable 'shutil' where it is not associated with a value
-
-[2025-11-16 18:22:11] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288531399390_000020.webm
-[2025-11-16 18:22:11] 视频块大小: 247151 字节
-[2025-11-16 18:22:11] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:22:14] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288534434902_000021.webm
-[2025-11-16 18:22:14] 视频块大小: 334223 字节
-[2025-11-16 18:22:14] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:22:17] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288537525644_000022.webm
-[2025-11-16 18:22:17] 视频块大小: 295016 字节
-[2025-11-16 18:22:17] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:22:20] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288540623926_000023.webm
-[2025-11-16 18:22:20] 视频块大小: 278881 字节
-[2025-11-16 18:22:20] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:22:23] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288543780485_000024.webm
-[2025-11-16 18:22:23] 视频块大小: 283655 字节
-[2025-11-16 18:22:23] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:22:26] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288546839001_000025.webm
-[2025-11-16 18:22:26] 视频块大小: 345812 字节
-[2025-11-16 18:22:26] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:22:29] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288549885556_000026.webm
-[2025-11-16 18:22:29] 视频块大小: 253135 字节
-[2025-11-16 18:22:29] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:22:32] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288552987753_000027.webm
-[2025-11-16 18:22:32] 视频块大小: 275069 字节
-[2025-11-16 18:22:32] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:22:36] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288556105126_000028.webm
-[2025-11-16 18:22:36] 视频块大小: 355184 字节
-[2025-11-16 18:22:36] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:22:39] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288559166843_000029.webm
-[2025-11-16 18:22:39] 视频块大小: 223951 字节
-[2025-11-16 18:22:39] 视频块已添加到缓冲区，等待合并处理
-[2025-11-16 18:22:39] 准备创建列表文件: workspace/860924031381890_1763288465/chunk_list_1763288559.txt
-[2025-11-16 18:22:39] workspace_path: workspace/860924031381890_1763288465
-[2025-11-16 18:22:39] 有效视频块数量: 10
-[2025-11-16 18:22:39] 有效存在的视频块数量: 10
-[2025-11-16 18:22:39] 列表文件已成功创建: workspace/860924031381890_1763288465/chunk_list_1763288559.txt
-[2025-11-16 18:22:39] 列表文件内容:
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288531399390_000020.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288534434902_000021.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288537525644_000022.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288540623926_000023.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288543780485_000024.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288546839001_000025.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288549885556_000026.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288552987753_000027.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288556105126_000028.webm'
-file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288559166843_000029.webm'
-
-[2025-11-16 18:22:39] 视频合并失败 (直接复制): ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
+2025-11-18 22:13:28 INFO: [2025-11-18 22:13:28] 使用临时webm文件作为输出: workspace/860924031381890_1763475085/detection_video_chunk_0000.webm
+2025-11-18 22:13:28 INFO: [2025-11-18 22:13:28] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+2025-11-18 22:13:28 INFO: [2025-11-18 22:13:28] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:13:28 INFO: [2025-11-18 22:13:28] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+2025-11-18 22:13:28 INFO: [2025-11-18 22:13:28] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+2025-11-18 22:13:29 INFO: The task 047a8d2a-20d7-426f-8796-d8e66228627f is  RUNNING
+2025-11-18 22:13:30 INFO: [2025-11-18 22:13:30] {
+    "task_id": "047a8d2a-20d7-426f-8796-d8e66228627f",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:13:29.161",
+    "scheduled_time": "2025-11-18 22:13:29.204",
+    "end_time": "2025-11-18 22:13:29.811",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+2025-11-18 22:13:30 INFO: [2025-11-18 22:13:30] transcription done!
+2025-11-18 22:13:33 INFO: [2025-11-18 22:13:33] 识别成功
+2025-11-18 22:13:33 INFO: [2025-11-18 22:13:33] speech_result: {"status_code": 200, "request_id": "824b0ec4a4684d19b0e5ad7bb5d191c2", "code": "", "message": "", "output": null, "usage": null}
+2025-11-18 22:13:33 INFO: [2025-11-18 22:13:33] full_result: None
+2025-11-18 22:13:33 INFO: [2025-11-18 22:13:33] 未找到识别结果
+2025-11-18 22:13:35 INFO: [2025-11-18 22:13:35] 处理车号确认操作: 车号确认
+2025-11-18 22:13:42 INFO: [2025-11-18 22:13:42] 处理防遛确认操作: 铁鞋设置
+[2025-11-18 22:13:00] {
+    "task_id": "8ffb3038-c9fb-46f8-9556-6375319f796d",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:12:58.918",
+    "scheduled_time": "2025-11-18 22:12:58.961",
+    "end_time": "2025-11-18 22:12:59.667",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+[2025-11-18 22:13:00] transcription done!
+[2025-11-18 22:13:02] 识别成功
+[2025-11-18 22:13:02] speech_result: {"status_code": 200, "request_id": "b9412f06adeb42cfa31193b6a074d846", "code": "", "message": "", "output": null, "usage": null}
+[2025-11-18 22:13:02] full_result: None
+[2025-11-18 22:13:02] 未找到识别结果
+[2025-11-18 22:13:06] 处理车号确认操作: 车号确认
+[2025-11-18 22:13:08] 处理防遛确认操作: 铁鞋设置
+[2025-11-18 22:13:11] 处理防遛确认操作: 手闸拧紧
+[2025-11-18 22:13:13] 处理撤遛确认操作: 铁鞋撤除
+[2025-11-18 22:13:16] 处理撤遛确认操作: 手闸松开
+[2025-11-18 22:13:16] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:13:16] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475196824233_000009.webm
+[2025-11-18 22:13:16] 视频块大小: 2449194 字节
+[2025-11-18 22:13:16] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:13:18] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475198370474_000010.webm
+[2025-11-18 22:13:18] 视频块大小: 2541966 字节
+[2025-11-18 22:13:18] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:13:28] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475208457551_000011.webm
+[2025-11-18 22:13:28] 视频块大小: 2420697 字节
+[2025-11-18 22:13:28] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:13:28] 二进制合并完成: 7411857 -> 7411857 bytes
+[2025-11-18 22:13:28] 开始转换webm到最终mp4格式...
+[2025-11-18 22:13:28] 转换失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
   built with Apple clang version 16.0.0 (clang-1600.0.26.6)
   configuration: --prefix=/usr/local/Cellar/ffmpeg/8.0_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox
   libavutil      60.  8.100 / 60.  8.100
@@ -466,15 +475,133 @@ file '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/works
   libavfilter    11.  4.100 / 11.  4.100
   libswscale      9.  1.100 /  9.  1.100
   libswresample   6.  1.100 /  6.  1.100
-[matroska,webm @ 0x7febab0064c0] Format matroska,webm detected only with low score of 1, misdetection possible!
-[matroska,webm @ 0x7febab0064c0] EBML header parsing failed
-[concat @ 0x7febab005280] Impossible to open '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288531399390_000020.webm'
-[in#0 @ 0x7febab005080] Error opening input: Invalid data found when processing input
-Error opening input file workspace/860924031381890_1763288465/chunk_list_1763288559.txt.
+[matroska,webm @ 0x7fc5b4f06900] Format matroska,webm detected only with low score of 1, misdetection possible!
+[matroska,webm @ 0x7fc5b4f06900] EBML header parsing failed
+[in#0 @ 0x7fc5b4f06700] Error opening input: Invalid data found when processing input
+Error opening input file workspace/860924031381890_1763475085/detection_video_chunk_0000_temp.webm.
 Error opening input files: Invalid data found when processing input
 
-[2025-11-16 18:22:39] 尝试重新编码，valid_chunks数量: 10
-2025-11-16 18:22:39 INFO: [2025-11-16 18:22:39] 视频重新编码失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
+[2025-11-18 22:13:28] 使用临时webm文件作为输出: workspace/860924031381890_1763475085/detection_video_chunk_0000.webm
+[2025-11-18 22:13:28] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+[2025-11-18 22:13:28] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:13:28] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+[2025-11-18 22:13:28] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+[2025-11-18 22:13:30] {
+    "task_id": "047a8d2a-20d7-426f-8796-d8e66228627f",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:13:29.161",
+    "scheduled_time": "2025-11-18 22:13:29.204",
+    "end_time": "2025-11-18 22:13:29.811",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+[2025-11-18 22:13:30] transcription done!
+[2025-11-18 22:13:33] 识别成功
+[2025-11-18 22:13:33] speech_result: {"status_code": 200, "request_id": "824b0ec4a4684d19b0e5ad7bb5d191c2", "code": "", "message": "", "output": null, "usage": null}
+[2025-11-18 22:13:33] full_result: None
+[2025-11-18 22:13:33] 未找到识别结果
+[2025-11-18 22:13:35] 处理车号确认操作: 车号确认
+[2025-11-18 22:13:37] vehicle response: {"status_code": 200, "request_id": "7d177b23-03e0-4856-b224-1a42070e643d", "code": "", "message": "", "output": {"text": null, "finish_reason": null, "choices": [{"finish_reason": "stop", "message": {"role": "assistant", "content": [{"text": "未识别"}]}}], "audio": null}, "usage": {"input_tokens": 2079, "output_tokens": 3, "characters": 0, "image_tokens": 2042, "input_tokens_details": {"image_tokens": 2042, "text_tokens": 37}, "output_tokens_details": {"text_tokens": 3}, "total_tokens": 2082}}
+[2025-11-18 22:13:40] vehicle response: {"status_code": 200, "request_id": "04077e88-d8ec-4c81-ab46-f2bff2a88c30", "code": "", "message": "", "output": {"text": null, "finish_reason": null, "choices": [{"finish_reason": "stop", "message": {"role": "assistant", "content": [{"text": "000000 860924031381890"}]}}], "audio": null}, "usage": {"input_tokens": 2079, "output_tokens": 23, "characters": 0, "image_tokens": 2042, "input_tokens_details": {"image_tokens": 2042, "text_tokens": 37}, "output_tokens_details": {"text_tokens": 23}, "total_tokens": 2102}}
+[2025-11-18 22:13:42] 处理防遛确认操作: 铁鞋设置
+[2025-11-18 22:13:42] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_26.38.jpg
+[2025-11-18 22:13:42] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_27.38.jpg
+[2025-11-18 22:13:42] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_28.38.jpg
+[2025-11-18 22:13:42] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_29.38.jpg
+[2025-11-18 22:13:42] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_30.38.jpg
+[2025-11-18 22:13:42] 处理图像时出错: 'Conv' object has no attribute 'bn'
+[2025-11-18 22:13:42] 处理图像 workspace/860924031381890_1763475085/frame_28.38.jpg 耗时: 0.23秒
+[2025-11-18 22:13:42] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_31.38.jpg
+
+Ultralytics 8.3.203 🚀 Python-3.11.9 torch-2.2.2 MPS (Intel Core i7-9750H 2.60GHz)
+2025-11-18 22:13:43 INFO: [2025-11-18 22:13:43] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475223140936_000012.webm
+2025-11-18 22:13:43 INFO: [2025-11-18 22:13:43] 视频块大小: 2599110 字节
+2025-11-18 22:13:43 INFO: [2025-11-18 22:13:43] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:13:42] 处理图像时出错: 'Conv' object has no attribute 'bn'
+[2025-11-18 22:13:42] 处理图像 workspace/860924031381890_1763475085/frame_29.38.jpg 耗时: 0.25秒
+[2025-11-18 22:13:42] 处理图像时出错: 'Conv' object has no attribute 'bn'
+[2025-11-18 22:13:42] 处理图像 workspace/860924031381890_1763475085/frame_26.38.jpg 耗时: 0.26秒
+[2025-11-18 22:13:42] 处理图像时出错: 'Conv' object has no attribute 'bn'
+[2025-11-18 22:13:42] 处理图像 workspace/860924031381890_1763475085/frame_27.38.jpg 耗时: 0.26秒
+[2025-11-18 22:13:43] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475223140936_000012.webm
+[2025-11-18 22:13:43] 视频块大小: 2599110 字节
+[2025-11-18 22:13:43] 视频块已添加到缓冲区，等待合并处理
+YOLO11n summary (fused): 100 layers, 2,583,322 parameters, 0 gradients, 6.3 GFLOPs
+
+Ultralytics 8.3.203 🚀 Python-3.11.9 torch-2.2.2 MPS (Intel Core i7-9750H 2.60GHz)
+YOLO11n summary (fused): 100 layers, 2,583,322 parameters, 0 gradients, 6.3 GFLOPs
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_31.38.jpg: 384x640 (no detections), 770.5ms
+Speed: 26.6ms preprocess, 770.5ms inference, 91.5ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:13:46] 未检测到物体
+[2025-11-18 22:13:46] 处理图像 workspace/860924031381890_1763475085/frame_31.38.jpg 耗时: 3.32秒
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_30.38.jpg: 384x640 (no detections), 39.5ms
+Speed: 4.6ms preprocess, 39.5ms inference, 3.1ms postprocess per image at shape (1, 3, 384, 640)
+2025-11-18 22:13:49 INFO: [2025-11-18 22:13:49] 处理防遛确认操作: 手闸拧紧
+[2025-11-18 22:13:46] 未检测到物体
+[2025-11-18 22:13:46] 处理图像 workspace/860924031381890_1763475085/frame_30.38.jpg 耗时: 3.61秒
+[2025-11-18 22:13:49] 处理防遛确认操作: 手闸拧紧
+[2025-11-18 22:13:49] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_26.38.jpg
+
+[2025-11-18 22:13:49] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_27.38.jpg
+[2025-11-18 22:13:49] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_28.38.jpg
+[2025-11-18 22:13:49] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_29.38.jpg
+[2025-11-18 22:13:49] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_30.38.jpg
+
+
+
+
+2025-11-18 22:13:49 INFO: [2025-11-18 22:13:49] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475229707938_000013.webm
+2025-11-18 22:13:49 INFO: [2025-11-18 22:13:49] 视频块大小: 2026826 字节
+2025-11-18 22:13:49 INFO: [2025-11-18 22:13:49] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:13:49] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475229707938_000013.webm
+[2025-11-18 22:13:49] 视频块大小: 2026826 字节
+[2025-11-18 22:13:49] 视频块已添加到缓冲区，等待合并处理
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_26.38.jpg: 384x640 (no detections), 39.2ms
+Speed: 4.5ms preprocess, 39.2ms inference, 2.5ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:13:49] 未检测到物体
+[2025-11-18 22:13:49] 处理图像 workspace/860924031381890_1763475085/frame_26.38.jpg 耗时: 0.06秒
+[2025-11-18 22:13:49] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_31.38.jpg
+
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_27.38.jpg: 384x640 (no detections), 38.2ms
+Speed: 5.5ms preprocess, 38.2ms inference, 10.2ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:13:49] 未检测到物体
+[2025-11-18 22:13:49] 处理图像 workspace/860924031381890_1763475085/frame_27.38.jpg 耗时: 0.13秒
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_28.38.jpg: 384x640 (no detections), 36.7ms
+Speed: 4.4ms preprocess, 36.7ms inference, 2.8ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:13:49] 未检测到物体
+[2025-11-18 22:13:49] 处理图像 workspace/860924031381890_1763475085/frame_28.38.jpg 耗时: 0.18秒
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_29.38.jpg: 384x640 (no detections), 35.4ms
+Speed: 4.3ms preprocess, 35.4ms inference, 2.5ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:13:49] 未检测到物体
+[2025-11-18 22:13:49] 处理图像 workspace/860924031381890_1763475085/frame_29.38.jpg 耗时: 0.24秒
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_30.38.jpg: 384x640 (no detections), 34.6ms
+Speed: 4.5ms preprocess, 34.6ms inference, 2.5ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:13:49] 未检测到物体
+[2025-11-18 22:13:49] 处理图像 workspace/860924031381890_1763475085/frame_30.38.jpg 耗时: 0.29秒
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_31.38.jpg: 384x640 (no detections), 36.1ms
+Speed: 5.1ms preprocess, 36.1ms inference, 2.8ms postprocess per image at shape (1, 3, 384, 640)
+2025-11-18 22:13:52 INFO: [2025-11-18 22:13:52] 处理撤遛确认操作: 铁鞋撤除
+2025-11-18 22:13:55 INFO: [2025-11-18 22:13:55] 处理撤遛确认操作: 手闸松开
+2025-11-18 22:13:55 INFO: [2025-11-18 22:13:55] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:13:58 INFO: [2025-11-18 22:13:58] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475238746916_000014.webm
+2025-11-18 22:13:58 INFO: [2025-11-18 22:13:58] 视频块大小: 2491844 字节
+2025-11-18 22:13:58 INFO: [2025-11-18 22:13:58] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:13:58 INFO: [2025-11-18 22:13:58] 二进制合并完成: 7117780 -> 7117780 bytes
+2025-11-18 22:13:58 INFO: [2025-11-18 22:13:58] 开始转换webm到最终mp4格式...
+2025-11-18 22:13:58 INFO: [2025-11-18 22:13:58] 转换失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
   built with Apple clang version 16.0.0 (clang-1600.0.26.6)
   configuration: --prefix=/usr/local/Cellar/ffmpeg/8.0_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox
   libavutil      60.  8.100 / 60.  8.100
@@ -484,38 +611,699 @@ Error opening input files: Invalid data found when processing input
   libavfilter    11.  4.100 / 11.  4.100
   libswscale      9.  1.100 /  9.  1.100
   libswresample   6.  1.100 /  6.  1.100
-[matroska,webm @ 0x7f9757f071c0] Format matroska,webm detected only with low score of 1, misdetection possible!
-[matroska,webm @ 0x7f9757f071c0] EBML header parsing failed
-[concat @ 0x7f9757f05f80] Impossible to open '/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763288465/tmp/video_chunk_1763288531399390_000020.webm'
-[in#0 @ 0x7f9757f05d80] Error opening input: Invalid data found when processing input
-Error opening input file workspace/860924031381890_1763288465/chunk_list_1763288559.txt.
+[matroska,webm @ 0x7fc39bf06900] Format matroska,webm detected only with low score of 1, misdetection possible!
+[matroska,webm @ 0x7fc39bf06900] EBML header parsing failed
+[in#0 @ 0x7fc39bf06700] Error opening input: Invalid data found when processing input
+Error opening input file workspace/860924031381890_1763475085/detection_video_chunk_0000_temp.webm.
 Error opening input files: Invalid data found when processing input
 
-2025-11-16 18:22:39 INFO: [2025-11-16 18:22:39] 尝试逐步合并视频块...
-2025-11-16 18:22:39 INFO: [2025-11-16 18:22:39] 逐步合并过程中出现异常: cannot access local variable 'shutil' where it is not associated with a value
-2025-11-16 18:22:39 INFO: [2025-11-16 18:22:39] 合并视频块时出错: cannot access local variable 'shutil' where it is not associated with a value
-2025-11-16 18:22:39 INFO: [2025-11-16 18:22:39] 错误详情: Traceback (most recent call last):
-  File "/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/main.py", line 449, in websocket_live_video
-    current_file = valid_chunks[0]
-    ^^^^^^^^^^^^
-UnboundLocalError: cannot access local variable 'shutil' where it is not associated with a value
+2025-11-18 22:13:58 INFO: [2025-11-18 22:13:58] 使用临时webm文件作为输出: workspace/860924031381890_1763475085/detection_video_chunk_0000.webm
+2025-11-18 22:13:58 INFO: [2025-11-18 22:13:58] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+2025-11-18 22:13:58 INFO: [2025-11-18 22:13:58] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:13:59 INFO: [2025-11-18 22:13:59] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+2025-11-18 22:13:59 INFO: [2025-11-18 22:13:59] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+2025-11-18 22:13:59 INFO: The task 273ad767-3794-4177-8bd7-2f1529d15f8f is  RUNNING
+2025-11-18 22:14:00 INFO: [2025-11-18 22:14:00] {
+    "task_id": "273ad767-3794-4177-8bd7-2f1529d15f8f",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:13:59.461",
+    "scheduled_time": "2025-11-18 22:13:59.501",
+    "end_time": "2025-11-18 22:14:00.133",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+2025-11-18 22:14:00 INFO: [2025-11-18 22:14:00] transcription done!
+2025-11-18 22:14:03 INFO: [2025-11-18 22:14:03] 识别成功
+2025-11-18 22:14:03 INFO: [2025-11-18 22:14:03] speech_result: {"status_code": 200, "request_id": "78d470770aeb422bbaad15fd6c1cfbad", "code": "", "message": "", "output": null, "usage": null}
+2025-11-18 22:14:03 INFO: [2025-11-18 22:14:03] full_result: None
+2025-11-18 22:14:03 INFO: [2025-11-18 22:14:03] 未找到识别结果
+2025-11-18 22:14:06 INFO: [2025-11-18 22:14:06] 处理车号确认操作: 车号确认
+2025-11-18 22:14:09 INFO: [2025-11-18 22:14:09] 处理防遛确认操作: 铁鞋设置
+2025-11-18 22:14:12 INFO: [2025-11-18 22:14:12] 处理防遛确认操作: 手闸拧紧
+2025-11-18 22:14:14 INFO: [2025-11-18 22:14:14] 处理撤遛确认操作: 铁鞋撤除
+2025-11-18 22:14:17 INFO: [2025-11-18 22:14:17] 处理撤遛确认操作: 手闸松开
+2025-11-18 22:14:17 INFO: [2025-11-18 22:14:17] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:14:17 INFO: [2025-11-18 22:14:17] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475257569402_000015.webm
+2025-11-18 22:14:17 INFO: [2025-11-18 22:14:17] 视频块大小: 2735873 字节
+2025-11-18 22:14:17 INFO: [2025-11-18 22:14:17] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:14:18 INFO: [2025-11-18 22:14:18] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475258849356_000016.webm
+2025-11-18 22:14:18 INFO: [2025-11-18 22:14:18] 视频块大小: 2187940 字节
+2025-11-18 22:14:18 INFO: [2025-11-18 22:14:18] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:14:28 INFO: [2025-11-18 22:14:28] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475268868139_000017.webm
+2025-11-18 22:14:28 INFO: [2025-11-18 22:14:28] 视频块大小: 2536460 字节
+2025-11-18 22:14:28 INFO: [2025-11-18 22:14:28] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:14:28 INFO: [2025-11-18 22:14:28] 二进制合并完成: 7460273 -> 7460273 bytes
+2025-11-18 22:14:28 INFO: [2025-11-18 22:14:28] 开始转换webm到最终mp4格式...
+2025-11-18 22:14:29 INFO: [2025-11-18 22:14:29] 转换失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
+  built with Apple clang version 16.0.0 (clang-1600.0.26.6)
+  configuration: --prefix=/usr/local/Cellar/ffmpeg/8.0_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+[matroska,webm @ 0x7fc1ebb04300] Format matroska,webm detected only with low score of 1, misdetection possible!
+[matroska,webm @ 0x7fc1ebb04300] EBML header parsing failed
+[in#0 @ 0x7fc1ebb04100] Error opening input: Invalid data found when processing input
+Error opening input file workspace/860924031381890_1763475085/detection_video_chunk_0000_temp.webm.
+Error opening input files: Invalid data found when processing input
 
-During handling of the above exception, another exception occurred:
+2025-11-18 22:14:29 INFO: [2025-11-18 22:14:29] 使用临时webm文件作为输出: workspace/860924031381890_1763475085/detection_video_chunk_0000.webm
+2025-11-18 22:14:29 INFO: [2025-11-18 22:14:29] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+2025-11-18 22:14:29 INFO: [2025-11-18 22:14:29] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:13:50] 未检测到物体
+[2025-11-18 22:13:50] 处理图像 workspace/860924031381890_1763475085/frame_31.38.jpg 耗时: 0.28秒
+[2025-11-18 22:13:52] 处理撤遛确认操作: 铁鞋撤除
+[2025-11-18 22:13:55] 处理撤遛确认操作: 手闸松开
+[2025-11-18 22:13:55] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:13:58] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475238746916_000014.webm
+[2025-11-18 22:13:58] 视频块大小: 2491844 字节
+[2025-11-18 22:13:58] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:13:58] 二进制合并完成: 7117780 -> 7117780 bytes
+[2025-11-18 22:13:58] 开始转换webm到最终mp4格式...
+[2025-11-18 22:13:58] 转换失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
+  built with Apple clang version 16.0.0 (clang-1600.0.26.6)
+  configuration: --prefix=/usr/local/Cellar/ffmpeg/8.0_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+[matroska,webm @ 0x7fc39bf06900] Format matroska,webm detected only with low score of 1, misdetection possible!
+[matroska,webm @ 0x7fc39bf06900] EBML header parsing failed
+[in#0 @ 0x7fc39bf06700] Error opening input: Invalid data found when processing input
+Error opening input file workspace/860924031381890_1763475085/detection_video_chunk_0000_temp.webm.
+Error opening input files: Invalid data found when processing input
 
-Traceback (most recent call last):
-  File "/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/main.py", line 508, in websocket_live_video
-    shutil.copy2(valid_chunks[0], chunk_file_path)
-    ^^^^^^
-UnboundLocalError: cannot access local variable 'shutil' where it is not associated with a value
+[2025-11-18 22:13:58] 使用临时webm文件作为输出: workspace/860924031381890_1763475085/detection_video_chunk_0000.webm
+[2025-11-18 22:13:58] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+[2025-11-18 22:13:58] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:13:59] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+[2025-11-18 22:13:59] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+[2025-11-18 22:14:00] {
+    "task_id": "273ad767-3794-4177-8bd7-2f1529d15f8f",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:13:59.461",
+    "scheduled_time": "2025-11-18 22:13:59.501",
+    "end_time": "2025-11-18 22:14:00.133",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+[2025-11-18 22:14:00] transcription done!
+[2025-11-18 22:14:03] 识别成功
+[2025-11-18 22:14:03] speech_result: {"status_code": 200, "request_id": "78d470770aeb422bbaad15fd6c1cfbad", "code": "", "message": "", "output": null, "usage": null}
+[2025-11-18 22:14:03] full_result: None
+[2025-11-18 22:14:03] 未找到识别结果
+[2025-11-18 22:14:06] 处理车号确认操作: 车号确认
+[2025-11-18 22:14:09] 处理防遛确认操作: 铁鞋设置
+[2025-11-18 22:14:12] 处理防遛确认操作: 手闸拧紧
+[2025-11-18 22:14:14] 处理撤遛确认操作: 铁鞋撤除
+[2025-11-18 22:14:17] 处理撤遛确认操作: 手闸松开
+[2025-11-18 22:14:17] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:14:17] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475257569402_000015.webm
+[2025-11-18 22:14:17] 视频块大小: 2735873 字节
+[2025-11-18 22:14:17] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:14:18] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475258849356_000016.webm
+[2025-11-18 22:14:18] 视频块大小: 2187940 字节
+[2025-11-18 22:14:18] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:14:28] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475268868139_000017.webm
+[2025-11-18 22:14:28] 视频块大小: 2536460 字节
+[2025-11-18 22:14:28] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:14:28] 二进制合并完成: 7460273 -> 7460273 bytes
+[2025-11-18 22:14:28] 开始转换webm到最终mp4格式...
+[2025-11-18 22:14:29] 转换失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
+  built with Apple clang version 16.0.0 (clang-1600.0.26.6)
+  configuration: --prefix=/usr/local/Cellar/ffmpeg/8.0_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+[matroska,webm @ 0x7fc1ebb04300] Format matroska,webm detected only with low score of 1, misdetection possible!
+[matroska,webm @ 0x7fc1ebb04300] EBML header parsing failed
+[in#0 @ 0x7fc1ebb04100] Error opening input: Invalid data found when processing input
+Error opening input file workspace/860924031381890_1763475085/detection_video_chunk_0000_temp.webm.
+Error opening input files: Invalid data found when processing input
 
-2025-11-16 18:22:42 INFO: [2025-11-16 18:22:42] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288562199290_000030.webm
-2025-11-16 18:22:42 INFO: [2025-11-16 18:22:42] 视频块大小: 257367 字节
-2025-11-16 18:22:42 INFO: [2025-11-16 18:22:42] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:22:45 INFO: [2025-11-16 18:22:45] 接收视频块，临时文件: workspace/860924031381890_1763288465/tmp/video_chunk_1763288565320674_000031.webm
-2025-11-16 18:22:45 INFO: [2025-11-16 18:22:45] 视频块大小: 272274 字节
-2025-11-16 18:22:45 INFO: [2025-11-16 18:22:45] 视频块已添加到缓冲区，等待合并处理
-2025-11-16 18:22:46 INFO: [2025-11-16 18:22:46] 收到停止检测信号，设备ID: 860924031381890
-2025-11-16 18:22:46 INFO: [2025-11-16 18:22:46] 等待视频帧写入完成，当前帧数: 0
-2025-11-16 18:22:46 INFO: [2025-11-16 18:22:46] 实时视频WebSocket连接已关闭，设备ID: 860924031381890
-2025-11-16 18:22:47 INFO:     connection closed
-2025-11-16 18:22:47 INFO: connection closed
+[2025-11-18 22:14:29] 使用临时webm文件作为输出: workspace/860924031381890_1763475085/detection_video_chunk_0000.webm
+[2025-11-18 22:14:29] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+[2025-11-18 22:14:29] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:14:29 INFO: [2025-11-18 22:14:29] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+2025-11-18 22:14:29 INFO: [2025-11-18 22:14:29] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+2025-11-18 22:14:29 INFO: The task cdea305c-d3cc-4131-9759-256346cdaea0 is  RUNNING
+2025-11-18 22:14:31 INFO: [2025-11-18 22:14:31] {
+    "task_id": "cdea305c-d3cc-4131-9759-256346cdaea0",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:14:29.600",
+    "scheduled_time": "2025-11-18 22:14:29.627",
+    "end_time": "2025-11-18 22:14:30.192",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+2025-11-18 22:14:31 INFO: [2025-11-18 22:14:31] transcription done!
+2025-11-18 22:14:33 INFO: [2025-11-18 22:14:33] 识别成功
+2025-11-18 22:14:33 INFO: [2025-11-18 22:14:33] speech_result: {"status_code": 200, "request_id": "af0d44ce4a1c4bdb968d9b8d0c424684", "code": "", "message": "", "output": null, "usage": null}
+2025-11-18 22:14:33 INFO: [2025-11-18 22:14:33] full_result: None
+2025-11-18 22:14:33 INFO: [2025-11-18 22:14:33] 未找到识别结果
+2025-11-18 22:14:36 INFO: [2025-11-18 22:14:36] 处理车号确认操作: 车号确认
+2025-11-18 22:14:38 INFO: [2025-11-18 22:14:38] 处理防遛确认操作: 铁鞋设置
+2025-11-18 22:14:41 INFO: [2025-11-18 22:14:41] 处理防遛确认操作: 手闸拧紧
+2025-11-18 22:14:44 INFO: [2025-11-18 22:14:44] 处理撤遛确认操作: 铁鞋撤除
+2025-11-18 22:14:47 INFO: [2025-11-18 22:14:47] 处理撤遛确认操作: 手闸松开
+2025-11-18 22:14:47 INFO: [2025-11-18 22:14:47] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:14:47 INFO: [2025-11-18 22:14:47] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475287068394_000018.webm
+2025-11-18 22:14:47 INFO: [2025-11-18 22:14:47] 视频块大小: 2464863 字节
+2025-11-18 22:14:47 INFO: [2025-11-18 22:14:47] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:14:48 INFO: [2025-11-18 22:14:48] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475288970664_000019.webm
+2025-11-18 22:14:48 INFO: [2025-11-18 22:14:48] 视频块大小: 2494318 字节
+2025-11-18 22:14:48 INFO: [2025-11-18 22:14:48] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:14:59 INFO: [2025-11-18 22:14:59] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475299058094_000020.webm
+2025-11-18 22:14:59 INFO: [2025-11-18 22:14:59] 视频块大小: 2456123 字节
+2025-11-18 22:14:59 INFO: [2025-11-18 22:14:59] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:14:59 INFO: [2025-11-18 22:14:59] 二进制合并完成: 7415304 -> 7415304 bytes
+2025-11-18 22:14:59 INFO: [2025-11-18 22:14:59] 开始转换webm到最终mp4格式...
+2025-11-18 22:14:59 INFO: [2025-11-18 22:14:59] 转换失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
+  built with Apple clang version 16.0.0 (clang-1600.0.26.6)
+  configuration: --prefix=/usr/local/Cellar/ffmpeg/8.0_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+[matroska,webm @ 0x7fe0e3805b80] Format matroska,webm detected only with low score of 1, misdetection possible!
+[matroska,webm @ 0x7fe0e3805b80] EBML header parsing failed
+[in#0 @ 0x7fe0e3805a40] Error opening input: Invalid data found when processing input
+Error opening input file workspace/860924031381890_1763475085/detection_video_chunk_0000_temp.webm.
+Error opening input files: Invalid data found when processing input
+
+2025-11-18 22:14:59 INFO: [2025-11-18 22:14:59] 使用临时webm文件作为输出: workspace/860924031381890_1763475085/detection_video_chunk_0000.webm
+2025-11-18 22:14:59 INFO: [2025-11-18 22:14:59] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+2025-11-18 22:14:59 INFO: [2025-11-18 22:14:59] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:14:59 INFO: [2025-11-18 22:14:59] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+2025-11-18 22:14:59 INFO: [2025-11-18 22:14:59] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+2025-11-18 22:15:00 INFO: The task 587581ee-c571-4134-b4d4-2c8702cf1c04 is  RUNNING
+2025-11-18 22:15:01 INFO: [2025-11-18 22:15:01] {
+    "task_id": "587581ee-c571-4134-b4d4-2c8702cf1c04",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:14:59.899",
+    "scheduled_time": "2025-11-18 22:14:59.918",
+    "end_time": "2025-11-18 22:15:00.525",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+2025-11-18 22:15:01 INFO: [2025-11-18 22:15:01] transcription done!
+2025-11-18 22:15:04 INFO: [2025-11-18 22:15:04] 识别成功
+2025-11-18 22:15:04 INFO: [2025-11-18 22:15:04] speech_result: {"status_code": 200, "request_id": "4d36d7f75867414d853342997842cff1", "code": "", "message": "", "output": null, "usage": null}
+2025-11-18 22:15:04 INFO: [2025-11-18 22:15:04] full_result: None
+2025-11-18 22:15:04 INFO: [2025-11-18 22:15:04] 未找到识别结果
+2025-11-18 22:15:06 INFO: [2025-11-18 22:15:06] 处理车号确认操作: 车号确认
+[2025-11-18 22:14:29] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+[2025-11-18 22:14:29] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+[2025-11-18 22:14:31] {
+    "task_id": "cdea305c-d3cc-4131-9759-256346cdaea0",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:14:29.600",
+    "scheduled_time": "2025-11-18 22:14:29.627",
+    "end_time": "2025-11-18 22:14:30.192",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+[2025-11-18 22:14:31] transcription done!
+[2025-11-18 22:14:33] 识别成功
+[2025-11-18 22:14:33] speech_result: {"status_code": 200, "request_id": "af0d44ce4a1c4bdb968d9b8d0c424684", "code": "", "message": "", "output": null, "usage": null}
+[2025-11-18 22:14:33] full_result: None
+[2025-11-18 22:14:33] 未找到识别结果
+[2025-11-18 22:14:36] 处理车号确认操作: 车号确认
+[2025-11-18 22:14:38] 处理防遛确认操作: 铁鞋设置
+[2025-11-18 22:14:41] 处理防遛确认操作: 手闸拧紧
+[2025-11-18 22:14:44] 处理撤遛确认操作: 铁鞋撤除
+[2025-11-18 22:14:47] 处理撤遛确认操作: 手闸松开
+[2025-11-18 22:14:47] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:14:47] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475287068394_000018.webm
+[2025-11-18 22:14:47] 视频块大小: 2464863 字节
+[2025-11-18 22:14:47] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:14:48] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475288970664_000019.webm
+[2025-11-18 22:14:48] 视频块大小: 2494318 字节
+[2025-11-18 22:14:48] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:14:59] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475299058094_000020.webm
+[2025-11-18 22:14:59] 视频块大小: 2456123 字节
+[2025-11-18 22:14:59] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:14:59] 二进制合并完成: 7415304 -> 7415304 bytes
+[2025-11-18 22:14:59] 开始转换webm到最终mp4格式...
+[2025-11-18 22:14:59] 转换失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
+  built with Apple clang version 16.0.0 (clang-1600.0.26.6)
+  configuration: --prefix=/usr/local/Cellar/ffmpeg/8.0_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+[matroska,webm @ 0x7fe0e3805b80] Format matroska,webm detected only with low score of 1, misdetection possible!
+[matroska,webm @ 0x7fe0e3805b80] EBML header parsing failed
+[in#0 @ 0x7fe0e3805a40] Error opening input: Invalid data found when processing input
+Error opening input file workspace/860924031381890_1763475085/detection_video_chunk_0000_temp.webm.
+Error opening input files: Invalid data found when processing input
+
+[2025-11-18 22:14:59] 使用临时webm文件作为输出: workspace/860924031381890_1763475085/detection_video_chunk_0000.webm
+[2025-11-18 22:14:59] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+[2025-11-18 22:14:59] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:14:59] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+[2025-11-18 22:14:59] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+[2025-11-18 22:15:01] {
+    "task_id": "587581ee-c571-4134-b4d4-2c8702cf1c04",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:14:59.899",
+    "scheduled_time": "2025-11-18 22:14:59.918",
+    "end_time": "2025-11-18 22:15:00.525",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+[2025-11-18 22:15:01] transcription done!
+[2025-11-18 22:15:04] 识别成功
+[2025-11-18 22:15:04] speech_result: {"status_code": 200, "request_id": "4d36d7f75867414d853342997842cff1", "code": "", "message": "", "output": null, "usage": null}
+[2025-11-18 22:15:04] full_result: None
+[2025-11-18 22:15:04] 未找到识别结果
+[2025-11-18 22:15:06] 处理车号确认操作: 车号确认
+[2025-11-18 22:15:08] vehicle response: {"status_code": 200, "request_id": "b8ac4cc6-c266-4a4c-aabf-c544ed1c38bd", "code": "", "message": "", "output": {"text": null, "finish_reason": null, "choices": [{"finish_reason": "stop", "message": {"role": "assistant", "content": [{"text": "未识别"}]}}], "audio": null}, "usage": {"input_tokens": 2079, "output_tokens": 3, "characters": 0, "image_tokens": 2042, "input_tokens_details": {"image_tokens": 2042, "text_tokens": 37}, "output_tokens_details": {"text_tokens": 3}, "total_tokens": 2082}}
+[2025-11-18 22:15:11] vehicle response: {"status_code": 200, "request_id": "f2df2f02-0e47-46d6-8793-7972ea549d6a", "code": "", "message": "", "output": {"text": null, "finish_reason": null, "choices": [{"finish_reason": "stop", "message": {"role": "assistant", "content": [{"text": "未识别"}]}}], "audio": null}, "usage": {"input_tokens": 2079, "output_tokens": 3, "characters": 0, "image_tokens": 2042, "input_tokens_details": {"image_tokens": 2042, "text_tokens": 37}, "output_tokens_details": {"text_tokens": 3}, "total_tokens": 2082}}
+[2025-11-18 22:15:13] vehicle response: {"status_code": 200, "request_id": "8679a1df-7588-400b-bc73-a737cc95f9fb", "code": "", "message": "", "output": {"text": null, "finish_reason": null, "choices": [{"finish_reason": "stop", "message": {"role": "assistant", "content": [{"text": "000000 860924031381890"}]}}], "audio": null}, "usage": {"input_tokens": 2079, "output_tokens": 23, "characters": 0, "image_tokens": 2042, "input_tokens_details": {"image_tokens": 2042, "text_tokens": 37}, "output_tokens_details": {"text_tokens": 23}, "total_tokens": 2102}}
+2025-11-18 22:15:16 INFO: [2025-11-18 22:15:16] 处理防遛确认操作: 铁鞋设置
+[2025-11-18 22:15:16] 处理防遛确认操作: 铁鞋设置
+[2025-11-18 22:15:16] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_17.62.jpg
+
+[2025-11-18 22:15:16] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_18.62.jpg
+
+[2025-11-18 22:15:16] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_19.62.jpg
+
+[2025-11-18 22:15:16] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_20.62.jpg
+
+[2025-11-18 22:15:16] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_21.62.jpg
+
+2025-11-18 22:15:16 INFO: [2025-11-18 22:15:16] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475316178544_000021.webm
+2025-11-18 22:15:16 INFO: [2025-11-18 22:15:16] 视频块大小: 2369708 字节
+2025-11-18 22:15:16 INFO: [2025-11-18 22:15:16] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:15:16] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475316178544_000021.webm
+[2025-11-18 22:15:16] 视频块大小: 2369708 字节
+[2025-11-18 22:15:16] 视频块已添加到缓冲区，等待合并处理
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_17.62.jpg: 384x640 (no detections), 48.9ms
+Speed: 7.1ms preprocess, 48.9ms inference, 2.9ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:15:16] 未检测到物体
+[2025-11-18 22:15:16] 处理图像 workspace/860924031381890_1763475085/frame_17.62.jpg 耗时: 0.08秒
+[2025-11-18 22:15:16] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_22.62.jpg
+
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_18.62.jpg: 384x640 (no detections), 40.0ms
+Speed: 5.4ms preprocess, 40.0ms inference, 3.1ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:15:16] 未检测到物体
+[2025-11-18 22:15:16] 处理图像 workspace/860924031381890_1763475085/frame_18.62.jpg 耗时: 0.14秒
+[2025-11-18 22:15:16] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_23.62.jpg
+
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_19.62.jpg: 384x640 (no detections), 44.6ms
+Speed: 4.7ms preprocess, 44.6ms inference, 3.2ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:15:16] 未检测到物体
+[2025-11-18 22:15:16] 处理图像 workspace/860924031381890_1763475085/frame_19.62.jpg 耗时: 0.21秒
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_20.62.jpg: 384x640 (no detections), 46.3ms
+Speed: 4.7ms preprocess, 46.3ms inference, 3.0ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:15:16] 未检测到物体
+[2025-11-18 22:15:16] 处理图像 workspace/860924031381890_1763475085/frame_20.62.jpg 耗时: 0.28秒
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_21.62.jpg: 384x640 (no detections), 41.7ms
+Speed: 4.5ms preprocess, 41.7ms inference, 3.1ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:15:16] 未检测到物体
+[2025-11-18 22:15:16] 处理图像 workspace/860924031381890_1763475085/frame_21.62.jpg 耗时: 0.34秒
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_22.62.jpg: 384x640 (no detections), 41.1ms
+Speed: 4.6ms preprocess, 41.1ms inference, 3.1ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:15:16] 未检测到物体
+[2025-11-18 22:15:16] 处理图像 workspace/860924031381890_1763475085/frame_22.62.jpg 耗时: 0.33秒
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_23.62.jpg: 384x640 (no detections), 36.8ms
+Speed: 4.3ms preprocess, 36.8ms inference, 3.0ms postprocess per image at shape (1, 3, 384, 640)
+2025-11-18 22:15:19 INFO: [2025-11-18 22:15:19] 处理防遛确认操作: 手闸拧紧
+[2025-11-18 22:15:16] 未检测到物体
+[2025-11-18 22:15:16] 处理图像 workspace/860924031381890_1763475085/frame_23.62.jpg 耗时: 0.32秒
+[2025-11-18 22:15:19] 处理防遛确认操作: 手闸拧紧
+[2025-11-18 22:15:19] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_17.62.jpg
+
+[2025-11-18 22:15:19] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_18.62.jpg
+
+[2025-11-18 22:15:19] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_19.62.jpg
+
+[2025-11-18 22:15:19] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_20.62.jpg
+
+[2025-11-18 22:15:19] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_21.62.jpg
+
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_17.62.jpg: 384x640 (no detections), 37.3ms
+Speed: 4.7ms preprocess, 37.3ms inference, 2.6ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:15:19] 未检测到物体
+[2025-11-18 22:15:19] 处理图像 workspace/860924031381890_1763475085/frame_17.62.jpg 耗时: 0.06秒
+[2025-11-18 22:15:19] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_22.62.jpg
+
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_18.62.jpg: 384x640 (no detections), 48.3ms
+Speed: 4.3ms preprocess, 48.3ms inference, 2.8ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:15:19] 未检测到物体
+[2025-11-18 22:15:19] 处理图像 workspace/860924031381890_1763475085/frame_18.62.jpg 耗时: 0.12秒
+[2025-11-18 22:15:19] 调用防遛确认模型处理图像: workspace/860924031381890_1763475085/frame_23.62.jpg
+
+2025-11-18 22:15:19 INFO: [2025-11-18 22:15:19] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475319335300_000022.webm
+2025-11-18 22:15:19 INFO: [2025-11-18 22:15:19] 视频块大小: 2474968 字节
+2025-11-18 22:15:19 INFO: [2025-11-18 22:15:19] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:15:19] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475319335300_000022.webm
+[2025-11-18 22:15:19] 视频块大小: 2474968 字节
+[2025-11-18 22:15:19] 视频块已添加到缓冲区，等待合并处理
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_19.62.jpg: 384x640 (no detections), 43.4ms
+Speed: 11.0ms preprocess, 43.4ms inference, 7.1ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:15:19] 未检测到物体
+[2025-11-18 22:15:19] 处理图像 workspace/860924031381890_1763475085/frame_19.62.jpg 耗时: 0.20秒
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_20.62.jpg: 384x640 (no detections), 38.1ms
+Speed: 5.6ms preprocess, 38.1ms inference, 3.0ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:15:19] 未检测到物体
+[2025-11-18 22:15:19] 处理图像 workspace/860924031381890_1763475085/frame_20.62.jpg 耗时: 0.26秒
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_21.62.jpg: 384x640 (no detections), 38.5ms
+Speed: 4.5ms preprocess, 38.5ms inference, 3.3ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:15:19] 未检测到物体
+[2025-11-18 22:15:19] 处理图像 workspace/860924031381890_1763475085/frame_21.62.jpg 耗时: 0.32秒
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_22.62.jpg: 384x640 (no detections), 38.3ms
+Speed: 4.7ms preprocess, 38.3ms inference, 3.0ms postprocess per image at shape (1, 3, 384, 640)
+[2025-11-18 22:15:19] 未检测到物体
+[2025-11-18 22:15:19] 处理图像 workspace/860924031381890_1763475085/frame_22.62.jpg 耗时: 0.32秒
+image 1/1 /Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763475085/frame_23.62.jpg: 384x640 (no detections), 37.6ms
+Speed: 4.3ms preprocess, 37.6ms inference, 2.7ms postprocess per image at shape (1, 3, 384, 640)
+2025-11-18 22:15:22 INFO: [2025-11-18 22:15:22] 处理撤遛确认操作: 铁鞋撤除
+2025-11-18 22:15:24 INFO: [2025-11-18 22:15:24] 处理撤遛确认操作: 手闸松开
+2025-11-18 22:15:24 INFO: [2025-11-18 22:15:24] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:15:29 INFO: [2025-11-18 22:15:29] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475329411420_000023.webm
+2025-11-18 22:15:29 INFO: [2025-11-18 22:15:29] 视频块大小: 2352049 字节
+2025-11-18 22:15:29 INFO: [2025-11-18 22:15:29] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:15:29 INFO: [2025-11-18 22:15:29] 二进制合并完成: 7196725 -> 7196725 bytes
+2025-11-18 22:15:29 INFO: [2025-11-18 22:15:29] 开始转换webm到最终mp4格式...
+2025-11-18 22:15:29 INFO: [2025-11-18 22:15:29] 转换失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
+  built with Apple clang version 16.0.0 (clang-1600.0.26.6)
+  configuration: --prefix=/usr/local/Cellar/ffmpeg/8.0_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+[matroska,webm @ 0x7f9dcd005740] Format matroska,webm detected only with low score of 1, misdetection possible!
+[matroska,webm @ 0x7f9dcd005740] EBML header parsing failed
+[in#0 @ 0x7f9dcd005540] Error opening input: Invalid data found when processing input
+Error opening input file workspace/860924031381890_1763475085/detection_video_chunk_0000_temp.webm.
+Error opening input files: Invalid data found when processing input
+
+2025-11-18 22:15:29 INFO: [2025-11-18 22:15:29] 使用临时webm文件作为输出: workspace/860924031381890_1763475085/detection_video_chunk_0000.webm
+2025-11-18 22:15:29 INFO: [2025-11-18 22:15:29] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+2025-11-18 22:15:29 INFO: [2025-11-18 22:15:29] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:15:29 INFO: [2025-11-18 22:15:29] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+2025-11-18 22:15:29 INFO: [2025-11-18 22:15:29] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+2025-11-18 22:15:30 INFO: The task e8bed227-7d1a-49c5-a87a-a1e5053df584 is  RUNNING
+2025-11-18 22:15:31 INFO: [2025-11-18 22:15:31] {
+    "task_id": "e8bed227-7d1a-49c5-a87a-a1e5053df584",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:15:30.199",
+    "scheduled_time": "2025-11-18 22:15:30.225",
+    "end_time": "2025-11-18 22:15:30.857",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+2025-11-18 22:15:31 INFO: [2025-11-18 22:15:31] transcription done!
+2025-11-18 22:15:35 INFO: [2025-11-18 22:15:35] 识别成功
+2025-11-18 22:15:35 INFO: [2025-11-18 22:15:35] speech_result: {"status_code": 200, "request_id": "bc01c056108e439a9c804cc3d4bb977e", "code": "", "message": "", "output": null, "usage": null}
+2025-11-18 22:15:35 INFO: [2025-11-18 22:15:35] full_result: None
+2025-11-18 22:15:35 INFO: [2025-11-18 22:15:35] 未找到识别结果
+2025-11-18 22:15:38 INFO: [2025-11-18 22:15:38] 处理车号确认操作: 车号确认
+2025-11-18 22:15:41 INFO: [2025-11-18 22:15:41] 处理防遛确认操作: 铁鞋设置
+2025-11-18 22:15:44 INFO: [2025-11-18 22:15:44] 处理防遛确认操作: 手闸拧紧
+2025-11-18 22:15:47 INFO: [2025-11-18 22:15:47] 处理撤遛确认操作: 铁鞋撤除
+2025-11-18 22:15:50 INFO: [2025-11-18 22:15:50] 处理撤遛确认操作: 手闸松开
+2025-11-18 22:15:50 INFO: [2025-11-18 22:15:50] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:15:50 INFO: [2025-11-18 22:15:50] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475350029417_000024.webm
+2025-11-18 22:15:50 INFO: [2025-11-18 22:15:50] 视频块大小: 2547795 字节
+2025-11-18 22:15:50 INFO: [2025-11-18 22:15:50] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:15:50 INFO: [2025-11-18 22:15:50] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475350109687_000025.webm
+2025-11-18 22:15:50 INFO: [2025-11-18 22:15:50] 视频块大小: 2569274 字节
+2025-11-18 22:15:50 INFO: [2025-11-18 22:15:50] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:15:59 INFO: [2025-11-18 22:15:59] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475359644130_000026.webm
+2025-11-18 22:15:59 INFO: [2025-11-18 22:15:59] 视频块大小: 2483933 字节
+2025-11-18 22:15:59 INFO: [2025-11-18 22:15:59] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:15:59 INFO: [2025-11-18 22:15:59] 二进制合并完成: 7601002 -> 7601002 bytes
+2025-11-18 22:15:59 INFO: [2025-11-18 22:15:59] 开始转换webm到最终mp4格式...
+2025-11-18 22:15:59 INFO: [2025-11-18 22:15:59] 转换失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
+  built with Apple clang version 16.0.0 (clang-1600.0.26.6)
+  configuration: --prefix=/usr/local/Cellar/ffmpeg/8.0_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+[matroska,webm @ 0x7fc415904540] Format matroska,webm detected only with low score of 1, misdetection possible!
+[matroska,webm @ 0x7fc415904540] EBML header parsing failed
+[in#0 @ 0x7fc415904340] Error opening input: Invalid data found when processing input
+Error opening input file workspace/860924031381890_1763475085/detection_video_chunk_0000_temp.webm.
+Error opening input files: Invalid data found when processing input
+
+2025-11-18 22:15:59 INFO: [2025-11-18 22:15:59] 使用临时webm文件作为输出: workspace/860924031381890_1763475085/detection_video_chunk_0000.webm
+2025-11-18 22:15:59 INFO: [2025-11-18 22:15:59] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+2025-11-18 22:15:59 INFO: [2025-11-18 22:15:59] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:15:19] 未检测到物体
+[2025-11-18 22:15:19] 处理图像 workspace/860924031381890_1763475085/frame_23.62.jpg 耗时: 0.31秒
+[2025-11-18 22:15:22] 处理撤遛确认操作: 铁鞋撤除
+[2025-11-18 22:15:24] 处理撤遛确认操作: 手闸松开
+[2025-11-18 22:15:24] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:15:29] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475329411420_000023.webm
+[2025-11-18 22:15:29] 视频块大小: 2352049 字节
+[2025-11-18 22:15:29] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:15:29] 二进制合并完成: 7196725 -> 7196725 bytes
+[2025-11-18 22:15:29] 开始转换webm到最终mp4格式...
+[2025-11-18 22:15:29] 转换失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
+  built with Apple clang version 16.0.0 (clang-1600.0.26.6)
+  configuration: --prefix=/usr/local/Cellar/ffmpeg/8.0_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+[matroska,webm @ 0x7f9dcd005740] Format matroska,webm detected only with low score of 1, misdetection possible!
+[matroska,webm @ 0x7f9dcd005740] EBML header parsing failed
+[in#0 @ 0x7f9dcd005540] Error opening input: Invalid data found when processing input
+Error opening input file workspace/860924031381890_1763475085/detection_video_chunk_0000_temp.webm.
+Error opening input files: Invalid data found when processing input
+
+[2025-11-18 22:15:29] 使用临时webm文件作为输出: workspace/860924031381890_1763475085/detection_video_chunk_0000.webm
+[2025-11-18 22:15:29] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+[2025-11-18 22:15:29] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:15:29] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+[2025-11-18 22:15:29] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+[2025-11-18 22:15:31] {
+    "task_id": "e8bed227-7d1a-49c5-a87a-a1e5053df584",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:15:30.199",
+    "scheduled_time": "2025-11-18 22:15:30.225",
+    "end_time": "2025-11-18 22:15:30.857",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+[2025-11-18 22:15:31] transcription done!
+[2025-11-18 22:15:35] 识别成功
+[2025-11-18 22:15:35] speech_result: {"status_code": 200, "request_id": "bc01c056108e439a9c804cc3d4bb977e", "code": "", "message": "", "output": null, "usage": null}
+[2025-11-18 22:15:35] full_result: None
+[2025-11-18 22:15:35] 未找到识别结果
+[2025-11-18 22:15:38] 处理车号确认操作: 车号确认
+[2025-11-18 22:15:41] 处理防遛确认操作: 铁鞋设置
+[2025-11-18 22:15:44] 处理防遛确认操作: 手闸拧紧
+[2025-11-18 22:15:47] 处理撤遛确认操作: 铁鞋撤除
+[2025-11-18 22:15:50] 处理撤遛确认操作: 手闸松开
+[2025-11-18 22:15:50] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+[2025-11-18 22:15:50] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475350029417_000024.webm
+[2025-11-18 22:15:50] 视频块大小: 2547795 字节
+[2025-11-18 22:15:50] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:15:50] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475350109687_000025.webm
+[2025-11-18 22:15:50] 视频块大小: 2569274 字节
+[2025-11-18 22:15:50] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:15:59] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475359644130_000026.webm
+[2025-11-18 22:15:59] 视频块大小: 2483933 字节
+[2025-11-18 22:15:59] 视频块已添加到缓冲区，等待合并处理
+[2025-11-18 22:15:59] 二进制合并完成: 7601002 -> 7601002 bytes
+[2025-11-18 22:15:59] 开始转换webm到最终mp4格式...
+[2025-11-18 22:15:59] 转换失败: ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers
+  built with Apple clang version 16.0.0 (clang-1600.0.26.6)
+  configuration: --prefix=/usr/local/Cellar/ffmpeg/8.0_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+[matroska,webm @ 0x7fc415904540] Format matroska,webm detected only with low score of 1, misdetection possible!
+[matroska,webm @ 0x7fc415904540] EBML header parsing failed
+[in#0 @ 0x7fc415904340] Error opening input: Invalid data found when processing input
+Error opening input file workspace/860924031381890_1763475085/detection_video_chunk_0000_temp.webm.
+Error opening input files: Invalid data found when processing input
+
+[2025-11-18 22:15:59] 使用临时webm文件作为输出: workspace/860924031381890_1763475085/detection_video_chunk_0000.webm
+[2025-11-18 22:15:59] 检测视频块已合并并保存到: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4，大小: 6049440 字节
+[2025-11-18 22:15:59] 开始处理存储的视频块: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:16:00 INFO: [2025-11-18 22:16:00] SpeechProcessor初始化完成，模型: paraformer-realtime-v2，采样率: 16000Hz
+2025-11-18 22:16:00 INFO: [2025-11-18 22:16:00] 开始转录音频文件: workspace/860924031381890_1763475085/extracted_audio_detection_video_chunk_0000.mp4.wav
+2025-11-18 22:16:00 INFO: The task ac5d25ac-459b-4cc2-9dae-18e4470b4d48 is  RUNNING
+2025-11-18 22:16:01 INFO: [2025-11-18 22:16:01] {
+    "task_id": "ac5d25ac-459b-4cc2-9dae-18e4470b4d48",
+    "task_status": "FAILED",
+    "submit_time": "2025-11-18 22:16:00.427",
+    "scheduled_time": "2025-11-18 22:16:00.452",
+    "end_time": "2025-11-18 22:16:01.096",
+    "code": "FILE_403_FORBIDDEN",
+    "message": "FILE_403_FORBIDDEN",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/extracted_audio.wav?Expires=1763206898&OSSAccessKeyId=TMP.3Krxew4PmqeU7DxGWAouXnxb77PyfgXcmfXBYAvFLvMST3eEoNiH9ysUA9AFtu5NGkuCLYQJGUeBsjSH7aZn6bGq8rLpkZ&Signature=9BMIP6bSzqY7lq86ifbNaceD448%3D",
+            "code": "FILE_403_FORBIDDEN",
+            "message": "FILE_403_FORBIDDEN",
+            "subtask_status": "FAILED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 0,
+        "FAILED": 1
+    }
+}
+2025-11-18 22:16:01 INFO: [2025-11-18 22:16:01] transcription done!
+2025-11-18 22:16:03 INFO: [2025-11-18 22:16:03] 识别成功
+2025-11-18 22:16:03 INFO: [2025-11-18 22:16:03] speech_result: {"status_code": 200, "request_id": "d3afb9f715954e8188bf7accd23a9cd5", "code": "", "message": "", "output": null, "usage": null}
+2025-11-18 22:16:03 INFO: [2025-11-18 22:16:03] full_result: None
+2025-11-18 22:16:03 INFO: [2025-11-18 22:16:03] 未找到识别结果
+2025-11-18 22:16:06 INFO: [2025-11-18 22:16:06] 处理车号确认操作: 车号确认
+2025-11-18 22:16:09 INFO: [2025-11-18 22:16:09] 处理防遛确认操作: 铁鞋设置
+2025-11-18 22:16:11 INFO: [2025-11-18 22:16:11] 处理防遛确认操作: 手闸拧紧
+2025-11-18 22:16:15 INFO: [2025-11-18 22:16:15] 处理撤遛确认操作: 铁鞋撤除
+2025-11-18 22:16:18 INFO: [2025-11-18 22:16:18] 处理撤遛确认操作: 手闸松开
+2025-11-18 22:16:18 INFO: [2025-11-18 22:16:18] 视频处理完成: workspace/860924031381890_1763475085/detection_video_chunk_0000.mp4
+2025-11-18 22:16:18 INFO: [2025-11-18 22:16:18] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475378178657_000027.webm
+2025-11-18 22:16:18 INFO: [2025-11-18 22:16:18] 视频块大小: 2333615 字节
+2025-11-18 22:16:18 INFO: [2025-11-18 22:16:18] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:16:19 INFO: [2025-11-18 22:16:19] 接收视频块，临时文件: workspace/860924031381890_1763475085/tmp/video_chunk_1763475379698287_000028.webm
+2025-11-18 22:16:19 INFO: [2025-11-18 22:16:19] 视频块大小: 2025047 字节
+2025-11-18 22:16:19 INFO: [2025-11-18 22:16:19] 视频块已添加到缓冲区，等待合并处理
+2025-11-18 22:16:25 INFO: [2025-11-18 22:16:25] 收到停止检测信号，设备ID: 860924031381890
+2025-11-18 22:16:25 INFO: [2025-11-18 22:16:25] 等待视频帧写入完成，当前帧数: 0
+2025-11-18 22:16:25 INFO: [2025-11-18 22:16:25] 实时视频WebSocket连接已关闭，设备ID: 860924031381890
+2025-11-18 22:16:25 INFO:     connection closed
+2025-11-18 22:16:25 INFO: connection closed
