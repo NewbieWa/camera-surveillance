@@ -12,6 +12,25 @@ from camera_surveillance.processor import process_detection
 # 用于限制同时执行的视频处理任务数量
 video_processing_semaphore = asyncio.Semaphore(3)
 
+async def process_stored_video_chunk(chunk_file_path: str, device_id: str, workspace_path: str,
+                                   keyword_detector: KeywordDetector,
+                                   vehicle_recognizer: "VehicleNumberRecognizer",
+                                   anti_rolling_model: "AntiRollingModel",
+                                   remove_rolling_model: "RemoveRollingModel"):
+    """处理存储的视频块 - 类似process_video_task的逻辑"""
+    # 使用信号量确保同时最多有3个任务在执行
+    async with video_processing_semaphore:
+        log_with_timestamp(f"开始处理存储的视频块: {chunk_file_path}")
+        await process_video_common(
+            chunk_file_path,
+            device_id,
+            workspace_path,
+            keyword_detector,
+            vehicle_recognizer,
+            anti_rolling_model,
+            remove_rolling_model
+        )
+
 async def process_video_common(video_source, device_id: str, workspace_path: str, 
                               keyword_detector: KeywordDetector,
                               vehicle_recognizer: "VehicleNumberRecognizer",
@@ -45,9 +64,30 @@ async def process_video_common(video_source, device_id: str, workspace_path: str
         audio_path = os.path.join(workspace_path, f"extracted_audio_{os.path.basename(str(video_source))}.wav")
         video_processor.extract_audio_from_video(video_path, audio_path)
         
+        # 上传音频文件到OSS
+        presign_url_res = False
+        try:
+            from camera_surveillance.processor.oss_handler import OSSHandler
+            import datetime
+            oss_handler = OSSHandler()
+            # 构建OSS文件键名，包含日期、设备ID和时间戳
+            date_str = datetime.datetime.now().strftime("%Y-%m-%d")
+            oss_audio_key = f"audio/{date_str}/{device_id}/{os.path.basename(audio_path)}"
+            upload_file_res = oss_handler.upload_file("test-workspace-wl",object_key=oss_audio_key, file_path=audio_path)
+            if upload_file_res:
+                presign_url_res, presign_url = oss_handler.presign("test-workspace-wl",oss_audio_key)
+            else:
+                log_with_timestamp(f"upload_file fail, {audio_path}")
+        except Exception as e:
+            log_with_timestamp(f"上传音频到OSS失败: {e}")
+
+        if presign_url_res == False:
+            log_with_timestamp(f"upload_file and get presign fail, {audio_path}")
+            return False
+
         # 转录音频
         speech_processor = SpeechProcessor()
-        transcriptions = speech_processor.transcribe_file(audio_path)
+        transcriptions = speech_processor.transcribe_url(presign_url)
         # 如果没有转录结果，使用模拟数据
         if not transcriptions:
             transcriptions = [
@@ -87,25 +127,6 @@ async def process_video_common(video_source, device_id: str, workspace_path: str
         }
         await result_reporter.report_result(error_result)
         return False
-
-async def process_stored_video_chunk(chunk_file_path: str, device_id: str, workspace_path: str,
-                                   keyword_detector: KeywordDetector,
-                                   vehicle_recognizer: "VehicleNumberRecognizer",
-                                   anti_rolling_model: "AntiRollingModel",
-                                   remove_rolling_model: "RemoveRollingModel"):
-    """处理存储的视频块 - 类似process_video_task的逻辑"""
-    # 使用信号量确保同时最多有3个任务在执行
-    async with video_processing_semaphore:
-        log_with_timestamp(f"开始处理存储的视频块: {chunk_file_path}")
-        await process_video_common(
-            chunk_file_path,
-            device_id,
-            workspace_path,
-            keyword_detector,
-            vehicle_recognizer,
-            anti_rolling_model,
-            remove_rolling_model
-        )
 
 async def process_video_task(device_id: str, video_stream_data: bytes):
     """异步处理视频流任务 - 接收实时视频数据流"""

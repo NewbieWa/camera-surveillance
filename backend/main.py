@@ -177,6 +177,8 @@ async def websocket_live_video(websocket: WebSocket, device_id: str):
     # 用于存储detection_video_chunk的计数器和缓冲区
     chunk_counter = 0
     chunk_buffer = []
+    # 存储WebM文件头部信息
+    webm_header = None
     
     try:
         # 存储待处理的元数据
@@ -348,6 +350,18 @@ async def websocket_live_video(websocket: WebSocket, device_id: str):
                         chunk_buffer.append(temp_video_path)
                         chunk_counter += 1
                         
+                        # 如果是第一个chunk，提取头部信息
+                        if chunk_counter == 1:
+                            # 读取第一个chunk文件内容，提取头部
+                            with open(temp_video_path, 'rb') as f:
+                                chunk_data = f.read()
+                            # 使用find_segment_start找到Segment位置
+                            segment_pos = find_segment_start(chunk_data)
+                            track_end = find_track_entries_end(chunk_data, segment_pos)
+                            # 提取从开始到Segment位置的数据作为头部
+                            webm_header = chunk_data[:segment_pos]
+                            webm_header = chunk_data[:track_end]
+                        
                         # 检查文件大小
                         if os.path.exists(temp_video_path):
                             file_size = os.path.getsize(temp_video_path)
@@ -358,7 +372,7 @@ async def websocket_live_video(websocket: WebSocket, device_id: str):
                         # 每3个数据块存储一次
                         if chunk_counter % 3 == 0:
                             # 生成带序号的文件名
-                            chunk_file_path = os.path.join(workspace_path, f"detection_video_chunk_{chunk_counter//60:04d}.webm")
+                            chunk_file_path = os.path.join(workspace_path, f"detection_video_chunk_{chunk_counter//3:04d}.webm")
                             
                             # 合并所有缓冲区中的视频块 - 使用二进制拼接方式
                             try:
@@ -377,14 +391,18 @@ async def websocket_live_video(websocket: WebSocket, device_id: str):
                                     continue
 
                                 # 生成带序号的文件名 - 但这次使用mp4扩展名
-                                chunk_file_path_mp4 = os.path.join(workspace_path, f"detection_video_chunk_{chunk_counter//60:04d}.mp4")
+                                chunk_file_path_mp4 = os.path.join(workspace_path, f"detection_video_chunk_{chunk_counter//3:04d}.mp4")
                                 
                                 # 先创建临时的webm文件进行二进制合并
                                 temp_webm = chunk_file_path_mp4.replace('.mp4', '_temp.webm')
                                 
                                 # 二进制合并：第一个分段 + 后续分段的核心数据
                                 with open(temp_webm, 'wb') as output_file:
-                                    # 写入第一个分段（包含头部）
+                                    # 如果不是第一次合并且存在头部信息，则先写入头部
+                                    if chunk_counter > 3 and webm_header:  # 第二次及以后的合并，需要添加头部
+                                        output_file.write(webm_header)
+                                    
+                                    # 写入第一个分段
                                     output_file.write(chunk_data[0])
 
                                     # 后续分段：直接追加数据
@@ -419,8 +437,8 @@ async def websocket_live_video(websocket: WebSocket, device_id: str):
                                     log_with_timestamp(f"使用临时webm文件作为输出: {chunk_file_path_webm}")
                                 
                                 # 删除临时webm文件
-                                if os.path.exists(temp_webm):
-                                    os.unlink(temp_webm)
+                                # if os.path.exists(temp_webm):
+                                #     os.unlink(temp_webm)
                                 
                                 # 检查生成的文件大小
                                 final_file_path = chunk_file_path_mp4 if os.path.exists(chunk_file_path_mp4) else chunk_file_path_mp4.replace('.mp4', '.webm')
@@ -533,7 +551,14 @@ def find_segment_start(data):
     # 如果没找到 Segment，返回 0
     return 0
 
-
+def find_track_entries_end(data, segment_start):
+    """找到 TrackEntry 结束位置（简化版）"""
+    # 查找 TrackEntry (0x16 0x54 0xAE 0x6B)
+    track_pos = data.find(b'\x16\x54\xae\x6b', segment_start)
+    if track_pos != -1:
+        # 简化：假设 TrackEntry 在 500 字节内结束
+        return min(len(data), track_pos + 500)
+    return segment_start + 100  # 默认返回较短的头部
 
 
 

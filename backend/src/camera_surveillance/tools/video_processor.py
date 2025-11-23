@@ -307,7 +307,14 @@ class VideoStreamProcessor:
         Returns:
             是否成功提取音频
         """
+        log_with_timestamp(f"开始提取音频，输入视频: {video_path}, 输出音频: {audio_path}")
+        
         try:
+            # 检查输入视频文件是否存在
+            if not os.path.exists(video_path):
+                log_with_timestamp(f"输入视频文件不存在: {video_path}")
+                return False
+            
             # 使用ffmpeg从视频中提取音频
             import subprocess
             cmd = [
@@ -318,8 +325,26 @@ class VideoStreamProcessor:
                 audio_path,
                 '-y'  # 覆盖输出文件
             ]
+            
+            log_with_timestamp(f"执行ffmpeg命令: {' '.join(cmd)}")
             result = subprocess.run(cmd, capture_output=True, text=True)
-            return result.returncode == 0
+            
+            if result.returncode == 0:
+                log_with_timestamp(f"音频提取成功，输出文件: {audio_path}")
+                
+                # 检查输出音频文件是否存在以及大小
+                if os.path.exists(audio_path):
+                    file_size = os.path.getsize(audio_path)
+                    log_with_timestamp(f"输出音频文件大小: {file_size} 字节")
+                    return True
+                else:
+                    log_with_timestamp(f"警告：ffmpeg执行成功但输出音频文件不存在: {audio_path}")
+                    return False
+            else:
+                log_with_timestamp(f"ffmpeg执行失败，返回码: {result.returncode}")
+                log_with_timestamp(f"ffmpeg错误输出: {result.stderr}")
+                log_with_timestamp(f"ffmpeg标准输出: {result.stdout}")
+                return False
         except Exception as e:
             log_with_timestamp(f"提取音频时出错: {e}")
             return False
