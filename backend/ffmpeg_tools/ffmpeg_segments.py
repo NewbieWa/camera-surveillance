@@ -64,7 +64,7 @@ def merge_mediarecorder_chunks(chunk_files, output_path):
 def process_workspace_tmp_data():
     """处理 workspace 目录下 tmp 文件夹中的数据"""
     # 指定目录路径
-    workspace_path = "/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763292801/tmp"
+    workspace_path = "/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763905130/tmp"
     
     # 查找所有 .webm 文件
     webm_pattern = os.path.join(workspace_path, "*.webm")
@@ -75,7 +75,7 @@ def process_workspace_tmp_data():
         return False
     
     # 输出文件路径
-    output_path = "/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763292801/merged_output.mp4"
+    output_path = "/Users/wanglei/workStore/code/workSource/camera-surveillance/backend/workspace/860924031381890_1763905130/merged_output.mp4"
     
     print(f"找到 {len(chunk_files)} 个分段文件")
     print("开始处理...")

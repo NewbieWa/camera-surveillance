@@ -1,0 +1,19 @@
+ {
+    "task_id": "544ec269-d5b8-4539-957e-9a1f40b1c769",
+    "task_status": "SUCCEEDED",
+    "submit_time": "2025-11-30 18:33:07.680",
+    "scheduled_time": "2025-11-30 18:33:07.711",
+    "end_time": "2025-11-30 18:33:12.412",
+    "results": [
+        {
+            "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/M800001MguT30uity1.mp3?Expires=1764499055&OSSAccessKeyId=TMP.3KscUxwmxfde2F7BhKD1NT1GbtTAswNE72Ycr5mSXjEQZ2uLfx6kyrprUW2UwNroVM4AxFsw1Z2WEmsiJ2ykvDoph6QkYq&Signature=KdTDiao6nBHINvCuEcGLfkgeJrA%3D",
+            "transcription_url": "https://dashscope-result-bj.oss-cn-beijing.aliyuncs.com/prod/paraformer-v2/20251130/18%3A33/70d724a5-bf0d-4d91-bcb8-d1c494e1bf0a-1.json?Expires=1764585192&OSSAccessKeyId=LTAI5tQZd8AEcZX6KZV4G8qL&Signature=%2BW6CH2EQN74TDNbwUeK5Y9pLHzs%3D",
+            "subtask_status": "SUCCEEDED"
+        }
+    ],
+    "task_metrics": {
+        "TOTAL": 1,
+        "SUCCEEDED": 1,
+        "FAILED": 0
+    }
+}

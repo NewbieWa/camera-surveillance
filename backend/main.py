@@ -177,8 +177,6 @@ async def websocket_live_video(websocket: WebSocket, device_id: str):
     # 用于存储detection_video_chunk的计数器和缓冲区
     chunk_counter = 0
     chunk_buffer = []
-    # 存储WebM文件头部信息
-    webm_header = None
     
     try:
         # 存储待处理的元数据
@@ -350,103 +348,54 @@ async def websocket_live_video(websocket: WebSocket, device_id: str):
                         chunk_buffer.append(temp_video_path)
                         chunk_counter += 1
                         
-                        # 如果是第一个chunk，提取头部信息
-                        if chunk_counter == 1:
-                            # 读取第一个chunk文件内容，提取头部
-                            with open(temp_video_path, 'rb') as f:
-                                chunk_data = f.read()
-                            # 使用find_segment_start找到Segment位置
-                            segment_pos = find_segment_start(chunk_data)
-                            track_end = find_track_entries_end(chunk_data, segment_pos)
-                            # 提取从开始到Segment位置的数据作为头部
-                            webm_header = chunk_data[:segment_pos]
-                            webm_header = chunk_data[:track_end]
-                        
                         # 检查文件大小
                         if os.path.exists(temp_video_path):
                             file_size = os.path.getsize(temp_video_path)
                             log_with_timestamp(f"视频块大小: {file_size} 字节")
                         
                         log_with_timestamp("视频块已添加到缓冲区，等待合并处理")
-                        
+
+
+                        batch_size = 1
                         # 每3个数据块存储一次
-                        if chunk_counter % 3 == 0:
-                            # 生成带序号的文件名
-                            chunk_file_path = os.path.join(workspace_path, f"detection_video_chunk_{chunk_counter//3:04d}.webm")
-                            
-                            # 合并所有缓冲区中的视频块 - 使用二进制拼接方式
+                        if chunk_counter % batch_size == 0:
                             try:
-                                # 读取所有缓冲区中的视频块数据
-                                chunk_data = []
-                                for chunk_path in chunk_buffer:
-                                    if os.path.exists(chunk_path):
-                                        with open(chunk_path, 'rb') as f:
-                                            data = f.read()
-                                            if data:
-                                                chunk_data.append(data)
+                                # 定义最终合并文件的路径
+                                final_file_path = os.path.join(workspace_path, f"detection_video_chunk_{chunk_counter//batch_size:04d}.mp4")
                                 
-                                if not chunk_data:
-                                    log_with_timestamp("没有有效的视频块数据可以合并")
-                                    # 继续处理下一个循环
-                                    continue
-
-                                # 生成带序号的文件名 - 但这次使用mp4扩展名
-                                chunk_file_path_mp4 = os.path.join(workspace_path, f"detection_video_chunk_{chunk_counter//3:04d}.mp4")
+                                # 创建包含所有视频块路径的临时列表文件
+                                list_file_path = os.path.join(workspace_path, f"video_list_{chunk_counter//batch_size}.txt")
                                 
-                                # 先创建临时的webm文件进行二进制合并
-                                temp_webm = chunk_file_path_mp4.replace('.mp4', '_temp.webm')
+                                with open(list_file_path, 'w', encoding='utf-8') as f:
+                                    for video_chunk_path in chunk_buffer:
+                                        # 转换为绝对路径以避免路径问题
+                                        abs_video_path = os.path.abspath(video_chunk_path)
+                                        # 使用单引号包围路径以处理特殊字符
+                                        f.write(f"file '{abs_video_path}'\n")
                                 
-                                # 二进制合并：第一个分段 + 后续分段的核心数据
-                                with open(temp_webm, 'wb') as output_file:
-                                    # 如果不是第一次合并且存在头部信息，则先写入头部
-                                    if chunk_counter > 3 and webm_header:  # 第二次及以后的合并，需要添加头部
-                                        output_file.write(webm_header)
-                                    
-                                    # 写入第一个分段
-                                    output_file.write(chunk_data[0])
-
-                                    # 后续分段：直接追加数据
-                                    for i, chunk in enumerate(chunk_data[1:], 1):
-                                        output_file.write(chunk)
-
-                                # 验证临时webm文件大小
-                                temp_size = os.path.getsize(temp_webm)
-                                expected_size = sum(len(data) for data in chunk_data)
-                                log_with_timestamp(f"二进制合并完成: {expected_size} -> {temp_size} bytes")
-                                
-                                # 然后使用ffmpeg将webm转换为最终的mp4格式
-                                log_with_timestamp("开始转换webm到最终mp4格式...")
-                                convert_result = subprocess.run([
+                                # 使用ffmpeg合并视频块，转码为MP4兼容格式
+                                cmd = [
                                     'ffmpeg',
-                                    '-i', temp_webm,
-                                    '-c:v', 'libx264',
-                                    '-c:a', 'aac',
-                                    '-movflags', '+faststart',
-                                    '-y',
-                                    chunk_file_path_mp4
-                                ], capture_output=True, text=True)
-
-                                if convert_result.returncode == 0:
-                                    output_size = os.path.getsize(chunk_file_path_mp4)
-                                    log_with_timestamp(f"转换完成! 最终MP4文件大小: {output_size} 字节")
-                                else:
-                                    log_with_timestamp(f"转换失败: {convert_result.stderr}")
-                                    # 如果转换失败，尝试直接复制临时webm文件
-                                    chunk_file_path_webm = chunk_file_path_mp4.replace('.mp4', '.webm')
-                                    shutil.copy2(temp_webm, chunk_file_path_webm)
-                                    log_with_timestamp(f"使用临时webm文件作为输出: {chunk_file_path_webm}")
+                                    '-f', 'concat',
+                                    '-safe', '0',
+                                    '-i', list_file_path,
+                                    '-c:v', 'libx264',  # 将VP8视频编码转换为H.264
+                                    '-c:a', 'aac',      # 将Opus音频编码转换为AAC
+                                    '-strict', 'experimental',
+                                    final_file_path,
+                                    '-y'  # 覆盖已存在的文件
+                                ]
                                 
-                                # 删除临时webm文件
-                                # if os.path.exists(temp_webm):
-                                #     os.unlink(temp_webm)
+                                log_with_timestamp(f"开始合并视频块到: {final_file_path}")
+                                log_with_timestamp(f"合并命令: {' '.join(cmd)}")
                                 
-                                # 检查生成的文件大小
-                                final_file_path = chunk_file_path_mp4 if os.path.exists(chunk_file_path_mp4) else chunk_file_path_mp4.replace('.mp4', '.webm')
-                                if os.path.exists(final_file_path):
-                                    file_size = os.path.getsize(final_file_path)
-                                    log_with_timestamp(f"检测视频块已合并并保存到: {final_file_path}，大小: {file_size} 字节")
-                                else:
-                                    log_with_timestamp(f"错误：合并后的文件不存在")
+                                result = subprocess.run(cmd, capture_output=True, text=True)
+                                
+                                if result.returncode != 0:
+                                    log_with_timestamp(f"FFmpeg合并失败: {result.stderr}")
+                                    raise Exception(f"FFmpeg合并失败: {result.stderr}")
+                                
+                                log_with_timestamp(f"视频块合并完成: {final_file_path}, 大小: {os.path.getsize(final_file_path)} 字节")
                                 
                                 # 启动子协程处理存储的视频文件
                                 asyncio.create_task(process_stored_video_chunk(
@@ -465,12 +414,11 @@ async def websocket_live_video(websocket: WebSocket, device_id: str):
                                 log_with_timestamp(f"错误详情: {traceback.format_exc()}")
                             finally:
                                 # 清理列表文件
-                                # try:
-                                #     if 'list_file_path' in locals() and os.path.exists(list_file_path):
-                                #         os.unlink(list_file_path)
-                                # except Exception as e:
-                                #     log_with_timestamp(f"清理列表文件失败: {e}")
-                                i = 1
+                                try:
+                                    if 'list_file_path' in locals() and os.path.exists(list_file_path):
+                                        os.unlink(list_file_path)
+                                except Exception as e:
+                                    log_with_timestamp(f"清理列表文件失败: {e}")
                             
                             # 清空缓冲区
                             chunk_buffer.clear()

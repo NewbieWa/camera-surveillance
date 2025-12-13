@@ -19,6 +19,10 @@
   <script type="text/javascript" src="js/zTree/js/jquery.ztree.excheck.js"></script>
   <script type="text/javascript" src="js/zTree/js/jquery.ztree.exedit.js"></script>
 
+  <!-- RecordRTC for handling webm chunks with proper headers -->
+  <script src="https://cdn.webrtc-experiment.com/RecordRTC.js"></script>
+  <script src="https://cdn.webrtc-experiment.com/RecordRTCPromisesHandler.js"></script>
+
 </head>
 
 <body>
@@ -1964,7 +1968,7 @@ sdkclient.addObserver('AlarmUpload', msg => {
     let detectionMediaStream = null; // 检测媒体流对象
     let detectionDeviceId = null; // 检测设备ID
     let originalDetectionDeviceId = null; // 原始检测设备ID
-    let mediaRecorder = null; // 用于录制视频流
+    let mediaRecorder = null; // 用于录制视频流（保留以兼容旧代码）
     
     // 初始化检测设备选择下拉框
     function initDetectionDeviceSelect() {
@@ -2168,7 +2172,7 @@ sdkclient.addObserver('AlarmUpload', msg => {
           $('#detectionStatus').append('<br>音频和视频流已连接到元素');
           
           // 等待视频元素加载
-          videoElement.onloadedmetadata = function() {
+          videoElement.onloadedmetadata = async function() {
             // 检查浏览器是否支持MediaStream API和captureStream
             if (audioElement.captureStream && videoElement.captureStream) {
               // 合并音频和视频流
@@ -2188,110 +2192,105 @@ sdkclient.addObserver('AlarmUpload', msg => {
                 combinedStream.addTrack(track);
               });
               
-              // 使用合并后的流进行录制
+              // 使用合并后的流进行录制，使用RecordRTC
               const stream = combinedStream;
               
-              // 创建MediaRecorder来录制流并发送到后端
               try {
-                // 优化MediaRecorder配置，检查浏览器支持的格式
-                const mimeTypes = [
-                  'video/webm;codecs=vp9',
-                  'video/webm;codecs=vp8',
-                  'video/webm',
-                  'video/mp4'
-                ];
+                $('#detectionStatus').append('<br>开始使用RecordRTC录制音视频流...');
                 
-                let selectedMimeType = null;
-                for (const mimeType of mimeTypes) {
-                  if (MediaRecorder.isTypeSupported(mimeType)) {
-                    selectedMimeType = mimeType;
-                    break;
-                  }
-                }
-                
-                if (!selectedMimeType) {
-                  console.error('浏览器不支持任何指定的录制格式');
-                  $('#detectionStatus').append('<br>错误：浏览器不支持任何录制格式');
-                  return;
-                }
-                
-                mediaRecorder = new MediaRecorder(stream, { 
-                  mimeType: selectedMimeType,
-                  videoBitsPerSecond: 5000000 // 限制比特率为5Mbps
+                // 使用RecordRTC Promises Handler来处理录制
+                const recorder = new RecordRTCPromisesHandler(stream, {
+                  type: 'video',
+                  mimeType: 'video/webm',
+                  timeSlice: 60000,  // 60秒的块，每个块都有完整的头部信息
+                  video: {
+                    width: 1280,
+                    height: 720
+                  },
+                  disableLogs: false
                 });
                 
-                // 添加错误处理
-                mediaRecorder.onerror = function(event) {
-                  console.error('MediaRecorder错误:', event.error);
-                  $('#detectionStatus').append('<br>MediaRecorder错误: ' + event.error);
-                };
+                // 开始录制
+                await recorder.startRecording();
                 
-                mediaRecorder.ondataavailable = function(event) {
-                  if (event.data.size > 0) {
-                    // 发送视频数据块到后端
-                    sendDetectionVideoChunkToBackend(event.data);
+                // 设置定时器，每60秒停止录制、发送数据块并重新开始
+                const recordingInterval = setInterval(async () => {
+                  try {
+                    await recorder.stopRecording();
+                    const blob = await recorder.getBlob();
+                    
+                    if (blob && blob.size > 0) {
+                      // 发送完整的视频块到后端
+                      await sendDetectionVideoChunkToBackend(blob);
+                    }
+                    
+                    // 重新开始录制
+                    await recorder.startRecording();
+                    $('#detectionStatus').append('<br>重新录制 ');
+                  } catch (error) {
+                    console.error('RecordRTC处理错误:', error);
+                    $('#detectionStatus').append('<br>RecordRTC处理错误: ' + error.message);
                   }
-                };
+                }, 60000); // 每60秒执行一次
                 
-                // 开始录制 - 增加数据块大小以减少碎片
-                mediaRecorder.start(10000); // 每15秒生成一个数据块，减少传输频率
-                $('#detectionStatus').append('<br>开始捕获音视频流并发送到后端');
+                // 保存recorder实例和定时器ID以便后续停止
+                window.currentRecorder = recorder;
+                window.recordingInterval = recordingInterval;
+                
+                $('#detectionStatus').append('<br>开始捕获音视频流并发送到后端（使用RecordRTC）');
               } catch (error) {
-                console.error('创建MediaRecorder失败:', error);
-                $('#detectionStatus').append('<br>创建录制器失败: ' + error.message);
+                console.error('创建RecordRTC录制器失败:', error);
+                $('#detectionStatus').append('<br>创建RecordRTC录制器失败: ' + error.message);
               }
             } else if (videoElement.captureStream) {
               // 如果不支持合并流，只录制视频流
               const stream = videoElement.captureStream();
               
-              // 创建MediaRecorder来录制流并发送到后端
               try {
-                // 优化MediaRecorder配置，检查浏览器支持的格式
-                const mimeTypes = [
-                  'video/webm;codecs=vp9',
-                  'video/webm;codecs=vp8',
-                  'video/webm',
-                  'video/mp4'
-                ];
+                $('#detectionStatus').append('<br>开始使用RecordRTC录制视频流...');
                 
-                let selectedMimeType = null;
-                for (const mimeType of mimeTypes) {
-                  if (MediaRecorder.isTypeSupported(mimeType)) {
-                    selectedMimeType = mimeType;
-                    break;
-                  }
-                }
-                
-                if (!selectedMimeType) {
-                  console.error('浏览器不支持任何指定的录制格式');
-                  $('#detectionStatus').append('<br>错误：浏览器不支持任何录制格式');
-                  return;
-                }
-                
-                mediaRecorder = new MediaRecorder(stream, { 
-                  mimeType: selectedMimeType,
-                  videoBitsPerSecond: 5000000 // 限制比特率为5Mbps
+                // 使用RecordRTC Promises Handler来处理录制
+                const recorder = new RecordRTCPromisesHandler(stream, {
+                  type: 'video',
+                  mimeType: 'video/webm',
+                  timeSlice: 20000,  // 20秒的块，每个块都有完整的头部信息
+                  video: {
+                    width: 1280,
+                    height: 720
+                  },
+                  disableLogs: false
                 });
                 
-                // 添加错误处理
-                mediaRecorder.onerror = function(event) {
-                  console.error('MediaRecorder错误:', event.error);
-                  $('#detectionStatus').append('<br>MediaRecorder错误: ' + event.error);
-                };
+                // 开始录制
+                await recorder.startRecording();
                 
-                mediaRecorder.ondataavailable = function(event) {
-                  if (event.data.size > 0) {
-                    // 发送视频数据块到后端
-                    sendDetectionVideoChunkToBackend(event.data);
+                // 设置定时器，每20秒停止录制、发送数据块并重新开始
+                const recordingInterval = setInterval(async () => {
+                  try {
+                    await recorder.stopRecording();
+                    const blob = await recorder.getBlob();
+                    
+                    if (blob && blob.size > 0) {
+                      // 发送完整的视频块到后端
+                      await sendDetectionVideoChunkToBackend(blob);
+                    }
+                    
+                    // 重新开始录制
+                    await recorder.startRecording();
+                  } catch (error) {
+                    console.error('RecordRTC处理错误:', error);
+                    $('#detectionStatus').append('<br>RecordRTC处理错误: ' + error.message);
                   }
-                };
+                }, 10000); // 每20秒执行一次
                 
-                // 开始录制 - 增加数据块大小以减少碎片
-                mediaRecorder.start(15000); // 每15秒生成一个数据块，减少传输频率
-                $('#detectionStatus').append('<br>开始捕获视频流并发送到后端（可能缺少音频）');
+                // 保存recorder实例和定时器ID以便后续停止
+                window.currentRecorder = recorder;
+                window.recordingInterval = recordingInterval;
+                
+                $('#detectionStatus').append('<br>开始捕获视频流并发送到后端（使用RecordRTC）');
               } catch (error) {
-                console.error('创建MediaRecorder失败:', error);
-                $('#detectionStatus').append('<br>创建录制器失败: ' + error.message);
+                console.error('创建RecordRTC录制器失败:', error);
+                $('#detectionStatus').append('<br>创建RecordRTC录制器失败: ' + error.message);
               }
             } else {
               console.error('浏览器不支持captureStream API');
@@ -2308,10 +2307,9 @@ sdkclient.addObserver('AlarmUpload', msg => {
       }
     }
     
-    // 发送视频数据块到后端 - 优化版本：直接发送二进制数据并验证
+    // 发送视频数据块到后端 - 使用RecordRTC后，每个块都有完整的头部信息
     async function sendDetectionVideoChunkToBackend(videoChunk) {
       if (detectionWs && detectionWs.readyState === WebSocket.OPEN) {
-        // 不再检查WebM头部，直接发送所有数据
         // 发送元数据
         const metadata = {
           type: 'detection_video_chunk_metadata',
@@ -2322,7 +2320,7 @@ sdkclient.addObserver('AlarmUpload', msg => {
         
         detectionWs.send(JSON.stringify(metadata));
         
-        // 直接发送二进制数据，避免DataURL转换
+        // 直接发送二进制数据，RecordRTC生成的每个块都包含完整的头部信息
         detectionWs.send(videoChunk);
       }
     }
@@ -2334,7 +2332,23 @@ sdkclient.addObserver('AlarmUpload', msg => {
       $('#stopDetectionBtn').hide();
       isDetectionStreaming = false;
       
-      // 停止录制
+      // 停止RecordRTC录制
+      if (window.currentRecorder) {
+        window.currentRecorder.stopRecording().then(() => {
+          console.log('RecordRTC录制已停止');
+        }).catch(error => {
+          console.error('停止RecordRTC录制时出错:', error);
+        });
+        window.currentRecorder = null;
+      }
+      
+      // 清理录制定时器
+      if (window.recordingInterval) {
+        clearInterval(window.recordingInterval);
+        window.recordingInterval = null;
+      }
+      
+      // 停止旧的MediaRecorder（如果存在）
       if (mediaRecorder && mediaRecorder.state !== 'inactive') {
         mediaRecorder.stop();
       }

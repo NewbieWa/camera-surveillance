@@ -1,131 +1,92 @@
-# 外勤作业智能分析系统后端服务
+# 后端 - 摄像头监控系统
 
-## 系统架构
+这是摄像头监控系统的后端组件，使用 Python 和 FastAPI 构建。它处理视频处理、物体检测、AI 分析，并为前端提供 API。
 
-本系统是一个基于FastAPI的后端服务，用于处理实时视频流并进行智能分析。主要功能包括：
+## 架构
 
-1. 接收实时视频流
-2. 提取音频并进行语音识别（集成阿里云百炼语音识别服务）
-3. 识别特定关键词（车号确认、防遛设置、撤遛设置等）
-4. 在关键词识别后提取相关帧图像
-5. 使用AI模型进行图像分析
-6. 将结果通过WebSocket实时回传给前端
+后端结构如下：
 
-## 目录结构
+- `main.py`: 主应用程序入口点，包含 FastAPI 路由
+- `src/camera_surveillance/`: 核心模块
+  - `coordinator/`: 协调和管理视频处理任务
+  - `models/`: 数据模型和架构定义
+  - `processor/`: 视频和音频处理模块
+  - `tools/`: 实用函数
+- `ffmpeg_tools/`: 使用 FFmpeg 的视频处理工具
+- `demo/`: 示例实现和测试脚本
+- `doc/`: 文档和示例数据格式
+- `test/`: 单元和集成测试
 
-```
-backend/
-├── main.py                 # 主服务文件
-├── requirements.txt        # 依赖包列表
-├── core/                   # 核心模块
-│   ├── __init__.py
-│   ├── workspace.py        # 工作空间管理
-│   ├── video_processor.py  # 视频处理模块
-│   ├── audio_transcriber.py # 音频转文字模块
-│   ├── keyword_detector.py # 关键词检测模块
-│   ├── frame_extractor.py  # 图像帧提取模块
-│   ├── vehicle_recognizer.py # 车辆编号识别模块
-│   ├── local_models.py     # 本地模型接口
-│   └── result_reporter.py  # 结果报告模块
-└── demo/                   # 示例代码
-    ├── bailianParaformer.py  # 百炼语音识别示例
-    └── bailianQwen3vl.py     # 阿里云视觉大模型示例
-```
+## 功能特性
 
-## 安装依赖
+- 实时视频处理和分析
+- 使用 YOLO 模型进行物体检测
+- 音频转录功能
+- 多摄像头支持
+- 视频块处理
+- API 端点用于前端通信
 
+## 文档和数据格式
+
+### 1. transcribe_response.json
+这是 speech_processor 模块的返回格式示例，包含音频转录的结果及相关信息。
+
+### 2. transcription.json
+这是从 transcription_url 下载后的格式，包含转录文本的时间戳和其他元数据。
+
+## 视频处理流程
+
+后端处理视频的完整流程如下：
+
+### 1. 视频接收流程
+后端通过 WebSocket 端点 `/ws/live-video/{device_id}` 接收来自前端的视频数据。前端使用 RecordRTC 库将视频流按时间分块（通常是60秒一个块），然后通过 WebSocket 发送到后端。
+
+### 2. 视频合并流程
+后端接收视频块并将其存储在临时目录中，当积攒到一定数量的视频块时，使用 FFmpeg 的 concat 协议将多个视频块合并成一个完整的视频文件，合并后的视频转码为 MP4 格式以确保兼容性。
+
+### 3. 视频分析流程
+合并完成后，启动子协程处理合并的视频文件：
+- 使用 VideoStreamProcessor 提取视频中的音频
+- 使用 SpeechProcessor 对音频进行转录
+- 使用 KeywordDetector 检测关键词（如"车号确认"、"铁鞋设置"、"铁鞋撤除"等）
+- 根据检测到的关键词，调用相应的模型进行识别：
+  - VehicleNumberRecognizer：识别车辆编号
+  - AntiRollingModel：防遛确认
+  - RemoveRollingModel：撤遛确认
+- 处理结果通过 WebSocket 发送回前端
+
+### 4. 工作空间管理
+为每个设备创建独立的工作空间（workspace/{device_id}_{timestamp}），工作空间包含视频块、提取的音频、处理结果等文件，处理完成后保留工作空间以供后续查看。
+
+整个流程是：前端录制 → 按时间分块 → WebSocket传输 → 后端接收 → 暂存 → FFmpeg合并 → 音频提取 → 语音转录 → 关键词检测 → AI模型分析 → 结果返回前端。
+
+## 运行后端
+
+### 使用启动脚本：
 ```bash
-cd camera_surveillance
-pip install -r requirements.txt
+./start.sh
 ```
 
-## 运行服务
-
+### 使用 uv 运行：
 ```bash
-cd camera_surveillance
+cd backend
+uv run main.py
+```
+
+### 使用 uvicorn 直接执行：
+```bash
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+### 直接运行主 Python 文件：
+```bash
 python main.py
 ```
 
-服务将在 `http://localhost:8000` 启动。
+## 配置
 
-## API接口
-
-### WebSocket接口
-
-- `ws://localhost:8000/ws/results` - 用于接收处理结果的WebSocket连接
-
-### HTTP接口
-
-- `POST /video-stream/{device_id}` - 接收指定设备的视频流
-- `POST /process-video/{device_id}` - 处理指定设备的视频流
-- `GET /` - 服务状态检查
-
-## 环境变量
-
-需要设置以下环境变量：
-
-- `DASHSCOPE_API_KEY` - 阿里云百炼平台的API密钥
-- `MAX_CONCURRENT_MODELS` - 最大并发模型调用数（默认为5）
-
-## 处理流程
-
-1. 前端通过WebSocket连接到 `/ws/results` 端点
-2. 前端调用 `/video-stream/{device_id}` 创建设备的工作空间
-3. 系统开始接收并处理视频流
-4. 系统提取音频并使用百炼语音识别服务转文字
-5. 系统检测关键词并根据关键词类型执行相应操作：
-   - 车号确认：提取相关帧并使用阿里云视觉大模型识别车辆编号
-   - 防遛设置：提取相关帧并使用本地模型A判断
-   - 撤遛设置：提取相关帧并使用本地模型B判断
-6. 系统将处理结果通过WebSocket实时发送给前端
-
-## 改进功能
-
-### 1. 并行模型调用
-- 本地模型支持并行处理，提高处理效率
-- 可配置最大并发调用数量（通过环境变量`MAX_CONCURRENT_MODELS`）
-- 使用线程池实现并发处理，避免阻塞主线程
-
-### 2. 模型调用基类
-- 所有本地模型都继承自`BaseModelInterface`基类
-- 基类提供统一的并行处理接口
-- 自动处理异常和超时情况
-
-### 3. 音频片段时间点处理
-- 支持基于音频片段的时间范围提取帧
-- 提供专门的方法`extract_frames_for_audio_segment`处理音频片段
-- 更准确地定位关键操作时间点
-
-### 4. 阿里云语音识别集成
-- 集成阿里云百炼语音识别服务（dashscope）
-- 支持实时流式音频转录
-- 返回带时间戳的识别结果，便于精确分析
-- 支持WAV和PCM格式音频文件处理
-
-## 开发说明
-
-### 添加新的关键词检测
-
-1. 在 `core/keyword_detector.py` 中的 `keyword_patterns` 字典中添加新的关键词模式
-2. 在 `core/keyword_detector.py` 中的 `OperationType` 枚举中添加新的操作类型
-3. 在 `main.py` 中添加相应的处理函数
-
-### 集成新的AI模型
-
-1. 在 `core/local_models.py` 中创建新的模型类，继承 `BaseModelInterface`
-2. 实现 `process_image` 方法
-3. 在 `main.py` 中初始化新模型并添加到处理流程中
-
-### 配置并发数量
-
-可以通过设置环境变量来配置最大并发模型调用数：
-
-```bash
-export MAX_CONCURRENT_MODELS=10
-python main.py
-```
-
-或者在启动服务时直接设置：
-
-```bash
-MAX_CONCURRENT_MODELS=10 python main.py
+后端可以通过环境变量或主应用程序文件进行配置。主要配置选项包括：
+- API 端口和主机设置
+- 视频处理参数
+- AI 模型路径
+- 摄像头源配置

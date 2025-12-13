@@ -1,0 +1,1139 @@
+{
+  "file_url": "https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/M800001MguT30uity1.mp3?Expires=1764499055&OSSAccessKeyId=TMP.3KscUxwmxfde2F7BhKD1NT1GbtTAswNE72Ycr5mSXjEQZ2uLfx6kyrprUW2UwNroVM4AxFsw1Z2WEmsiJ2ykvDoph6QkYq&Signature=KdTDiao6nBHINvCuEcGLfkgeJrA%3D",
+  "properties": {
+    "audio_format": "mp3",
+    "channels": [
+      0,
+      1
+    ],
+    "original_sampling_rate": 44100,
+    "original_duration_in_milliseconds": 251482
+  },
+  "transcripts": [
+    {
+      "channel_id": 0,
+      "content_duration_in_milliseconds": 99900,
+      "text": "他们说一切都是最好的安排，就让爱叫我学会忍耐，我愿意承受所有绝望与苦难。如果一切是最好的。只尖下冰冷的肩膀，微弱逐仙随风摇摆，无处可归的徘徊。一尖下的泪滴掩盖难回的色彩，像是已杯坠入尘埃，渺小到。陷入了沉迷，粉水四季没有呼吸。我时常想象你再次出现的场景，今天突然下起大雨，就刷干净这些年所有委屈。一切是最好的安排。最好的安排，为何我却开始恐惧等待？你的吻眼看时间。我还在等待那个最好的。",
+      "sentences": [
+        {
+          "begin_time": 320,
+          "end_time": 22072,
+          "text": "他们说一切都是最好的安排，就让爱叫我学会忍耐，我愿意承受所有绝望与苦难。",
+          "sentence_id": 1,
+          "words": [
+            {
+              "begin_time": 320,
+              "end_time": 962,
+              "text": "他",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 962,
+              "end_time": 1605,
+              "text": "们",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 1605,
+              "end_time": 2248,
+              "text": "说",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 2248,
+              "end_time": 2891,
+              "text": "一",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 2891,
+              "end_time": 3534,
+              "text": "切",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 3534,
+              "end_time": 4177,
+              "text": "都",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 4177,
+              "end_time": 4820,
+              "text": "是",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 4820,
+              "end_time": 5462,
+              "text": "最",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 5462,
+              "end_time": 6105,
+              "text": "好",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 6105,
+              "end_time": 6748,
+              "text": "的",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 6748,
+              "end_time": 7391,
+              "text": "安",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 7391,
+              "end_time": 8034,
+              "text": "排",
+              "punctuation": "，"
+            },
+            {
+              "begin_time": 8034,
+              "end_time": 8677,
+              "text": "就",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 8677,
+              "end_time": 9320,
+              "text": "让",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 9320,
+              "end_time": 9962,
+              "text": "爱",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 9962,
+              "end_time": 10605,
+              "text": "叫",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 10605,
+              "end_time": 11248,
+              "text": "我",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 11248,
+              "end_time": 11891,
+              "text": "学",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 11891,
+              "end_time": 12534,
+              "text": "会",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 12534,
+              "end_time": 13177,
+              "text": "忍",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 13177,
+              "end_time": 13820,
+              "text": "耐",
+              "punctuation": "，"
+            },
+            {
+              "begin_time": 14620,
+              "end_time": 15241,
+              "text": "我",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 15241,
+              "end_time": 15862,
+              "text": "愿",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 15862,
+              "end_time": 16483,
+              "text": "意",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 16483,
+              "end_time": 17104,
+              "text": "承",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 17104,
+              "end_time": 17725,
+              "text": "受",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 17725,
+              "end_time": 18346,
+              "text": "所",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 18346,
+              "end_time": 18967,
+              "text": "有",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 18967,
+              "end_time": 19588,
+              "text": "绝",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 19588,
+              "end_time": 20209,
+              "text": "望",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 20209,
+              "end_time": 20830,
+              "text": "与",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 20830,
+              "end_time": 21451,
+              "text": "苦",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 21451,
+              "end_time": 22072,
+              "text": "难",
+              "punctuation": "。"
+            }
+          ]
+        },
+        {
+          "begin_time": 22072,
+          "end_time": 27040,
+          "text": "如果一切是最好的。",
+          "sentence_id": 2,
+          "words": [
+            {
+              "begin_time": 22072,
+              "end_time": 22693,
+              "text": "如",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 22693,
+              "end_time": 23314,
+              "text": "果",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 23314,
+              "end_time": 23935,
+              "text": "一",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 23935,
+              "end_time": 24556,
+              "text": "切",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 24556,
+              "end_time": 25177,
+              "text": "是",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 25177,
+              "end_time": 25798,
+              "text": "最",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 25798,
+              "end_time": 26419,
+              "text": "好",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 26419,
+              "end_time": 27040,
+              "text": "的",
+              "punctuation": "。"
+            }
+          ]
+        },
+        {
+          "begin_time": 29780,
+          "end_time": 43620,
+          "text": "只尖下冰冷的肩膀，微弱逐仙随风摇摆，无处可归的徘徊。",
+          "sentence_id": 3,
+          "words": [
+            {
+              "begin_time": 29780,
+              "end_time": 30447,
+              "text": "只",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 30447,
+              "end_time": 31115,
+              "text": "尖",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 31115,
+              "end_time": 31782,
+              "text": "下",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 31782,
+              "end_time": 32450,
+              "text": "冰",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 32450,
+              "end_time": 33117,
+              "text": "冷",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 33117,
+              "end_time": 33785,
+              "text": "的",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 33785,
+              "end_time": 34452,
+              "text": "肩",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 34452,
+              "end_time": 35120,
+              "text": "膀",
+              "punctuation": "，"
+            },
+            {
+              "begin_time": 36800,
+              "end_time": 37254,
+              "text": "微",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 37254,
+              "end_time": 37709,
+              "text": "弱",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 37709,
+              "end_time": 38164,
+              "text": "逐",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 38164,
+              "end_time": 38618,
+              "text": "仙",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 38618,
+              "end_time": 39073,
+              "text": "随",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 39073,
+              "end_time": 39528,
+              "text": "风",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 39528,
+              "end_time": 39982,
+              "text": "摇",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 39982,
+              "end_time": 40437,
+              "text": "摆",
+              "punctuation": "，"
+            },
+            {
+              "begin_time": 40437,
+              "end_time": 40892,
+              "text": "无",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 40892,
+              "end_time": 41346,
+              "text": "处",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 41346,
+              "end_time": 41801,
+              "text": "可",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 41801,
+              "end_time": 42256,
+              "text": "归",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 42256,
+              "end_time": 42710,
+              "text": "的",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 42710,
+              "end_time": 43165,
+              "text": "徘",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 43165,
+              "end_time": 43620,
+              "text": "徊",
+              "punctuation": "。"
+            }
+          ]
+        },
+        {
+          "begin_time": 44260,
+          "end_time": 56420,
+          "text": "一尖下的泪滴掩盖难回的色彩，像是已杯坠入尘埃，渺小到。",
+          "sentence_id": 4,
+          "words": [
+            {
+              "begin_time": 44260,
+              "end_time": 44756,
+              "text": "一",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 44756,
+              "end_time": 45253,
+              "text": "尖",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 45253,
+              "end_time": 45750,
+              "text": "下",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 45750,
+              "end_time": 46247,
+              "text": "的",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 46247,
+              "end_time": 46744,
+              "text": "泪",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 46744,
+              "end_time": 47241,
+              "text": "滴",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 47241,
+              "end_time": 47738,
+              "text": "掩",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 47738,
+              "end_time": 48235,
+              "text": "盖",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 48235,
+              "end_time": 48732,
+              "text": "难",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 48732,
+              "end_time": 49229,
+              "text": "回",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 49229,
+              "end_time": 49726,
+              "text": "的",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 49726,
+              "end_time": 50223,
+              "text": "色",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 50223,
+              "end_time": 50720,
+              "text": "彩",
+              "punctuation": "，"
+            },
+            {
+              "begin_time": 51080,
+              "end_time": 51565,
+              "text": "像",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 51565,
+              "end_time": 52050,
+              "text": "是",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 52050,
+              "end_time": 52536,
+              "text": "已",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 52536,
+              "end_time": 53021,
+              "text": "杯",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 53021,
+              "end_time": 53507,
+              "text": "坠",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 53507,
+              "end_time": 53992,
+              "text": "入",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 53992,
+              "end_time": 54478,
+              "text": "尘",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 54478,
+              "end_time": 54963,
+              "text": "埃",
+              "punctuation": "，"
+            },
+            {
+              "begin_time": 54963,
+              "end_time": 55449,
+              "text": "渺",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 55449,
+              "end_time": 55934,
+              "text": "小",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 55934,
+              "end_time": 56420,
+              "text": "到",
+              "punctuation": "。"
+            }
+          ]
+        },
+        {
+          "begin_time": 91860,
+          "end_time": 97520,
+          "text": "陷入了沉迷，粉水四季没有呼吸。",
+          "sentence_id": 5,
+          "words": [
+            {
+              "begin_time": 91860,
+              "end_time": 92295,
+              "text": "陷",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 92295,
+              "end_time": 92730,
+              "text": "入",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 92730,
+              "end_time": 93166,
+              "text": "了",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 93166,
+              "end_time": 93601,
+              "text": "沉",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 93601,
+              "end_time": 94036,
+              "text": "迷",
+              "punctuation": "，"
+            },
+            {
+              "begin_time": 94036,
+              "end_time": 94472,
+              "text": "粉",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 94472,
+              "end_time": 94907,
+              "text": "水",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 94907,
+              "end_time": 95343,
+              "text": "四",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 95343,
+              "end_time": 95778,
+              "text": "季",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 95778,
+              "end_time": 96213,
+              "text": "没",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 96213,
+              "end_time": 96649,
+              "text": "有",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 96649,
+              "end_time": 97084,
+              "text": "呼",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 97084,
+              "end_time": 97520,
+              "text": "吸",
+              "punctuation": "。"
+            }
+          ]
+        },
+        {
+          "begin_time": 99940,
+          "end_time": 116360,
+          "text": "我时常想象你再次出现的场景，今天突然下起大雨，就刷干净这些年所有委屈。",
+          "sentence_id": 6,
+          "words": [
+            {
+              "begin_time": 99940,
+              "end_time": 100564,
+              "text": "我",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 100564,
+              "end_time": 101189,
+              "text": "时",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 101189,
+              "end_time": 101813,
+              "text": "常",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 101813,
+              "end_time": 102438,
+              "text": "想",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 102438,
+              "end_time": 103063,
+              "text": "象",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 103063,
+              "end_time": 103687,
+              "text": "你",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 103687,
+              "end_time": 104312,
+              "text": "再",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 104312,
+              "end_time": 104936,
+              "text": "次",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 104936,
+              "end_time": 105561,
+              "text": "出",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 105561,
+              "end_time": 106186,
+              "text": "现",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 106186,
+              "end_time": 106810,
+              "text": "的",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 106810,
+              "end_time": 107435,
+              "text": "场",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 107435,
+              "end_time": 108060,
+              "text": "景",
+              "punctuation": "，"
+            },
+            {
+              "begin_time": 108520,
+              "end_time": 108932,
+              "text": "今",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 108932,
+              "end_time": 109345,
+              "text": "天",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 109345,
+              "end_time": 109757,
+              "text": "突",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 109757,
+              "end_time": 110170,
+              "text": "然",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 110170,
+              "end_time": 110583,
+              "text": "下",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 110583,
+              "end_time": 110995,
+              "text": "起",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 110995,
+              "end_time": 111408,
+              "text": "大",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 111408,
+              "end_time": 111821,
+              "text": "雨",
+              "punctuation": "，"
+            },
+            {
+              "begin_time": 111821,
+              "end_time": 112233,
+              "text": "就",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 112233,
+              "end_time": 112646,
+              "text": "刷",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 112646,
+              "end_time": 113058,
+              "text": "干",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 113058,
+              "end_time": 113471,
+              "text": "净",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 113471,
+              "end_time": 113884,
+              "text": "这",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 113884,
+              "end_time": 114296,
+              "text": "些",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 114296,
+              "end_time": 114709,
+              "text": "年",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 114709,
+              "end_time": 115122,
+              "text": "所",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 115122,
+              "end_time": 115534,
+              "text": "有",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 115534,
+              "end_time": 115947,
+              "text": "委",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 115947,
+              "end_time": 116360,
+              "text": "屈",
+              "punctuation": "。"
+            }
+          ]
+        },
+        {
+          "begin_time": 138520,
+          "end_time": 143560,
+          "text": "一切是最好的安排。",
+          "sentence_id": 7,
+          "words": [
+            {
+              "begin_time": 138520,
+              "end_time": 139150,
+              "text": "一",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 139150,
+              "end_time": 139780,
+              "text": "切",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 139780,
+              "end_time": 140410,
+              "text": "是",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 140410,
+              "end_time": 141040,
+              "text": "最",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 141040,
+              "end_time": 141670,
+              "text": "好",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 141670,
+              "end_time": 142300,
+              "text": "的",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 142300,
+              "end_time": 142930,
+              "text": "安",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 142930,
+              "end_time": 143560,
+              "text": "排",
+              "punctuation": "。"
+            }
+          ]
+        },
+        {
+          "begin_time": 180460,
+          "end_time": 190100,
+          "text": "最好的安排，为何我却开始恐惧等待？",
+          "sentence_id": 8,
+          "words": [
+            {
+              "begin_time": 180460,
+              "end_time": 181102,
+              "text": "最",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 181102,
+              "end_time": 181745,
+              "text": "好",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 181745,
+              "end_time": 182388,
+              "text": "的",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 182388,
+              "end_time": 183030,
+              "text": "安",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 183030,
+              "end_time": 183673,
+              "text": "排",
+              "punctuation": "，"
+            },
+            {
+              "begin_time": 183673,
+              "end_time": 184316,
+              "text": "为",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 184316,
+              "end_time": 184958,
+              "text": "何",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 184958,
+              "end_time": 185601,
+              "text": "我",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 185601,
+              "end_time": 186244,
+              "text": "却",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 186244,
+              "end_time": 186886,
+              "text": "开",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 186886,
+              "end_time": 187529,
+              "text": "始",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 187529,
+              "end_time": 188172,
+              "text": "恐",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 188172,
+              "end_time": 188814,
+              "text": "惧",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 188814,
+              "end_time": 189457,
+              "text": "等",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 189457,
+              "end_time": 190100,
+              "text": "待",
+              "punctuation": "？"
+            }
+          ]
+        },
+        {
+          "begin_time": 196600,
+          "end_time": 201640,
+          "text": "你的吻眼看时间。",
+          "sentence_id": 9,
+          "words": [
+            {
+              "begin_time": 196600,
+              "end_time": 197320,
+              "text": "你",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 197320,
+              "end_time": 198040,
+              "text": "的",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 198040,
+              "end_time": 198760,
+              "text": "吻",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 198760,
+              "end_time": 199480,
+              "text": "眼",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 199480,
+              "end_time": 200200,
+              "text": "看",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 200200,
+              "end_time": 200920,
+              "text": "时",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 200920,
+              "end_time": 201640,
+              "text": "间",
+              "punctuation": "。"
+            }
+          ]
+        },
+        {
+          "begin_time": 233720,
+          "end_time": 239100,
+          "text": "我还在等待那个最好的。",
+          "sentence_id": 10,
+          "words": [
+            {
+              "begin_time": 233720,
+              "end_time": 234258,
+              "text": "我",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 234258,
+              "end_time": 234796,
+              "text": "还",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 234796,
+              "end_time": 235334,
+              "text": "在",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 235334,
+              "end_time": 235872,
+              "text": "等",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 235872,
+              "end_time": 236410,
+              "text": "待",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 236410,
+              "end_time": 236948,
+              "text": "那",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 236948,
+              "end_time": 237486,
+              "text": "个",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 237486,
+              "end_time": 238024,
+              "text": "最",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 238024,
+              "end_time": 238562,
+              "text": "好",
+              "punctuation": ""
+            },
+            {
+              "begin_time": 238562,
+              "end_time": 239100,
+              "text": "的",
+              "punctuation": "。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

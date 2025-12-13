@@ -17,7 +17,8 @@ dependencies = [
     "ultralytics==8.3.203",
     "uvicorn>=0.38.0",
     "websockets>=15.0.1",
-    "alibabacloud-oss-v2==1.2.1"
+    "alibabacloud-oss-v2==1.2.1",
+    "opencv-python==4.11.0.86"
 ]
 
 [build-system]

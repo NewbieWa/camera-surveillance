@@ -34,7 +34,7 @@ def test_speech_processor():
         # 测试从URL转录音频（如果网络可用）
         print("测试从URL转录音频...")
         result = processor.transcribe_url(
-            'https://dashscope.oss-cn-beijing.aliyuncs.com/samples/audio/paraformer/hello_world_female2.wav'
+            'https://test-workspace-wl.oss-cn-hangzhou.aliyuncs.com/voice/M800001MguT30uity1.mp3?Expires=1764499055&OSSAccessKeyId=TMP.3KscUxwmxfde2F7BhKD1NT1GbtTAswNE72Ycr5mSXjEQZ2uLfx6kyrprUW2UwNroVM4AxFsw1Z2WEmsiJ2ykvDoph6QkYq&Signature=KdTDiao6nBHINvCuEcGLfkgeJrA%3D'
         )
         print(f"URL转录结果: {result}")
         

@@ -56,6 +56,35 @@ class SpeechProcessor:
                 log_with_timestamp(json.dumps(transcribe_response.output, indent=4, ensure_ascii=False))
                 log_with_timestamp('transcription done!')
                 
+                # 获取transcription_url并下载内容
+                transcription_url = transcribe_response.output.results[0].transcription_url
+                log_with_timestamp(f"获取到transcription_url: {transcription_url}")
+                
+                # 下载transcription_url内容
+                import requests
+                response = requests.get(transcription_url)
+                if response.status_code == 200:
+                    transcription_data = response.json()
+                    log_with_timestamp(f"下载transcription数据成功，内容长度: {len(transcription_data.get('transcripts', []))}")
+                    
+                    # 从transcripts中提取sentences的text和时间信息
+                    transcriptions = []
+                    for transcript in transcription_data.get('transcripts', []):
+                        for sentence in transcript.get('sentences', []):
+                            # 时间从毫秒转换为秒
+                            begin_time = sentence['begin_time'] / 1000.0
+                            text = sentence['text']
+                            transcriptions.append((begin_time, text))
+                    
+                    log_with_timestamp(f"提取到 {len(transcriptions)} 条转录记录")
+                    return transcriptions
+                else:
+                    log_with_timestamp(f"下载transcription_url失败，状态码: {response.status_code}")
+                    return []
+            else:
+                log_with_timestamp(f"转录任务失败，状态码: {transcribe_response.status_code}")
+                return []
+                
         except Exception as e:
             log_with_timestamp(f"转录过程中发生错误: {e}")
             return []
